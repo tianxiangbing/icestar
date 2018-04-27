@@ -1,0 +1,36 @@
+{
+    // Use IntelliSense to learn about possible Node.js debug attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "启动程序",
+            "runtimeExecutable": "electron.cmd",
+            "program": "${workspaceRoot}/src/index.js",
+            "cwd": "${workspaceRoot}"
+        },
+        {
+            "type": "node",
+            "request": "attach",
+            "name": "附加到进程",
+            "port": 5808
+        },
+        {
+            "name": "Debug Renderer Process",
+            "type": "chrome",
+            "request": "launch",
+            "runtimeExecutable": "electron.cmd",
+            "windows": {
+                "runtimeExecutable": "electron.cmd",
+            },
+            "runtimeArgs": [
+                "${workspaceRoot}/src/index.js",
+                "--remote-debugging-port=9222"
+            ],
+            "webRoot": "${workspaceRoot}"
+        }
+    ]
+}
