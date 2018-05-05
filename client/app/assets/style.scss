@@ -11,10 +11,9 @@ body {
 a {
     color: #cccccc;
     text-decoration: none;
-}
-
-a:hover {
-    color: #ffffff;
+    &:hover {
+        color: #ffffff;
+    }
 }
 
 .container {
@@ -30,18 +29,19 @@ a:hover {
     color: #d4d4d4;
 }
 
-header{
+header {
     text-align: center;
     height: 40px;
     line-height: 40px;
+    a {
+        color: #333;
+        padding: 5px;
+        &:hover {
+            color: #666;
+        }
+    }
 }
-header a{
-    color: #333;
-    padding:5px;
-}
-header a:hover{
-    color: #666;
-}
+
 footer {
     background-color: rgb(0, 122, 204);
     color: rgb(255, 255, 255);
@@ -59,15 +59,13 @@ footer {
     flex: 0 0 235px;
     background-color: rgb(37, 37, 38);
     line-height: 24px;
-}
-
-.sub-menu a {
-    padding: 0 12px;
-    display: block;
-}
-
-.sub-menu a:hover {
-    background-color: #2a2d2e;
+    a {
+        padding: 0 12px;
+        display: block;
+        &:hover {
+            background-color: #2a2d2e;
+        }
+    }
 }
 
 .content {

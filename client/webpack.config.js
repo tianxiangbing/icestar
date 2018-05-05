@@ -36,7 +36,7 @@ const config = {
                     loader: "css-loader" // translates CSS into CommonJS
                 }, {
                     loader: "sass-loader" // compiles Sass to CSS,
-                    ,options: {
+                    , options: {
                         includePaths: ["app/assets", "app/views"]
                     }
                 }]
@@ -79,6 +79,32 @@ const config = {
                 })
             }
         ]
+    },
+
+    resolve: {
+        // 解析模块请求的选项
+        // （不适用于对 loader 解析）
+        modules: [
+            "node_modules",
+            path.resolve(__dirname, "app"),
+            path.resolve(__dirname, "app/views")
+        ],
+        // 用于查找模块的目录
+        extensions: [".js", ".json", ".vue", ".jsx", ".css", ".scss"],
+        // 使用的扩展名
+        alias: {
+            // 模块别名列表
+
+            //   "module": "new-module",
+            //   // 起别名："module" -> "new-module" 和 "module/path/file" -> "new-module/path/file"
+
+            //   "only-module$": "new-module",
+            //   // 起别名 "only-module" -> "new-module"，但不匹配 "only-module/path/file" -> "new-module/path/file"
+
+            //   "module": path.resolve(__dirname, "app/third/module.js"),
+            // 起别名 "module" -> "./app/third/module.js" 和 "module/file" 会导致错误
+            // 模块别名相对于当前上下文导入
+        }
     },
     plugins: [
         extractCSS,
