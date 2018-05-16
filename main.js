@@ -15,20 +15,40 @@ const { BrowserWindow } = electron;
 const fs = require('fs');
 // const com = require('./js/common');
 const os = require('os');
-var package = require("../package.json");
-let win = null;
+var package = require("./package.json");
+let win = null, loadingScreen;
 function openWindow() {
     const { width, height } = electron.screen.getPrimaryDisplay().workAreaSize;
-    win = new BrowserWindow({ icon: 'icon/favicon.ico', title: 'mock V' + package.version, show: false, backgroundColor: '#ededed', minWidth: 1000 });
+    win = new BrowserWindow({ icon: __dirname + '/client/favicon.ico', title: 'IceStar V' + package.version, show: false, backgroundColor: 'rgb(30, 30, 30)', minWidth: 1000 });
     win.maximize();
-    win.loadURL(path.join('file://', __dirname, '/index.html'));
+
+    if (process.env.NODE_ENV === 'development') {
+        win.loadURL('http://localhost:52013/');
+    } else if (process.env.NODE_ENV === 'production') {
+        win.loadURL(path.join('file://', __dirname, '/client/index.html'));
+    }
+
     // win.setMenu(null);
     win.on('closed', function () {
         win = null;
     });
     //加快显示速度
     win.once('ready-to-show', () => {
-        win.show()
+        win.show();
+        if (loadingScreen) {
+            loadingScreen.close();
+        }
+    });
+
+    win.webContents.on('did-finish-load', () => {
+        win.show();
+        if (loadingScreen) {
+            loadingScreen.close();
+        }
+    });
+
+    win.on('closed', () => {
+        win = null;
     });
     // win.webContents.openDevTools();
     let p = path.join(os.homedir(), 'config.json');
@@ -52,7 +72,40 @@ function openWindow() {
         }
     });
 }
-app.on('ready', openWindow);
+let loadingParams = {
+    width: 580,
+    height: 200,
+    frame: false,
+    show: false
+};
+
+function createLoadingScreen() {
+    loadingScreen = new BrowserWindow(Object.assign(loadingParams, { parent: win }));
+
+    if (process.env.NODE_ENV === 'development') {
+        loadingScreen.loadURL('http://localhost:4000/loading.html');
+    } else {
+        loadingScreen.loadURL(`file://${__dirname}/client/loading.html`);
+    }
+
+    loadingScreen.on('closed', () => {
+        loadingScreen = null;
+    });
+    loadingScreen.webContents.on('did-finish-load', () => {
+        loadingScreen.show();
+    });
+}
+
+app.on('ready', () => {
+    createLoadingScreen();
+    openWindow();
+});
+
+app.on('activate', () => {
+    if (mainWindow === null) {
+        openWindow();
+    }
+});
 
 app.on('window-all-closed', function () {
     if (process.platform !== 'darwin') {
@@ -69,13 +122,13 @@ ipc.on('open-dir-dialog', function (event) {
         if (files) event.sender.send('selected-directory', files)
     })
 });
-ipc.on('open-file-dialog',(event,key,ext)=>{
-    ext = ext ||"*";
+ipc.on('open-file-dialog', (event, key, ext) => {
+    ext = ext || "*";
     dialog.showOpenDialog({
-        filters:[{name:ext,extensions:[ext]}],
+        filters: [{ name: ext, extensions: [ext] }],
         properties: ['openFile']
     }, function (files) {
-        console.log(key,files);
+        console.log(key, files);
         if (files) event.sender.send(key, files)
     })
 });

@@ -2,22 +2,22 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 [Setup]
-AppName=Mock客户端
-AppVerName=Mock客户端
+AppName=IceStar客户端
+AppVerName=IceStar客户端
 AppPublisher=田想兵
-AppPublisherURL=https://github.com/tianxiangbing/mock   
-DefaultDirName={pf}\Mock
+AppPublisherURL=https://github.com/tianxiangbing/icestar   
+DefaultDirName={pf}\IceStar
 AppSupportURL=https://github.com/tianxiangbing/
 AppUpdatesURL=https://github.com/tianxiangbing/
-DefaultGroupName=Mock客户端
-OutputBaseFilename=mock
+DefaultGroupName=IceStar客户端
+OutputBaseFilename=icestar
 Compression=lzma2/ultra64
 SolidCompression=true
 VersionInfoVersion=1.0.7
 VersionInfoCompany=田想兵
 VersionInfoDescription=Mock接口、推送、前端工具
-AppComments=Mock客户端
-UninstallDisplayIcon={app}\mock.exe
+AppComments=IceStar客户端
+UninstallDisplayIcon={app}\icestar.exe
 OutputDir=download\
 [Languages]
 Name: "chinese"; MessagesFile: "compiler:Languages\ChineseSample.isl"
@@ -27,21 +27,21 @@ Name: desktopicon; Description: {cm:CreateDesktopIcon}; GroupDescription: {cm:Ad
 
 [Files]
 ; 应用Mock客户端本身的内容    
-Source: "out/mock-win32-x64/*"; DestDir: "{app}"           
-Source: "out/mock-win32-x64/resources/*"; DestDir: "{app}/resources"     
-Source: "out/mock-win32-x64/resources/app.asar.unpacked/node_modules/rcedit/*"; DestDir: "{app}/resources/app.asar.unpacked/node_modules/rcedit"       
-Source: "out/mock-win32-x64/resources/app.asar.unpacked/node_modules/rcedit/bin/*"; DestDir: "{app}/resources/app.asar.unpacked/node_modules/rcedit/bin"  
-Source: "out/mock-win32-x64/resources/app.asar.unpacked/node_modules/rcedit/lib/*"; DestDir: "{app}/resources/app.asar.unpacked/node_modules/rcedit/lib"    
+Source: "out/icestar-win32-x64/*"; DestDir: "{app}"           
+Source: "out/icestar-win32-x64/resources/*"; DestDir: "{app}/resources"     
+Source: "out/icestar-win32-x64/resources/app.asar.unpacked/node_modules/rcedit/*"; DestDir: "{app}/resources/app.asar.unpacked/node_modules/rcedit"       
+Source: "out/icestar-win32-x64/resources/app.asar.unpacked/node_modules/rcedit/bin/*"; DestDir: "{app}/resources/app.asar.unpacked/node_modules/rcedit/bin"  
+Source: "out/icestar-win32-x64/resources/app.asar.unpacked/node_modules/rcedit/lib/*"; DestDir: "{app}/resources/app.asar.unpacked/node_modules/rcedit/lib"    
 ;NOTE: Don't use "Flags: ignoreversion" on any shared system files
 [Icons]
-Name: {commondesktop}\Mock客户端; Filename: {app}\mock.exe; Tasks: desktopicon; WorkingDir: {app}; Comment: 使用Mock客户端; IconIndex: 0
-;Name: "{userappdata}\Microsoft\Internet Explorer\Quick Launch\Mock客户端"; Filename: "{app}\mock.exe"; Tasks: quicklaunchicon
-Name: {group}\Mock客户端; Filename: {app}\electron.exe; WorkingDir: {app}; IconIndex: 0; Comment: 使用Mock客户端
-Name: {group}\{cm:UninstallProgram,Mock客户端}; Filename: {uninstallexe}; Comment: 卸载Mock客户端
+Name: {commondesktop}\IceStar客户端; Filename: {app}\icestar.exe; Tasks: desktopicon; WorkingDir: {app}; Comment: 使用IceStar客户端; IconIndex: 0
+;Name: "{userappdata}\Microsoft\Internet Explorer\Quick Launch\IceStar客户端"; Filename: "{app}\icestar.exe"; Tasks: quicklaunchicon
+Name: {group}\IceStar客户端; Filename: {app}\electron.exe; WorkingDir: {app}; IconIndex: 0; Comment: 使用IceStar客户端
+Name: {group}\{cm:UninstallProgram,IceStar客户端}; Filename: {uninstallexe}; Comment: 卸载Mock客户端
 [UninstallDelete]
 Name: {app}\*; Type: filesandordirs
 
 [Run]
-Filename: "{app}\mock.exe";Description:"初始化程序";Flags:nowait; StatusMsg:"正在启动Mock客户端";
+Filename: "{app}\icestar.exe";Description:"初始化程序";Flags:nowait; StatusMsg:"正在启动IceStar客户端";
 [Messages]
 SelectDirDesc=Vista用户请不要将软件安装到系统盘的Program Files目录下!

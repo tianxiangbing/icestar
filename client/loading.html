@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>IceStar</title>
+    <style>
+        html,body{
+            background:rgb(30, 30, 30);
+            font-size: 48px;
+            font-weight: bolder;
+            color:#d4d4d4;
+            height: 100%;
+            margin:0;
+            padding:0;
+        }
+        .container{
+            position:relative;
+            top:50%;
+            left:50%;
+            text-align: center;
+            transform: translate(-50%,-50%);
+        }
+        .container{ animation: change 1s  ease-in  infinite ; font-size: 36px; color:#f00; font-weight: bold}  
+        @keyframes change {  
+            0%{ text-shadow: 0 0 4px #fff}  
+            50%{ text-shadow: 0 0 40px #f00}  
+            100%{ text-shadow: 0 0 4px #fff}  
+        }  
+    </style>
+</head>
+<body>
+    <div class="container">
+        Welcome to use the front-end tool IceStar.
+    </div>
+</body>
+</html>
