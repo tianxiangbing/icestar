@@ -7,30 +7,13 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "启动程序",
+            "name": "Electron Main",
             "runtimeExecutable": "electron.cmd",
-            "program": "${workspaceRoot}/src/index.js",
-            "cwd": "${workspaceRoot}"
-        },
-        {
-            "type": "node",
-            "request": "attach",
-            "name": "附加到进程",
-            "port": 5808
-        },
-        {
-            "name": "Debug Renderer Process",
-            "type": "chrome",
-            "request": "launch",
-            "runtimeExecutable": "electron.cmd",
-            "windows": {
-                "runtimeExecutable": "electron.cmd",
-            },
-            "runtimeArgs": [
-                "${workspaceRoot}/src/index.js",
-                "--remote-debugging-port=9222"
-            ],
-            "webRoot": "${workspaceRoot}"
+            "program": "${workspaceFolder}/main.js",
+            "protocol": "legacy",
+            "env":{
+                "NODE_ENV":"development"
+            }
         }
     ]
 }

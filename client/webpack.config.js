@@ -1,6 +1,5 @@
 const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
-let extractCSS = new ExtractTextPlugin({ filename: 'app.css', allChunks: true });
 // __webpack_public_path__ = '/dist/';
 let isDev = process.env.NODE_ENV == "development";
 console.log(isDev)
@@ -27,6 +26,9 @@ const config = {
             ''  //发布引用路径
     },
     module: {
+        noParse: function (content) {
+            return /renderer/.test(content);
+        },
         rules: [
             {
                 test: /\.scss$/,
@@ -37,7 +39,7 @@ const config = {
                 }, {
                     loader: "sass-loader" // compiles Sass to CSS,
                     , options: {
-                        includePaths: ["app/assets", "app/views"]
+                        includePaths: ["app/assets", "app/views", "app/utils"]
                     }
                 }]
             },
@@ -46,7 +48,8 @@ const config = {
                 use: {
                     loader: 'babel-loader',
                     options: {
-                        presets: ['es2015']
+                        presets: ['es2015'],
+                        cacheDirectory: true
                     }
                 }
             },
@@ -60,7 +63,8 @@ const config = {
                                 use: 'css-loader',
                                 fallback: 'vue-style-loader' // <- 这是vue-loader的依赖，所以如果使用npm3，则不需要显式安装
                             })
-                        }
+                        },
+                        cacheDirectory: true
                     }
                 }
             },
@@ -71,12 +75,6 @@ const config = {
                     limit: 100,
                     name: '[name].[hash:7].[ext]'
                 }
-            },
-            {
-                test: /\.css$/,
-                use: extractCSS.extract({
-                    use: ['css-loader']
-                })
             }
         ]
     },
@@ -104,12 +102,30 @@ const config = {
             //   "module": path.resolve(__dirname, "app/third/module.js"),
             // 起别名 "module" -> "./app/third/module.js" 和 "module/file" 会导致错误
             // 模块别名相对于当前上下文导入
+            "utils": path.resolve(__dirname, "app/utils"),
+            "store": path.resolve(__dirname, "app/store"),
+            "components": path.resolve(__dirname, "app/components"),
+            "renderer": path.resolve(__dirname, "app/utils/renderer.js")
         }
     },
+    devtool: "source-map",
     plugins: [
-        extractCSS,
         htmlPlugin
-    ]
+    ],
+    watchOptions: {
+        aggregateTimeout: 300,
+        ignored: /node_modules/
+    }
 };
-
+if (!isDev) {
+    console.log('production...')
+    let extractCSS = new ExtractTextPlugin({ filename: 'app.css', allChunks: true });
+    config.module.rules.push({
+        test: /\.css$/,
+        use: extractCSS.extract({
+            use: ['css-loader']
+        })
+    });
+    config.plugins.push(extractCSS)
+}
 module.exports = config

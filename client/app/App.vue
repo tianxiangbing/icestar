@@ -1,9 +1,6 @@
 <template>
 <div class="container">
-    <header class="top-menu">
-        <router-link to="/"><i class="tianxiangbing txb-wxbzhuye"></i><span>首页</span></router-link>
-        <router-link to="/help"><i class="tianxiangbing txb-help"></i><span>帮助</span></router-link>
-    </header>
+    <mheader/>
     <div class="body">
         <nav class="left-menu">
             <a title="首页"><i class="tianxiangbing txb-wxbzhuye"></i></a>
@@ -12,9 +9,9 @@
             <a title="工具"><i class="tianxiangbing txb-iconfontwujingongju"></i></a>
         </nav>
         <nav class="sub-menu" v-if="expands">
-          <router-link to="/mock">mock接口</router-link>
+          <tab to="mock">mock接口</tab>
         </nav>
-        <router-view class="content"></router-view>
+        <div class="content">11212</div>
     </div>
     <footer>qq:55342775</footer>
 </div>
@@ -22,10 +19,20 @@
 
 <script>
 import "./assets/style";
+import tab from "./components/tab";
+import mheader from 'components/header';
+
 export default {
   name: "App",
+  components: {
+    tab,
+    mheader
+  },
   data() {
-    return { expands: true };
+    return { expands: true ,isMax:false};
+  },
+  methods:{
+    
   }
 };
 </script>

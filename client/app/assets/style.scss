@@ -11,6 +11,7 @@ body {
 a {
     color: #cccccc;
     text-decoration: none;
+    cursor: pointer;
     &:hover {
         color: #ffffff;
     }
@@ -29,36 +30,6 @@ a {
     color: #d4d4d4;
 }
 
-header {
-    text-align: center;
-    height: 40px;
-    line-height: 40px;
-    a {
-        color: #666;
-        padding: 5px;
-        display: inline-block;
-        width:30px;
-        text-align: center;
-        line-height: 1;
-        i{
-            display: block;
-            height:18px;
-            font-size: 24px;
-            font-weight: bold;
-            &:hover{
-                color:#fff;
-            }
-        }
-        &:hover {
-            color: #666;
-        }
-        span{
-            font-size: 12px;
-            display: block;
-        }
-    }
-}
-
 footer {
     background-color: rgb(0, 122, 204);
     color: rgb(255, 255, 255);
@@ -70,13 +41,13 @@ footer {
 .left-menu {
     background-color: rgb(51, 51, 51);
     flex: 0 0 50px;
-    a{
+    a {
         display: block;
         font-size: 18px;
         font-weight: bold;
         text-align: center;
         line-height: 60px;
-        &:hover{
+        &:hover {
             color: #fff;
         }
     }

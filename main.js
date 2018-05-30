@@ -10,63 +10,66 @@
  */
 let electron = require('electron');
 let path = require('path');
-const { app } = electron;
+const { app, Menu, Tray } = electron;
 const { BrowserWindow } = electron;
 const fs = require('fs');
 // const com = require('./js/common');
 const os = require('os');
 var package = require("./package.json");
 let win = null, loadingScreen;
+let now = +new Date();
+let tray = null;
 function openWindow() {
     const { width, height } = electron.screen.getPrimaryDisplay().workAreaSize;
-    win = new BrowserWindow({ icon: __dirname + '/client/favicon.ico', title: 'IceStar V' + package.version, show: false, backgroundColor: 'rgb(30, 30, 30)', minWidth: 1000 });
-    win.maximize();
-
+    let mainStyle = {
+        icon: __dirname + '/client/favicon.ico',
+        title: 'IceStar V' + package.version,
+        show: false,
+        backgroundColor: 'rgb(30, 30, 30)',
+        minWidth: 1000,
+        titleBarStyle: 'hidden',
+        width: width-100,
+        height: height-100,
+        frame: false,
+        resizable: true
+    }
+    win = new BrowserWindow(mainStyle);
     if (process.env.NODE_ENV === 'development') {
         win.loadURL('http://localhost:52013/');
     } else if (process.env.NODE_ENV === 'production') {
         win.loadURL(path.join('file://', __dirname, '/client/index.html'));
     }
-
-    // win.setMenu(null);
+    win.webContents.openDevTools()
     win.on('closed', function () {
         win = null;
+        tray.destroy();//销毁托盘图标
     });
     //加快显示速度
-    win.once('ready-to-show', () => {
-        win.show();
-        if (loadingScreen) {
-            loadingScreen.close();
-        }
-    });
-
     win.webContents.on('did-finish-load', () => {
+        console.log(+new Date() - now)
+        win.setMenu(null);
         win.show();
+        // win.maximize();
         if (loadingScreen) {
             loadingScreen.close();
         }
     });
-
     win.on('closed', () => {
         win = null;
     });
     // win.webContents.openDevTools();
     let p = path.join(os.homedir(), 'config.json');
     fs.exists(p, (ex) => {
-        console.log(ex)
         if (!ex) {
             fs.readFile(path.join(__dirname, '/mock/config.json'), 'utf8', (err, data) => {
-                console.log(111, err)
                 fs.writeFile(p, data, { encoding: 'utf8' });
             })
         }
     });
     let s = path.join(os.homedir(), 'socketconfig.json');
     fs.exists(s, (ex) => {
-        console.log(ex)
         if (!ex) {
             fs.readFile(path.join(__dirname, '/mock/socketconfig.json'), 'utf8', (err, data) => {
-                console.log(111, err)
                 fs.writeFile(s, data, { encoding: 'utf8' });
             })
         }
@@ -76,29 +79,40 @@ let loadingParams = {
     width: 580,
     height: 200,
     frame: false,
-    show: false
+    show: false,
+    backgroundColor: '#1E1E1E',
+    alwaysOnTop: true
 };
 
 function createLoadingScreen() {
     loadingScreen = new BrowserWindow(Object.assign(loadingParams, { parent: win }));
 
-    if (process.env.NODE_ENV === 'development') {
-        loadingScreen.loadURL('http://localhost:4000/loading.html');
-    } else {
-        loadingScreen.loadURL(`file://${__dirname}/client/loading.html`);
-    }
+    loadingScreen.loadURL(`file://${__dirname}/client/loading.html`);
 
     loadingScreen.on('closed', () => {
         loadingScreen = null;
     });
-    loadingScreen.webContents.on('did-finish-load', () => {
-        loadingScreen.show();
+    loadingScreen.once('ready-to-show', () => {
+        console.log(+new Date() - now, 'loading..')
+        // loadingScreen.show();
     });
 }
 
 app.on('ready', () => {
     createLoadingScreen();
     openWindow();
+    let trayIcon = path.join(__dirname, 'client');
+    tray = new Tray(path.join(trayIcon, 'favicon.ico'));
+    tray.setToolTip('我是前端开发工具.');
+    tray.on('click', () => {
+        win.isVisible() ? win.hide() : win.show()
+    })
+    // win.on('show', () => {
+    //     tray.setHighlightMode('always')
+    // })
+    // win.on('hide', () => {
+    //     tray.setHighlightMode('never')
+    // })
 });
 
 app.on('activate', () => {
