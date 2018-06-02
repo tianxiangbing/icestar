@@ -1,0 +1,30 @@
+.menus {
+    display: flex;
+    flex: 0 0 50px;
+    .left-menu {
+        background-color: rgb(51, 51, 51);
+        flex: 0 0 50px;
+        a {
+            display: block;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            line-height: 60px;
+            &:hover,&.active {
+                color: #fff;
+            }
+        }
+    }
+    .sub-menu {
+        flex: 0 0 235px;
+        background-color: rgb(37, 37, 38);
+        line-height: 24px;
+        a {
+            padding: 0 12px;
+            display: block;
+            &:hover {
+                background-color: #2a2d2e;
+            }
+        }
+    }
+}

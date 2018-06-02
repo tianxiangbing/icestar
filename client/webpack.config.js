@@ -1,4 +1,5 @@
 const path = require('path');
+let webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 // __webpack_public_path__ = '/dist/';
 let isDev = process.env.NODE_ENV == "development";
@@ -78,7 +79,6 @@ const config = {
             }
         ]
     },
-
     resolve: {
         // 解析模块请求的选项
         // （不适用于对 loader 解析）
@@ -110,7 +110,9 @@ const config = {
     },
     devtool: "source-map",
     plugins: [
-        htmlPlugin
+        htmlPlugin,
+        new webpack.NamedModulesPlugin(),
+        new webpack.HotModuleReplacementPlugin()
     ],
     watchOptions: {
         aggregateTimeout: 300,
@@ -126,6 +128,9 @@ if (!isDev) {
             use: ['css-loader']
         })
     });
-    config.plugins.push(extractCSS)
+    config.plugins.concat([
+        extractCSS
+    ]);
 }
+console.log(config)
 module.exports = config

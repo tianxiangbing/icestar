@@ -67,6 +67,9 @@ let Common = {
         // iWin.webContents.openDevTools();
         return iWin;
     },
+    openDevTool(){
+        win.webContents.openDevTools();
+    },
     formatString(jsonstr) {
         return jsonstr.replace(/[\n\t\r]/gi, '');
     },

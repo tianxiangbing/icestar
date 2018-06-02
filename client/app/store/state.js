@@ -1,4 +1,5 @@
 
 export default {
-    winStatus:0
+    winStatus:0,
+    isExpands:false
 }

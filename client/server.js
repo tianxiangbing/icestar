@@ -22,5 +22,7 @@ let config = require("./webpack.config.js");
 // config.entry.app.unshift("webpack-dev-server/client?http://localhost:52013/");
 let compiler = webpack(config);
 let server = new WebpackDevServer(compiler, {
+    // hot:true
 });
+// WebpackDevServer.addDevServerEntrypoints(config, {hot:true});
 server.listen(52013, '127.0.0.1');

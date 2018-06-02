@@ -39,7 +39,7 @@ function openWindow() {
     } else if (process.env.NODE_ENV === 'production') {
         win.loadURL(path.join('file://', __dirname, '/client/index.html'));
     }
-    win.webContents.openDevTools()
+    // win.webContents.openDevTools()
     win.on('closed', function () {
         win = null;
         tray.destroy();//销毁托盘图标

@@ -2,16 +2,11 @@
 <div class="container">
     <mheader/>
     <div class="body">
-        <nav class="left-menu">
-            <a title="首页"><i class="tianxiangbing txb-wxbzhuye"></i></a>
-            <a title="mock接口"><i class="tianxiangbing txb-M"></i></a>
-            <a title="模拟推送"><i class="tianxiangbing txb-W"></i></a>
-            <a title="工具"><i class="tianxiangbing txb-iconfontwujingongju"></i></a>
-        </nav>
-        <nav class="sub-menu" v-if="expands">
-          <tab to="mock">mock接口</tab>
-        </nav>
-        <div class="content">11212</div>
+        <left-menu/>
+        <div class="content">
+          <tab-header/>
+          <tab-view/>
+        </div>
     </div>
     <footer>qq:55342775</footer>
 </div>
@@ -19,20 +14,21 @@
 
 <script>
 import "./assets/style";
-import tab from "./components/tab";
+import tab from "components/tab/tab";
+import tabView from "components/tab/tabView";
+import tabHeader from "components/tab/tabHeader";
+import leftMenu from 'components/menuLeft';
 import mheader from 'components/header';
+import store from "store/store";
 
 export default {
   name: "App",
   components: {
     tab,
-    mheader
-  },
-  data() {
-    return { expands: true ,isMax:false};
-  },
-  methods:{
-    
+    mheader,
+    tabView,
+    tabHeader,
+    leftMenu
   }
 };
 </script>
