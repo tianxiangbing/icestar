@@ -49,7 +49,7 @@ export default {
   },
   methods: {
     showSubMenu(title) {
-      if (title == this.currentActive) {
+      if (title == this.currentActive || !this.isExpands) {
         store.dispatch({
           type: TOGGLESUBMENU
         });

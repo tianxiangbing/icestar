@@ -69,6 +69,7 @@ export default {
       renderer.minSys();
     },
     openDevTool(){
+      // event.stopPropagation();
       renderer.openDevTool();
     }
   }
