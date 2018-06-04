@@ -36,7 +36,7 @@ function openWindow() {
     win = new BrowserWindow(mainStyle);
     if (process.env.NODE_ENV === 'development') {
         win.loadURL('http://localhost:52013/');
-    } else if (process.env.NODE_ENV === 'production') {
+    } else {
         win.loadURL(path.join('file://', __dirname, '/client/index.html'));
     }
     // win.webContents.openDevTools()
