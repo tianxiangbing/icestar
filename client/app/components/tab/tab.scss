@@ -1,0 +1,33 @@
+.tab-header {
+    display: flex;
+    overflow:hidden;
+    height:35px;
+    line-height:35px;
+    background-color: rgb(37, 37, 38);
+    .item {
+        background-color: rgb(45, 45, 45);    
+        border-left:1px solid rgb(37, 37, 38);
+        display: flex;
+        white-space: nowrap;
+        cursor: pointer;
+        height: 35px;
+        line-height:35px;
+        box-sizing: border-box;
+        padding-left: 10px;
+        &:hover{
+            i{
+                opacity: 1;
+            }
+        }
+        i{
+            opacity: 0;
+            width:16px;
+            height:16px;
+            margin:0 4px;
+            font-size:12px;
+        }
+        &.active{
+            background-color: rgb(30, 30, 30);
+        }
+    }
+}

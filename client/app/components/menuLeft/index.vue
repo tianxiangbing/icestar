@@ -7,7 +7,8 @@
             <a title="工具" @click="showSubMenu('tool')" :class="{active:toolActive}"><i class="tianxiangbing txb-iconfontwujingongju"></i></a>
         </nav>
         <nav class="sub-menu" v-show="isExpands">
-            <tab to="mock">mock接口</tab>
+            <div class="sub-menu-title">{{currentTitle}}</div>
+            <tab v-for="item in submenu" :key="item.to" :to="item.to">{{item.title}}</tab>
         </nav>
     </div>
 </template>
@@ -25,11 +26,11 @@ export default {
   data() {
     return {
       styleObject: "",
-      currentActive: "",
       homeActive: "",
       mockActive: "",
       wsActive: "",
-      toolActive: ""
+      toolActive: "",
+      currentTitle:""
     };
   },
   watch: {
@@ -40,21 +41,28 @@ export default {
       } else {
         this.styleObject = { flex: `0 0 50px` };
       }
+    },
+    submenu(nv,ov){
     }
   },
   computed: {
     isExpands() {
       return store.state.isExpands;
+    },
+    submenu(){
+      return store.state.submenu;
+    },
+    currentActive(){
+      return store.state.currentActive;
     }
   },
   methods: {
     showSubMenu(title) {
-      if (title == this.currentActive || !this.isExpands) {
-        store.dispatch({
-          type: TOGGLESUBMENU
-        });
-      }
-      this.currentActive = title;
+      store.dispatch({
+        type: TOGGLESUBMENU,
+        title:title
+      });
+      this.currentTitle = event.currentTarget.getAttribute('title');
       if (store.state.isExpands) {
         this[`${title}Active`] = true;
       } else {

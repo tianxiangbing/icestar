@@ -6,19 +6,19 @@
   "scripts": {
     "start": "cross-env  NODE_ENV=development electron .",
     "build": "cross-env  NODE_ENV=production electron .",
-    "packager": "electron-packager . mock --electron-version=1.6.6 --asar.unpack=**/rcedit/**/*.* --overwrite --platform=win32 --arch=x64 --icon=src/icon/favicon.ico --out=out  --version-string.FileDescription=mock --version-string.ProductName=mock --ignore=[\"docs\",\"download\",\"imgs\",\"script\"]",
+    "packager": "electron-packager . icestar --electron-version=1.6.6 --asar.unpack=**/rcedit/**/*.* --overwrite --platform=win32 --arch=x64 --icon=src/icon/favicon.ico --out=out  --version-string.FileDescription=mock --version-string.ProductName=mock --ignore=[\"docs\",\"download\",\"imgs\",\"script\"]",
     "installer": "node ./script/installer.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tianxiangbing/mock.git"
+    "url": "git+https://github.com/tianxiangbing/icestar.git"
   },
   "author": "tianxiangbing",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/tianxiangbing/mock/issues"
+    "url": "https://github.com/tianxiangbing/icestar/issues"
   },
-  "homepage": "https://github.com/tianxiangbing/mock#readme",
+  "homepage": "https://github.com/tianxiangbing/icestar#readme",
   "dependencies": {
     "body-parser": "^1.18.2",
     "clipboard": "^2.0.0",

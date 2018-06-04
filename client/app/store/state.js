@@ -1,5 +1,11 @@
 
+
 export default {
     winStatus:0,
-    isExpands:false
+    isExpands:false,
+    submenu:[],
+    currentActive:'',
+    tabList:[
+    ],
+    tabActive:0
 }

@@ -94,7 +94,7 @@ function createLoadingScreen() {
     });
     loadingScreen.once('ready-to-show', () => {
         console.log(+new Date() - now, 'loading..')
-        // loadingScreen.show();
+        loadingScreen.show();
     });
 }
 

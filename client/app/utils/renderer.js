@@ -5,7 +5,8 @@ let os = require('os');
 const { shell } = require('electron');
 const ipc = require('electron').ipcRenderer;
 let wins = BrowserWindow.getAllWindows()
-let win  = wins[0]
+console.log(wins)
+let win  = wins.pop();
 
 let Common = {
     winArr :[],
