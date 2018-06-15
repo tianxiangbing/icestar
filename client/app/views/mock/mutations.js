@@ -1,4 +1,4 @@
-import { MOCK_PROJECT_ADD, MOCK_PROJECT_UPDATE,MOCK_INIT } from './actionTypes';
+import { MOCK_PROJECT_ADD, MOCK_PROJECT_UPDATE,MOCK_INIT,MOCK_LIST_INIT } from './actionTypes';
 import Vue from 'vue';
 
 let mutations = {
@@ -23,6 +23,9 @@ let mutations = {
     },
     [MOCK_INIT]:(state,data)=>{
         state.projectList = data;
+    },
+    [MOCK_LIST_INIT]:(state,id)=>{
+
     }
 }
 export default mutations;

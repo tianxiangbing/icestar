@@ -1,4 +1,4 @@
-import { MOCK_PROJECT_ADD, MOCK_PROJECT_UPDATE ,MOCK_INIT} from './actionTypes';
+import { MOCK_PROJECT_ADD, MOCK_PROJECT_UPDATE ,MOCK_INIT,MOCK_LIST_INIT} from './actionTypes';
 import renderer from 'renderer';
 let action = {
     [MOCK_PROJECT_ADD]: ({ commit, state }, item) => {
@@ -7,7 +7,7 @@ let action = {
         let obj = item.data;
         obj.id = len;
         data.push(obj)
-        renderer.save('[]','mocklist',`mock_${obj.id}`);
+        renderer.save('[]','mocklist',`mock_${obj.id}.json`);
         renderer.save(data, 'mock').then(() => {
             commit(MOCK_PROJECT_ADD, obj)
         });
@@ -32,6 +32,10 @@ let action = {
         renderer.read('mock').then(data=>{
             commit(MOCK_INIT,data);
         });
+    },
+    [MOCK_LIST_INIT]:({commit,state},item)=>{
+        let id = item.id;
+        renderer.read(`mock_${id}.json`)
     }
 };
 export default action;
