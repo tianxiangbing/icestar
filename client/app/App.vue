@@ -14,7 +14,6 @@
 
 <script>
 import "./assets/style";
-import tab from "components/tab/tab";
 import tabView from "components/tab/tabView";
 import tabHeader from "components/tab/tabHeader";
 import leftMenu from 'components/menuLeft';
@@ -24,7 +23,6 @@ import store from "store/store";
 export default {
   name: "App",
   components: {
-    tab,
     mheader,
     tabView,
     tabHeader,

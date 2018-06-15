@@ -1,5 +1,6 @@
 <template>
     <header class="top-menu">
+        <div class="title"><a class="logo"></a>{{title}} - IceStar</div>
         <tab to="home"><i class="tianxiangbing txb-wxbzhuye"></i><span>首页</span></tab>
         <a @click="openHelp()" class="help"><i class="tianxiangbing txb-help" :class="{active:clickHelp}"></i><span>帮助</span>
           <ul class="help-sub" v-show="clickHelp">
@@ -34,6 +35,9 @@ export default {
   computed: {
     isMax() {
       return store.state.winStatus;
+    },
+    title(){
+      return store.state.title;
     }
   },
   created: function() {

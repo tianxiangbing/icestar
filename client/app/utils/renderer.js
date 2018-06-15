@@ -4,18 +4,35 @@ let path = require('path');
 let os = require('os');
 const { shell } = require('electron');
 const ipc = require('electron').ipcRenderer;
+const crypto = require('crypto');//加密
+const basePath = path.join(os.homedir(),".icestar");
 let wins = BrowserWindow.getAllWindows()
 console.log(wins)
-let win  = wins.pop();
-
+let win = wins.pop();
+//目录不存在时创建
+if(!fs.statSync(basePath).isDirectory()){
+    fs.mkdirSync(basePath);
+}
 let Common = {
-    winArr :[],
-    cachewin :[],
-    getPath() {
-        return path.join(os.homedir(), 'config.json');
-    },
-    getSocketPath() {
-        return path.join(os.homedir(), 'socketconfig.json');
+    winArr: [],
+    cachewin: [],
+    getPath(type,filename) {
+        let pa = '';
+        switch(type){
+            case "mock":{
+                pa = path.join(basePath, 'mockconfig.json');
+                break;
+            }
+            case 'mocklist':{
+                pa = path.join(basePath,filename);
+                break;
+            }
+            case 'socket':{
+                pa = path.join(basePath, 'socketconfig.json');
+                break;
+            }
+        }
+        return pa;
     },
     formatJson(v, callback) {
         let json = v
@@ -28,29 +45,41 @@ let Common = {
         }
         return json;
     },
-    save(json, path) {
-        var deferr = new $.Deferred();
-        fs.writeFile(path || this.getPath(), JSON.stringify(json), function (e) {
-            if (e) {
-                alert(e)
-                deferr.reject()
-            } else {
-                // window.close();
-                deferr.resolve()
-            }
+    read(type){
+        let path = this.getPath(type);
+        return new Promise((resolve,reject)=>{
+            fs.readFile(path,{encoding:'utf-8'},(e,data)=>{
+                if(!e){
+                    resolve(JSON.parse(data));
+                }else{
+                    reject(e);
+                }
+            })
         });
-        return deferr;
+    },
+    save(json, type,filename) {
+        let path = this.getPath(type,filename);
+        return new Promise((resolve,reject)=>{
+            fs.writeFile(path, JSON.stringify(json), function (e) {
+                if (e) {
+                    console.error(e)
+                    reject()
+                } else {
+                    resolve()
+                }
+            });
+        }) 
     },
     parentWin: null,
-    createCacheWin(){
+    createCacheWin() {
         //缓存窗口
-        let self  = this;
-        for(let i =1;i;i--){
-            (function(){
-                let win = new BrowserWindow({show:false, transparent :true,backgroundColor:'#333333', resizable:false,maximizable :false});
+        let self = this;
+        for (let i = 1; i; i--) {
+            (function () {
+                let win = new BrowserWindow({ show: false, transparent: true, backgroundColor: '#333333', resizable: false, maximizable: false });
                 // callback && win.webContents.on('did-finish-load',callback);
-                win.on('close',()=>{
-                    win= null;
+                win.on('close', () => {
+                    win = null;
                 });
                 self.cachewin.push(win);
             })();
@@ -68,29 +97,53 @@ let Common = {
         // iWin.webContents.openDevTools();
         return iWin;
     },
-    openDevTool(){
+    openDevTool() {
         win.webContents.openDevTools();
     },
     formatString(jsonstr) {
         return jsonstr.replace(/[\n\t\r]/gi, '');
     },
-    close(){
+    close() {
         win.close();
     },
-    min(){
+    min() {
         win.minimize()
     },
-    max(){
+    max() {
         win.maximize()
     },
-    reset(){
+    reset() {
         win.unmaximize()
     },
-    minSys(){
+    minSys() {
         win.hide();
     },
-    listen(title,callback){
-        win.on(title,callback);
+    listen(title, callback) {
+        win.on(title, callback);
+    },
+    md5File(filename, cb) {
+        if (typeof cb !== 'function') throw new TypeError('Argument cb must be a function')
+        var output = crypto.createHash('md5')
+        var input = fs.createReadStream(filename)
+
+        input.on('error', function (err) {
+            cb(err)
+        })
+
+        output.once('readable', function () {
+            cb(null, output.read().toString('hex'))
+        })
+        input.pipe(output)
+    },
+    //openfile
+    openFile() {
+        let key = String(+new Date());
+        ipc.send('open-file-dialog', key, '*');
+        return new Promise((resolve) => {
+            ipc.on(key, (e,path) => {
+                resolve(path[0]);
+            });
+        });
     }
 }
 module.exports = Common;

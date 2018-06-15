@@ -1,0 +1,27 @@
+
+$borderColor:rgba(128, 128, 128, 0.35);
+$bgColor:#2d2d2d;
+$color:#d4d4d4;
+$colorHover:#C1C1C1;
+$focusBgColor:#1E1E1E;
+$titleBgColor:#2d2d30;
+.textPadding{
+    padding:0 10px;
+}
+.vertialMiddle{
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+}
+.btnOk,.btnCancel{
+    background-color:#1E1E1E;
+    height:24px;
+    line-height: 24px;
+    padding:0 6px;
+    border:1px solid $borderColor;
+    cursor: pointer;
+}
+.btnCancel{
+    background-color:#2D2D2D;
+}

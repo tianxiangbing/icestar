@@ -1,0 +1,35 @@
+@import 'baseCss';
+.dialog{
+    @extend .vertialMiddle;
+    background-color: $titleBgColor;
+    box-shadow: 0 2px 8px #000000;
+    position:fixed;
+    color:$color;
+    .dialog-title{
+        line-height: 35px;
+        height: 35px;
+        border-bottom:1px solid $borderColor;
+        padding: 0 10px;
+    }
+    .dialog-close{
+        float:right;
+        cursor: pointer;
+    }
+    .dialog-action{
+        line-height: 35px;
+        height:35px;
+        text-align: right;
+        border-top:1px solid $borderColor;
+        .submit,.cancel{
+            margin-right:6px;
+            color:$color;
+            &:hover{
+                color:$colorHover;
+            }
+            @extend .btnOk;
+        }
+        .cancel{
+            @extend .btnCancel;
+        }
+    }
+}

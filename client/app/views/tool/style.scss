@@ -1,0 +1,29 @@
+#filemd5 {
+    top: 50%;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    #holder {
+        border: 2px dashed #ccc;
+        padding: 5px;
+        height: 250px;
+        line-height: 250px;
+        width: 400px;
+        margin-bottom: 10px;
+        .tips {
+            font-size: 14px;
+        }
+        text-align: center;
+        vertical-align: middle;
+        .file-content {
+            display: inline-block;
+            width: 100%;
+            text-align: center;
+            line-height: 30px;
+            font-size: 12px;
+            .md5 {
+                color: #fff;
+            }
+        }
+    }
+}

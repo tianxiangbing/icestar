@@ -23,7 +23,7 @@ const config = {
         filename: '[name].js',
         path: __dirname + '/dist/assets',        //真实存放路径
         publicPath: isDev ?
-            '/dist/' :                        //开发引用路径
+            '/' :                        //开发引用路径
             ''  //发布引用路径
     },
     module: {
@@ -70,7 +70,7 @@ const config = {
                 }
             },
             {
-                test: /\.(woff2?|eot|ttf|otf|svg)(\?.*)?$/,
+                test: /\.(woff2?|eot|ttf|otf|svg|png|jpg)(\?.*)?$/,
                 loader: 'url-loader',
                 query: {
                     limit: 100,
@@ -103,9 +103,11 @@ const config = {
             // 起别名 "module" -> "./app/third/module.js" 和 "module/file" 会导致错误
             // 模块别名相对于当前上下文导入
             "utils": path.resolve(__dirname, "app/utils"),
+            "baseCss":path.resolve(__dirname,"app/assets/base.scss"),
             "store": path.resolve(__dirname, "app/store"),
             "components": path.resolve(__dirname, "app/components"),
-            "renderer": path.resolve(__dirname, "app/utils/renderer.js")
+            "renderer": path.resolve(__dirname, "app/utils/renderer.js"),
+            // 'vue': 'vue/dist/vue.js'
         }
     },
     devtool: "source-map",
@@ -119,8 +121,8 @@ const config = {
         ignored: /node_modules/
     }
 };
-if (!isDev) {
-    console.log('production...')
+// if (!isDev) {
+    // console.log('production...')
     let extractCSS = new ExtractTextPlugin({ filename: 'app.css', allChunks: true });
     config.module.rules.push({
         test: /\.css$/,
@@ -131,6 +133,6 @@ if (!isDev) {
     config.plugins.concat([
         extractCSS
     ]);
-}
+// }
 console.log(config)
 module.exports = config

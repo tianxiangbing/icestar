@@ -1,0 +1,50 @@
+@import 'baseCss';
+.projectList{
+    padding:10px;
+    overflow: hidden;
+    h1{
+        line-height: 35px;
+    }
+    .item{
+        float:left;
+        width:200px;
+        height:200px;
+        line-height: 30px;
+        position: relative;
+        margin:0 10px 10px 0;
+        h2{
+            border-bottom: 1px solid $borderColor;
+            @extend .textPadding;
+            background-color: $bgColor;
+            i{
+                float:right;
+            }
+        }
+        border:1px solid $borderColor;
+        .desc{
+            @extend .textPadding;
+        }
+        &.projectAdd{
+            i{
+                @extend  .vertialMiddle;
+            }
+        }
+    }
+}
+#mock-projectAdd{
+    .form{
+        width:500px;
+        padding:20px;
+        .form-row{
+            overflow: auto;
+            line-height: 30px;
+            .from-title{
+                display: inline-block;
+                width:120px;
+                text-align: right;
+                padding-right:12px;
+                vertical-align: top;
+            }
+        }
+    }
+}

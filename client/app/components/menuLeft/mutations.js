@@ -12,5 +12,6 @@ mutations[TOGGLESUBMENU] = (state,title) => {
     if(state.isExpands){
         state.submenu = menu[title];
     }
+    state.currentActive = title;
 }
 export default mutations;

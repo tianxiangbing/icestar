@@ -17,12 +17,20 @@
 // }
 const WebpackDevServer = require('webpack-dev-server');
 const webpack = require('webpack');
+const process = require('child_process');
+const spawn = process.spawn;
 const path = require('path');
 let config = require("./webpack.config.js");
 // config.entry.app.unshift("webpack-dev-server/client?http://localhost:52013/");
 let compiler = webpack(config);
 let server = new WebpackDevServer(compiler, {
-    // hot:true
+    // hot:true,
+    after() {
+        console.log('before....')
+        process.exec('electron ../main');
+    }
 });
 // WebpackDevServer.addDevServerEntrypoints(config, {hot:true});
-server.listen(52013, '127.0.0.1');
+server.listen(52013, '127.0.0.1',()=>{
+    console.log('服务启动')
+});

@@ -3,19 +3,20 @@
 </template>
 
 <script>
-import tabs from "store/tabs";
 import { OPENTAB } from "./actionTypes";
 import store from "store/store";
 
 export default {
   name: "Tab",
-  props: ["to"],
+  props: ["to","title","prop"],
   methods: {
     toTab() {
       console.log(this.to);
       store.dispatch({
         type: OPENTAB,
-        to: this.to
+        to: this.to,
+        title:this.title,
+        prop:this.prop
       });
     }
   }

@@ -1,32 +1,31 @@
 <template>
 <div>
-tabView
 <div v-for="(item,index) in tabList" :key="index">
-  <component :is="item.name"/>
+  <component :is="item.name" v-show="tabActive==index"/>
 </div>
 </div>
 </template>
 <script>
 import store from "store/store";
-import mockAdd from "mock/add";
-import mockList from "mock/list";
-import mockProjectList from "mock/projectList";
-
-import './tab.scss';
+import tabs from 'store/tabs';
+import './style';
+const components = {}
+tabs.forEach(item => {
+  components[item.name]=item.component; 
+});
 
 export default {
   name: "TabView",
-  components: {
-    mockAdd,
-    mockList,
-    mockProjectList
+  components: components,
+  data(){
+    return {};
   },
   computed: {
     tabList() {
-      return store.state.tabList;
+      return store.state.base.tabList;
     },
     tabActive() {
-      return store.state.tabActive;
+      return store.state.base.tabActive;
     }
   }
 };

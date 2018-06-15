@@ -1,3 +1,4 @@
+@import 'baseCss';
 @import './iconfont.css';
 html,
 body {
@@ -6,8 +7,13 @@ body {
     padding: 0;
     margin: 0;
     background-color: #ccc;
+    user-select: none;
 }
-
+*{
+    margin:0;
+    padding:0;
+    outline: none;
+}
 a {
     color: #cccccc;
     text-decoration: none;
@@ -24,7 +30,11 @@ ul,li{
     min-height: 100vh;
     flex-direction: column;
 }
-
+h1,h2,h3,h4{
+    padding:0;
+    margin:0;
+    font-size: 14px;
+}
 .body {
     display: flex;
     flex: 1;
@@ -43,4 +53,34 @@ footer {
 
 .content {
     flex: 1;
+    position: relative;
+}
+
+.btn{
+    border:1px solid $borderColor;
+    background-color:$bgColor;
+    color:#cccccc;
+    height:35px;
+    line-height: 35px;
+    cursor: pointer;
+    outline: none;
+    &:hover{
+        color:#fff;
+    }
+}
+input[type="text"],textarea{
+    background-color: transparent;
+    border:none;
+    border-bottom:1px solid $borderColor;
+    height:30px;
+    line-height: 30px;
+    color:$color;
+    padding-left:10px;
+    resize: none;
+    &:focus,&:hover{
+        background-color: $focusBgColor;
+    }
+}
+textarea{
+    height: 100px;
 }
