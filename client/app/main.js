@@ -5,6 +5,7 @@ import tab from "components/tab/tab";
 import Dialog from "components/dialog/index";
 import Alert from './components/alert/index';
 Vue.component('tab', tab);
+console.log(tab)
 // Vue.component('vdialog',dialog);
 // Vue.prototype.vdialog = dialog;
 const install = function (Vue) {

@@ -1,4 +1,4 @@
-import { MOCK_PROJECT_ADD, MOCK_PROJECT_UPDATE ,MOCK_INIT,MOCK_LIST_INIT} from './actionTypes';
+import { MOCK_PROJECT_ADD, MOCK_PROJECT_UPDATE ,MOCK_INIT,MOCK_LIST_INIT,MOCK_ADD} from './actionTypes';
 import renderer from 'renderer';
 let action = {
     [MOCK_PROJECT_ADD]: ({ commit, state }, item) => {
@@ -7,7 +7,7 @@ let action = {
         let obj = item.data;
         obj.id = len;
         data.push(obj)
-        renderer.save('[]','mocklist',`mock_${obj.id}.json`);
+        // renderer.save('[]','mocklist',`mock_${obj.id}.json`);
         renderer.save(data, 'mock').then(() => {
             commit(MOCK_PROJECT_ADD, obj)
         });
@@ -35,7 +35,32 @@ let action = {
     },
     [MOCK_LIST_INIT]:({commit,state},item)=>{
         let id = item.id;
-        renderer.read(`mock_${id}.json`)
+        renderer.read(`mock_${id}.json`).then(data=>{
+            
+        })
+    },
+    [MOCK_ADD]:({commit,state},item)=>{
+        let data = [...state.projectList];
+        let len = data.length;
+        let obj = item.data;
+        let pid = obj .pid;
+        let index = -1;
+        data.forEach((element,i) => {
+            if(pid == element.id){
+                index = i;
+                return false;
+            }
+        });
+        if(!data[index].list){
+            data[index].list = []
+        }
+        let list  = data[index].list ;
+        obj.id = list.length;
+        list.push(obj)
+        // renderer.save('[]','mocklist',`mock_${obj.id}.json`);
+        renderer.save(data, 'mock').then(() => {
+            commit(MOCK_PROJECT_ADD, obj)
+        });
     }
 };
 export default action;

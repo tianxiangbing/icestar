@@ -21,7 +21,24 @@ $titleBgColor:#2d2d30;
     padding:0 6px;
     border:1px solid $borderColor;
     cursor: pointer;
+    color:$color;
 }
 .btnCancel{
     background-color:#2D2D2D;
+}
+$placeholderColor:#717171;
+input::-webkit-input-placeholder{
+    color:$placeholderColor;
+}
+input::-moz-placeholder{   /* Mozilla Firefox 19+ */
+    color:$placeholderColor;
+}
+input:-moz-placeholder{    /* Mozilla Firefox 4 to 18 */
+    color:$placeholderColor;
+}
+input:-ms-input-placeholder{  /* Internet Explorer 10-11 */ 
+    color:$placeholderColor;
+}
+input[type="checkbox"]{
+    vertical-align: -3px;
 }

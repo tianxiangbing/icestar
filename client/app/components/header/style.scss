@@ -2,7 +2,8 @@ header {
     -webkit-app-region: drag;
     -webkit-user-select: none;
     .title{
-        float: left;
+        // float: left;
+        position: absolute;
         .logo{
             width:14px;
             height:14px;

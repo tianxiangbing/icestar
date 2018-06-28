@@ -26,7 +26,7 @@
 <script>
     export default {
         data(){
-            return {title:'',prefix:'',desc:''};
+            return {title:'',prefix:'',desc:'',list:[]};
         },
         name:"projectAdd",
         props:["params"],

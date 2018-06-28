@@ -1,50 +1,131 @@
 @import 'baseCss';
-.projectList{
-    padding:10px;
+.projectList {
+    padding: 10px;
     overflow: hidden;
-    h1{
+    h1 {
         line-height: 35px;
     }
-    .item{
-        float:left;
-        width:200px;
-        height:200px;
+    .item {
+        float: left;
+        width: 200px;
+        height: 200px;
         line-height: 30px;
         position: relative;
-        margin:0 10px 10px 0;
-        h2{
+        margin: 0 10px 10px 0;
+        h2 {
             border-bottom: 1px solid $borderColor;
             @extend .textPadding;
             background-color: $bgColor;
-            i{
-                float:right;
+            i {
+                float: right;
             }
         }
         border:1px solid $borderColor;
-        .desc{
+        .desc {
             @extend .textPadding;
         }
-        &.projectAdd{
-            i{
-                @extend  .vertialMiddle;
+        &.projectAdd {
+            i {
+                @extend .vertialMiddle;
             }
         }
     }
 }
-#mock-projectAdd{
-    .form{
-        width:500px;
-        padding:20px;
-        .form-row{
-            overflow: auto;
-            line-height: 30px;
-            .from-title{
-                display: inline-block;
-                width:120px;
-                text-align: right;
-                padding-right:12px;
-                vertical-align: top;
-            }
+ .form {
+    padding: 20px;
+    .form-row {
+        overflow: auto;
+        line-height: 30px;
+        .from-title {
+            display: inline-block;
+            width: 120px;
+            text-align: right;
+            padding-right: 12px;
+            vertical-align: top;
+        }
+    }
+}
+#mock-projectAdd {
+   .form{
+        width: 500px;
+   }
+}
+
+.mock-list {
+    .search_input {
+        width: 50%;
+        margin: 20px auto;
+        text-align: center;
+        display: inherit;
+        font-size: 14px;
+    }
+    .list {
+        line-height: 30px;
+        border: 1px solid $borderColor;
+        border-bottom: none;
+        overflow: auto;
+        margin: 20px;
+    }
+    .row {
+        display: flex;
+        height: 30px;
+        overflow: hidden;
+        border-bottom: 1px solid $borderColor;
+        &.active {
+            background-color: rgba(69, 69, 69, .8);
+        }
+        &:hover {
+            background-color: rgba(69, 69, 69, .5);
+        }
+        &>div {
+            padding: 0 12px;
+            box-sizing: border-box;
+        }
+        .index {
+            width: 70px;
+            text-align: center;
+        }
+        .title {
+            flex: 1;
+        }
+        .url {
+            flex: 1;
+        }
+        .action {
+            width: 80px;
+        }
+    }
+}
+
+.mockAdd {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    .codeView{
+        flex: 1;
+        height: 100%;
+    }
+    .vue-codemirror,
+    .CodeMirror {
+        height: 100%;
+    }
+    .mockFrom{
+        width: 300px;
+        @extend .form;
+        padding:0;
+        display:flex;
+        flex-direction:column-reverse;
+        .from-title {
+            width:60px!important;
+        }
+    }
+    .form-action{
+        padding-top:20px;
+        margin-top:20px;
+        text-align:center;
+        .bigBtn{
+            width:40%;
+            margin:0;
         }
     }
 }

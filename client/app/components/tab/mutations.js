@@ -5,12 +5,12 @@ import store from 'store/store';
 let mutations = {};
 
 mutations[OPENTAB] = (state, props) => {
-    let {to, title, prop} = props;
+    let { to, title, prop } = props;
     let tab = tabs.find(item => item.name == to);
     let ti;
     let index;
-    state.tabList.forEach((item,idx)=>{
-        if( item.name == to){
+    state.tabList.forEach((item, idx) => {
+        if (item.name == to) {
             ti = item;
             index = idx;
         }
@@ -20,11 +20,12 @@ mutations[OPENTAB] = (state, props) => {
         tab.prop = prop;
         state.tabList.push(tab);
         state.tabActive = state.tabList.length - 1;
-    }else{
-      store.dispatch({
-        type: SHOWTAB,
-        index: index
-      });
+    } else {
+        store.dispatch({
+            type: SHOWTAB,
+            index: index,
+            prop: prop
+        });
     }
 }
 mutations[SHOWTAB] = (state, props) => {

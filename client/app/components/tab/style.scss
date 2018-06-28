@@ -32,3 +32,16 @@
         }
     }
 }
+.tab-view{
+    position: relative;
+    flex:1;
+    .view-item{
+        // height: 100%;
+        overflow: auto;
+        position: absolute;
+        top:0;
+        bottom:0;
+        left:0;
+        right:0;
+    }
+}

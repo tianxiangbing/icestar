@@ -19,6 +19,7 @@ import tabHeader from "components/tab/tabHeader";
 import leftMenu from 'components/menuLeft';
 import mheader from 'components/header';
 import store from "store/store";
+import im from 'components/im';
 
 export default {
   name: "App",
@@ -26,7 +27,8 @@ export default {
     mheader,
     tabView,
     tabHeader,
-    leftMenu
+    leftMenu,
+    im
   }
 };
 </script>

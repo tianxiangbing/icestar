@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import { OPENTAB } from "./actionTypes";
+import { OPENTAB,CLOSETAB } from "./actionTypes";
 import store from "store/store";
 
 export default {
@@ -19,6 +19,12 @@ export default {
         prop:this.prop
       });
     }
+  },
+  close(){
+    console.log('close....')
+     store.dispatch({
+       type:CLOSETAB
+     });
   }
 };
 </script>

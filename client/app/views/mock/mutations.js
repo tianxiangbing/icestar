@@ -1,4 +1,4 @@
-import { MOCK_PROJECT_ADD, MOCK_PROJECT_UPDATE,MOCK_INIT,MOCK_LIST_INIT } from './actionTypes';
+import { MOCK_PROJECT_ADD, MOCK_PROJECT_UPDATE,MOCK_INIT,MOCK_LIST_INIT,MOCK_ADD } from './actionTypes';
 import Vue from 'vue';
 
 let mutations = {
@@ -26,6 +26,22 @@ let mutations = {
     },
     [MOCK_LIST_INIT]:(state,id)=>{
 
+    },
+    [MOCK_ADD]:(state,data)=>{
+        let index = -1;
+        let pid = data.pid;
+        state.projectList.forEach((element,i) => {
+            if(pid == element.id){
+                index = i;
+                return false;
+            }
+        });
+        if(!state.projectList[index].list){
+            state.projectList[index].list = []
+        }
+        let list  = state.projectList[index].list ;
+        data.id = list.length;
+        list.push(obj)
     }
 }
 export default mutations;
