@@ -22,6 +22,11 @@ $titleBgColor:#2d2d30;
     border:1px solid $borderColor;
     cursor: pointer;
     color:$color;
+    margin:0 3px;
+    &:hover{
+        background-color:#2E2E2E;
+        color:#fff;
+    }
 }
 .btnCancel{
     background-color:#2D2D2D;

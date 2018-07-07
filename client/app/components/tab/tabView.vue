@@ -1,7 +1,7 @@
 <template>
 <div class="tab-view">
-<div v-for="(item,index) in tabList" :key="index" class="view-item">
-  <component :is="item.name" :prop="item.prop" v-show="tabActive==index"/>
+<div v-for="(item,index) in tabList" :key="index" class="view-item" v-show="tabActive==index">
+  <component :is="item.name" :prop="item.prop"/>
 </div>
 </div>
 </template>

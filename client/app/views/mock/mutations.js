@@ -41,7 +41,7 @@ let mutations = {
         }
         let list  = state.projectList[index].list ;
         data.id = list.length;
-        list.push(obj)
+        list.push(data)
     }
 }
 export default mutations;

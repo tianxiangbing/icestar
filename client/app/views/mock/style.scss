@@ -92,7 +92,6 @@
             flex: 1;
         }
         .action {
-            width: 80px;
         }
     }
 }
@@ -127,5 +126,10 @@
             width:40%;
             margin:0;
         }
+    }
+}
+.mockConfig{
+    .bigBtn{
+        margin:20px 0 0 132px;
     }
 }

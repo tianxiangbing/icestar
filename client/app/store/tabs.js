@@ -5,11 +5,17 @@ import mockList from "mock/list";
 import mockProjectList from "mock/projectList";
 import toolFilemd5 from 'tool/filemd5';
 import projectAdd from 'mock/projectAdd';
+import mockConfig from 'mock/mockConfig';
 
 export default [{
     title: "添加接口",
     name:'mockAdd',
     component:mockAdd,
+    props:[]
+},{
+    title: "服务配置",
+    name:'mockConfig',
+    component:mockConfig,
     props:[]
 },{
     title: "项目列表",

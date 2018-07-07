@@ -7,10 +7,10 @@ export default {
         to: "mockProjectList",
         title: "项目列表"
     },
-        // {
-        //     to: "mockList",
-        //     title: "接口列表"
-        // },
+    {
+        to: "mockConfig",
+        title: "服务配置(开/关)"
+    },
         // {
         //     to: "mockAdd",
         //     title: "添加接口"

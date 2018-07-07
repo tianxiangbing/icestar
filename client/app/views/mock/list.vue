@@ -14,7 +14,7 @@
                 <div class="index">{{index}}</div>
                 <div class="title">{{item.title}}</div>
                 <div class="url">{{item.url}}</div>
-                <div class="action"></div>
+                <div class="action"><span class="btnCancel">预览</span><span class="btnCancel">删除</span><span class="btnCancel">编辑</span></div>
             </div>
         </div>
     </div>

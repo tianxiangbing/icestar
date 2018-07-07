@@ -75,10 +75,11 @@ export default {
           })
       },
       save(){
-          console.log(this.prop)
           store.dispatch({
             type: MOCK_ADD,
-            data: { title:this.title, url:this.url,methods:this.methods,pid:this.prop }
+            data: { title:this.title, url:this.url,methods:this.methods,pid:this.prop,callback:()=>{
+                this.valert({content:'添加成功！'});
+            } }
           });
       }
   },
