@@ -1,5 +1,6 @@
 export default {
     port:8080,
+    status:false,
     projectList:[{
         id:0,
         title:"示例项目demo",
@@ -8,7 +9,9 @@ export default {
         list:[{
             "title":"这是例子的标题",
             "url":"/",
-            "pid":0
+            "pid":0,
+            "content":"hello world.",
+            "when":""//条件,
         }]
     }]//mock项目列表
 }

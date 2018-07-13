@@ -19,6 +19,8 @@ var package = require("./package.json");
 let win = null, loadingScreen;
 let now = +new Date();
 let tray = null;
+const mockServer = require('./server/mockServer');
+
 function openWindow() {
     const { width, height } = electron.screen.getPrimaryDisplay().workAreaSize;
     let mainStyle = {
@@ -150,4 +152,7 @@ ipc.on('go-main', function (event) {
     console.log(event)
     console.log(arguments)
     win.focus();
+});
+ipc.on('mockServer',function(event,data){
+    mockServer.init(data);
 });

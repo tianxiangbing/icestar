@@ -18,7 +18,7 @@
             <span class="form-input">
                     {{this.url}}
                     <button class="btnCancel" @click="preview()">预览</button>
-                    <button class="btnCancel" ref="btnCopy" @click="copy()">复制</button>
+                    <button class="btnCancel" ref="btnCopy">复制</button>
                 </span>
         </div>
         <div class="form-action">
@@ -30,37 +30,50 @@
 
 <script>
 import store from "store/store";
-import renderer from 'renderer';
-import common from 'utils/common';
+import renderer from "renderer";
+import common from "utils/common";
+import { MOCK_START } from "./actionTypes";
 
 export default {
-    name: "mockConfig",
-    data() {
-        return {
-            status: false
-        };
+  name: "mockConfig",
+  data() {
+    return {};
+  },
+  computed: {
+    port() {
+      return store.state.mock.port;
     },
-    computed: {
-        port() {
-            return store.state.mock.port;
-        },
-        url() {
-            return this.address + ":" + this.port;
-        },
-        address() {
-            return renderer.getIPAdress();
-        }
+    url() {
+      return "http://" + this.address + ":" + this.port;
     },
-    methods: {
-        start() {
-
-        },
-        preview() {
-            renderer.openUrl()
-        },
-        copy() {
-            common.copy(this.refs.btnCopy,this.url);
-        }
+    address() {
+      return renderer.getIPAdress();
+    },
+    status() {
+      return store.state.mock.status;
     }
+  },
+  mounted() {
+    common.copy(
+      this.$refs.btnCopy,
+      () => {
+        return this.url;
+      },
+      this.valert
+    );
+  },
+  methods: {
+    start() {
+      store.dispatch({
+        type: MOCK_START,
+        data:{
+          port:this.port
+        }
+      });
+    },
+    preview() {
+      renderer.openUrl(this.url);
+    }
+  }
 };
 </script>

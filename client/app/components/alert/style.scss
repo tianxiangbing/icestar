@@ -1,14 +1,15 @@
 @import 'baseCss';
 .alert {
+    box-sizing:border-box;
     background-color: $titleBgColor;
     position: fixed;
-    right: 5px;
+    right: 10px;
     bottom: 5px;
     max-height: 128px;
     max-width: 300px;
     min-width: 200px;
     min-height: 50px;
-    padding: 10px 5px;
+    padding: 15px 10px;
     box-shadow: 0 2px 8px #000000;
     color:$color;
     .alert-close {
@@ -16,5 +17,6 @@
         right: 5px;
         top: 5px;
         cursor: pointer;
+        font-size:10px;
     }
 }

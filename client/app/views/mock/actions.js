@@ -1,4 +1,4 @@
-import { MOCK_PROJECT_ADD, MOCK_PROJECT_UPDATE, MOCK_INIT, MOCK_LIST_INIT, MOCK_ADD } from './actionTypes';
+import { MOCK_START, MOCK_PROJECT_ADD, MOCK_PROJECT_UPDATE, MOCK_INIT, MOCK_LIST_INIT, MOCK_ADD } from './actionTypes';
 import renderer from 'renderer';
 let action = {
     [MOCK_PROJECT_ADD]: ({ commit, state }, item) => {
@@ -63,6 +63,10 @@ let action = {
             commit(MOCK_ADD, obj);
             obj.callback && obj.callback();
         });
+    },
+    [MOCK_START]:({commit,state},data)=>{
+        renderer.mockServer(data.data.port,true);
+        commit(MOCK_START);
     }
 };
 export default action;

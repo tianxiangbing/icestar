@@ -13,6 +13,7 @@ let win = wins.pop();
 if(!fs.statSync(basePath).isDirectory()){
     fs.mkdirSync(basePath);
 }
+
 let Common = {
     winArr: [],
     cachewin: [],
@@ -161,6 +162,9 @@ let Common = {
     },
     openUrl(url){
         shell.openExternal(url);
+    },
+    mockServer(port,start=true){
+        ipc.send("mockServer",{port,path:this.getPath('mock'),status:start});
     }
 }
 module.exports = Common;

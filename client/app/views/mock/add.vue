@@ -77,7 +77,7 @@ export default {
       save(){
           store.dispatch({
             type: MOCK_ADD,
-            data: { title:this.title, url:this.url,methods:this.methods,pid:this.prop,callback:()=>{
+            data: { title:this.title, content:this.code, url:this.url,methods:this.methods,pid:this.prop,callback:()=>{
                 this.valert({content:'添加成功！'});
             } }
           });

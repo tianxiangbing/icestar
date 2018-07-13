@@ -8,9 +8,11 @@ let instance = new AlertConstructor({
 AlertConstructor.prototype.close = () => {
     const el = instance.$el;
     el.parentNode && el.parentNode.removeChild(el);
-    this.close && this.close(instance);
 }
 let Alert = (options={})=>{
+    if(typeof options==='string'){
+        options={content:options}
+    }
     instance.callback = options.callback;
     instance.content = options.content;
     document.body.appendChild(instance.$el);

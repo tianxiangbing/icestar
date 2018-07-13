@@ -11,7 +11,7 @@ export default {
         }
         return json;
     },
-    copy(target,text){
+    copy(target,text,alert){
         var clipboard = new Clipboard(target, {
             text
         });//实例化
