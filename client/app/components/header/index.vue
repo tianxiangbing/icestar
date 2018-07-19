@@ -5,6 +5,7 @@
         <a @click="openHelp()" class="help"><i class="tianxiangbing txb-help" :class="{active:clickHelp}"></i><span>帮助</span>
           <ul class="help-sub" v-show="clickHelp">
               <li @click="openDevTool()">开发人员工具</li>
+              <li @click="openSuport()">对作者支持</li>
           </ul>
         </a>
         <span class="win-act">
@@ -23,6 +24,7 @@ import renderer from "renderer";
 import tab from "components/tab/tab";
 import store from "store/store";
 import { MAX, RESET } from "store/actionTypes";
+import supportModal from './supportModal';
 
 export default {
   name: "Header",
@@ -75,6 +77,12 @@ export default {
     openDevTool(){
       // event.stopPropagation();
       renderer.openDevTool();
+    },
+    openSuport(){
+        this.vdialog({
+        content: supportModal,
+        title: "给作者支持"
+        });
     }
   }
 };

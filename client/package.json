@@ -1,11 +1,11 @@
 {
-  "name": "mock-client",
+  "name": "icestar",
   "version": "2.0.0",
-  "description": "mock",
+  "description": "IceStar:该工具可以模拟本地的http服务后端接口，以方便前端联调接口，支持多种请求类型，自定义url和参数。",
   "main": "src/main.js",
   "scripts": {
     "start": "cross-env  NODE_ENV=development  node server",
-    "build": "cross-env NODE_ENV=production node publish",
+    "build": "cross-env NODE_ENV=production && node publish",
     "test": "webpack-dev-server"
   },
   "dependencies": {

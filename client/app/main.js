@@ -2,6 +2,7 @@
 import Vue from 'vue';
 import App from './App.vue';
 import tab from "components/tab/tab";
+import Tab from 'components/tab/index';
 import Dialog from "components/dialog/index";
 import Alert from './components/alert/index';
 Vue.component('tab', tab);
@@ -15,6 +16,7 @@ const install = function (Vue) {
 Vue.use(install)
 Vue.prototype.valert = Alert;
 Vue.prototype.vdialog = Dialog;
+Vue.prototype.vtab= Tab;
 new Vue({
   render: h => h(App)
 }).$mount('#app');

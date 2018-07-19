@@ -2,7 +2,7 @@ const path = require('path');
 let webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 // __webpack_public_path__ = '/dist/';
-let isDev = process.env.NODE_ENV == "development";
+let isDev = false; //process.env.NODE_ENV == "development";
 console.log(isDev)
 
 //动态创建html
@@ -18,13 +18,31 @@ const config = {
         vendor: ["vue", "vuex", 'vue-router']
     },
     mode: isDev ? 'development' : 'production',
+    devtool:false,
     context: __dirname,
     output: {
         filename: '[name].js',
         path: __dirname + '/dist/assets',        //真实存放路径
         publicPath: isDev ?
             '/' :                        //开发引用路径
-            ''  //发布引用路径
+            'assets'  //发布引用路径
+    },
+    performance: {
+
+        hints: "warning", // 枚举
+
+        maxAssetSize: 600000, // 整数类型（以字节为单位）
+
+        maxEntrypointSize: 500000, // 整数类型（以字节为单位）
+
+        assetFilter: function (assetFilename) {
+
+            // 提供资源文件名的断言函数
+
+            return assetFilename.endsWith('.css') || assetFilename.endsWith('.js');
+
+        }
+
     },
     module: {
         noParse: function (content) {
@@ -114,7 +132,6 @@ const config = {
             // 'vue': 'vue/dist/vue.js'
         }
     },
-    devtool: "source-map",
     plugins: [
         htmlPlugin,
         new webpack.NamedModulesPlugin(),

@@ -1,4 +1,4 @@
-import { MOCK_START, MOCK_PROJECT_ADD, MOCK_PROJECT_UPDATE, MOCK_INIT, MOCK_LIST_INIT, MOCK_ADD } from './actionTypes';
+import { MOCK_DEL, MOCK_START, MOCK_PROJECT_ADD, MOCK_PROJECT_UPDATE, MOCK_INIT, MOCK_LIST_INIT, MOCK_ADD, MOCK_UPDATE } from './actionTypes';
 import renderer from 'renderer';
 let action = {
     [MOCK_PROJECT_ADD]: ({ commit, state }, item) => {
@@ -65,8 +65,57 @@ let action = {
         });
     },
     [MOCK_START]:({commit,state},data)=>{
-        renderer.mockServer(data.data.port,true);
-        commit(MOCK_START);
+        renderer.mockServer(data.data.port,data.data.status);
+        commit(MOCK_START,data);
+    },
+    [MOCK_DEL]:({commit,state},obj)=>{
+        let data = JSON.parse(JSON.stringify(state.projectList));
+        let delIndex = obj.data.index;
+        
+        let pid = obj.data.pid;
+        let index = -1;
+        data.forEach((element, i) => {
+            if (pid == element.id) {
+                index = i;
+                return false;
+            }
+        });
+        if (!data[index].list) {
+            data[index].list = []
+        }
+        data[index].list.splice(delIndex,1);
+        renderer.save(data, 'mock').then(() => {
+            commit(MOCK_DEL, obj);
+            obj.data.callback && obj.data.callback();
+        });
+    },
+    [MOCK_UPDATE]:({commit,state},obj)=>{
+        let data = JSON.parse(JSON.stringify(state.projectList));
+        
+        let pid = obj.data.pid;
+        let index = -1;
+        data.forEach((element, i) => {
+            if (pid == element.id) {
+                index = i;
+                return false;
+            }
+        });
+        if (!data[index].list) {
+            data[index].list = []
+        }
+        let currentIndex = -1;
+        data[index].list.forEach((item,i)=>{
+            if(item.id == obj.data.id){
+                currentIndex = i;
+            }
+        });
+        if(currentIndex !==-1 ){
+            data[index].list[currentIndex]=obj.data;
+            renderer.save(data, 'mock').then(() => {
+                commit(MOCK_UPDATE, obj);
+                obj.data.callback && obj.data.callback();
+            });
+        }
     }
 };
 export default action;

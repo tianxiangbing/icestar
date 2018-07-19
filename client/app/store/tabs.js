@@ -4,6 +4,7 @@ import mockAdd from "mock/add";
 import mockList from "mock/list";
 import mockProjectList from "mock/projectList";
 import toolFilemd5 from 'tool/filemd5';
+import formatJson from 'tool/formatJson';
 import projectAdd from 'mock/projectAdd';
 import mockConfig from 'mock/mockConfig';
 
@@ -37,5 +38,10 @@ export default [{
     name:"projectAdd",
     props:[],
     component:projectAdd
+},{
+    title:"Json格式验证",
+    name:"formatJson",
+    props:[],
+    component:formatJson
 }
 ];

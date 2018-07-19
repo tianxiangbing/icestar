@@ -19,5 +19,8 @@ export default {
     "tool": [{
         to: "filemd5",
         title: "文件md5加密"
+    },{
+        to: "formatJson",
+        title: "json格式验证"
     }]
 }

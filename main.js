@@ -20,6 +20,7 @@ let win = null, loadingScreen;
 let now = +new Date();
 let tray = null;
 const mockServer = require('./server/mockServer');
+const updater = require('./server/updater');
 
 function openWindow() {
     const { width, height } = electron.screen.getPrimaryDisplay().workAreaSize;
@@ -39,7 +40,7 @@ function openWindow() {
     if (process.env.NODE_ENV === 'development') {
         win.loadURL('http://localhost:52013/');
     } else {
-        win.loadURL(path.join('file://', __dirname, '/client/index.html'));
+        win.loadURL(path.join('file://', __dirname, '/client/dist/index.html'));
     }
     // win.webContents.openDevTools()
     win.on('closed', function () {
@@ -115,6 +116,7 @@ app.on('ready', () => {
     // win.on('hide', () => {
     //     tray.setHighlightMode('never')
     // })
+    updater.init();
 });
 
 app.on('activate', () => {

@@ -17,16 +17,29 @@ app.use(bodyParser.urlencoded({ extended: false }));
 let httpserver = {
     port: 8080,
     config: {},
+    status: false,
     init(param) {
         let { port, path, status } = param;
-        this.mockpath = path;
-        this.port = port;
-        this.bindConfig();
-        this.server = require('http').createServer(app);
-        this.server.listen(port, () => {
-            var host = this.server.address().address;
-            var port = this.server.address().port;
-        });
+        if (status && this.status) {
+            //停止服务
+            this.server.close((e) => {
+                console.log(e)
+                this.status = false;
+            });
+            return false;
+        }
+        if (!this.status) {
+            this.mockpath = path;
+            this.port = port;
+            this.bindConfig();
+            this.server = require('http').createServer(app);
+            this.server.listen(port, () => {
+                // var host = this.server.address().address;
+                // var port = this.server.address().port;
+                this.status = true;
+            });
+
+        }
         return this.server;
     },
     showtip: (text) => {
@@ -57,8 +70,8 @@ let httpserver = {
                             let prefix = item.prefix;
                             if (reqPrefix == prefix) {
                                 item.list.forEach(u => {
-                                    let method = u.method || [];
-                                    if (`/${prefix}${u.url}` == url && method.indexOf(req.method) > -1) {
+                                    let methods = u.methods || [];
+                                    if (`/${prefix}${u.url}` == url && methods.indexOf(req.method) > -1) {
                                         ishas = true;
                                         let returnvalue = u.content;
                                         res.send(returnvalue);

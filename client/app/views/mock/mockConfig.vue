@@ -66,13 +66,20 @@ export default {
     start() {
       store.dispatch({
         type: MOCK_START,
-        data:{
-          port:this.port
+        data: {
+          port: this.port,
+          url: this.url,
+          status: store.state.mock.status
         }
       });
     },
     preview() {
-      renderer.openUrl(this.url);
+      let status = store.state.mock.status;
+      if (!status) {
+        this.valert({ content: "mock服务未启动，请开启服务后预览." });
+      } else {
+        renderer.openUrl(this.url);
+      }
     }
   }
 };

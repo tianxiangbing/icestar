@@ -1,4 +1,4 @@
-import { MOCK_START, MOCK_PROJECT_ADD, MOCK_PROJECT_UPDATE, MOCK_INIT, MOCK_LIST_INIT, MOCK_ADD } from './actionTypes';
+import {MOCK_UPDATE, MOCK_START, MOCK_PROJECT_ADD, MOCK_PROJECT_UPDATE, MOCK_INIT, MOCK_LIST_INIT, MOCK_ADD, MOCK_DEL } from './actionTypes';
 import Vue from 'vue';
 
 let mutations = {
@@ -43,8 +43,49 @@ let mutations = {
         data.id = list.length;
         list.push(data)
     },
-    [MOCK_START]: (state) => {
+    [MOCK_DEL]: (state, obj) => {
+        let delIndex = obj.data.index;
+        let pid = obj.data.pid;
+        let index = -1;
+        let data =  state.projectList;
+        data.forEach((element, i) => {
+            if (pid == element.id) {
+                index = i;
+                return false;
+            }
+        });
+        if (!data[index].list) {
+            data[index].list = []
+        }
+        data[index].list.splice(delIndex,1);
+    },
+    [MOCK_UPDATE]:(state,obj)=>{
+        let data = state.projectList;
+        let pid = obj.data.pid;
+        let index = -1;
+        data.forEach((element, i) => {
+            if (pid == element.id) {
+                index = i;
+                return false;
+            }
+        });
+        if (!data[index].list) {
+            data[index].list = []
+        }
+        let currentIndex = -1;
+        data[index].list.forEach((item,i)=>{
+            if(item.id == obj.data.id){
+                currentIndex = i;
+            }
+        });
+        if(currentIndex !==-1 ){
+            // data[index].list[currentIndex]=obj.data;
+            data[index].list.splice(currentIndex,1,obj.data);
+        }
+    },
+    [MOCK_START]: (state,obj) => {
         state.status = !state.status;
+        state.url = obj.data.url;
     }
 }
 export default mutations;

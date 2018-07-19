@@ -39,18 +39,29 @@
 import { codemirror } from "vue-codemirror";
 
 import "./style";
-import 'codemirror/mode/javascript/javascript.js';
-import 'codemirror/lib/codemirror.css';
-import "codemirror/theme/seti.css";
-import common from 'utils/common';
-import store from 'store/store';
-import { MOCK_ADD } from './actionTypes';
+import "codemirror/mode/javascript/javascript.js";
+// import "codemirror/lib/codemirror.css";
+// import "codemirror/theme/seti.css";
+import common from "utils/common";
+import store from "store/store";
+import { MOCK_ADD, MOCK_UPDATE } from "./actionTypes";
 // component
 export default {
   name: "add",
-  props:[
-      "prop"
-  ],
+  props: ["prop"],
+  created() {
+    console.log(this.$props.prop);
+    this.pid = this.$props.prop.pid;
+    let index = this.$props.prop.index;
+    if (index >= 0) {
+      let obj = store.state.mock.projectList[this.pid].list[index];
+      this.url = obj.url;
+      this.id = obj.id;
+      this.title = obj.title;
+      this.methods = obj.methods;
+      this.code = obj.content;
+    }
+  },
   data() {
     return {
       code: "{}",
@@ -61,27 +72,55 @@ export default {
         lineNumbers: true,
         line: true
       },
-      url:"/",
-      title:"",
-      methods:[]
+      id: -1,
+      url: "/",
+      title: "",
+      methods: [],
+      pid: this.$props.prop.pid
     };
   },
-  methods:{
-      formatJson(){
-          common.formatJson(this.code,(state,json)=>{
-              if(state){
-                  this.code = json;
-              }
-          })
-      },
-      save(){
-          store.dispatch({
-            type: MOCK_ADD,
-            data: { title:this.title, content:this.code, url:this.url,methods:this.methods,pid:this.prop,callback:()=>{
-                this.valert({content:'添加成功！'});
-            } }
-          });
+  methods: {
+    formatJson() {
+      common.formatJson(this.code, (state, json) => {
+        if (state) {
+          this.code = json;
+        }
+      });
+    },
+    save() {
+      if (this.id == -1) {
+        store.dispatch({
+          type: MOCK_ADD,
+          data: {
+            title: this.title,
+            content: this.code,
+            url: this.url,
+            methods: this.methods,
+            pid: this.pid,
+            callback: () => {
+              this.valert({ content: "添加成功！" });
+              this.vtab.close();
+            }
+          }
+        });
+      } else {
+        store.dispatch({
+          type: MOCK_UPDATE,
+          data: {
+            id: this.id,
+            title: this.title,
+            content: this.code,
+            url: this.url,
+            methods: this.methods,
+            pid: this.pid,
+            callback: () => {
+              this.valert({ content: "修改成功！" });
+              this.vtab.close();
+            }
+          }
+        });
       }
+    }
   },
   components: {
     codemirror

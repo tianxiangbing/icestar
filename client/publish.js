@@ -1,7 +1,8 @@
 const webpack = require('webpack');
 const path = require('path');
-let config = require("./webpack.config.js");
+let config = require("./webpack.config.dist.js");
+console.log(config)
 let compiler = webpack(config);
-compiler.run(e=>{
-    console.log(e)
+compiler.run((err,status)=>{
+    console.log(err,status)
 });

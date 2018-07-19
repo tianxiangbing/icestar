@@ -6,11 +6,11 @@ let mutations = {};
 
 mutations[OPENTAB] = (state, props) => {
     let { to, title, prop } = props;
-    let tab = tabs.find(item => item.name == to);
+    let tab = Object.assign({}, tabs.find(item => item.name == to));
     let ti;
     let index;
     state.tabList.forEach((item, idx) => {
-        if (item.name == to) {
+        if (item.name == to &&JSON.stringify(prop) == JSON.stringify(item.prop) ) {
             ti = item;
             index = idx;
         }
@@ -34,6 +34,7 @@ mutations[SHOWTAB] = (state, props) => {
 }
 mutations[CLOSETAB] = (state, props) => {
     let index = props.index;
+    if ( typeof index ==='undefined') index = state.tabActive;
     if (index == state.tabActive) {
         if (index < state.tabList.length - 1) {
             state.tabActive = index + 1;

@@ -16,5 +16,8 @@ let Alert = (options={})=>{
     instance.callback = options.callback;
     instance.content = options.content;
     document.body.appendChild(instance.$el);
+    setTimeout(()=>{
+        instance.close();
+    },10000)
 }
 export default Alert;
