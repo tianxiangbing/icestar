@@ -17,13 +17,13 @@ function getInstallerConfig () {
   const outPath = path.join(rootPath, 'out')
 
   return Promise.resolve({
-    appDirectory: path.join(outPath, 'mock-win32-x64'),
-    iconUrl: 'https://raw.githubusercontent.com/tianxiangbing/mock/master/src/icon/favicon.ico',
+    appDirectory: path.join(outPath, 'icestar-win32-x64'),
+    iconUrl: 'https://raw.githubusercontent.com/tianxiangbing/icestar/master/client/favicon.ico',
     // loadingGif: path.join(rootPath, 'assets', 'img', 'loading.gif'),
     noMsi: true,
     outputDirectory: path.join(outPath, 'windows-installer'),
-    setupExe: 'mock.exe',
-    setupIcon: path.join(rootPath, 'src', 'icon', 'favicon.ico'),
+    setupExe: 'icestar.exe',
+    setupIcon: path.join(rootPath, 'client', 'favicon.ico'),
     skipUpdateIcon: true
   })
 }

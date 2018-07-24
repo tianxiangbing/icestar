@@ -21,6 +21,7 @@ let now = +new Date();
 let tray = null;
 const mockServer = require('./server/mockServer');
 const updater = require('./server/updater');
+const message = require('./server/message');
 
 function openWindow() {
     const { width, height } = electron.screen.getPrimaryDisplay().workAreaSize;
@@ -56,6 +57,8 @@ function openWindow() {
         if (loadingScreen) {
             loadingScreen.close();
         }
+        updater.init(win);
+        message.init();
     });
     win.on('closed', () => {
         win = null;
@@ -116,7 +119,6 @@ app.on('ready', () => {
     // win.on('hide', () => {
     //     tray.setHighlightMode('never')
     // })
-    updater.init();
 });
 
 app.on('activate', () => {

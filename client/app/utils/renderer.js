@@ -165,6 +165,17 @@ let Common = {
     },
     mockServer(port,start=true){
         ipc.send("mockServer",{port,path:this.getPath('mock'),status:start});
+    },
+    subscribe(title,data={}){
+        ipc.send('subscribe', title ,data);
+        return new Promise((resolve) => {
+            ipc.on(title, (e,res) => {
+                resolve(res);
+            });
+        });
+    },
+    send(title,data={}){
+        ipc.send('send',title,data);
     }
 }
 module.exports = Common;

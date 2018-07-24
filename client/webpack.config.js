@@ -2,7 +2,7 @@ const path = require('path');
 let webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 // __webpack_public_path__ = '/dist/';
-let isDev = false; //process.env.NODE_ENV == "development";
+let isDev = process.env.NODE_ENV == "development";
 console.log(isDev)
 
 //动态创建html
@@ -25,7 +25,7 @@ const config = {
         path: __dirname + '/dist/assets',        //真实存放路径
         publicPath: isDev ?
             '/' :                        //开发引用路径
-            'assets'  //发布引用路径
+            'assets/'  //发布引用路径
     },
     performance: {
 
@@ -154,6 +154,8 @@ if (!isDev) {
     config.plugins.concat([
         extractCSS
     ]);
+}else{
+    config.devtool = "source-map";
 }
 console.log(config)
 module.exports = config

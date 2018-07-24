@@ -10,7 +10,7 @@ DefaultDirName={pf}\IceStar
 AppSupportURL=https://github.com/tianxiangbing/
 AppUpdatesURL=https://github.com/tianxiangbing/
 DefaultGroupName=IceStar客户端
-OutputBaseFilename=icestar
+OutputBaseFilename=resource
 Compression=lzma2/ultra64
 SolidCompression=true
 VersionInfoVersion=1.0.7
@@ -26,13 +26,8 @@ Name: "chinese"; MessagesFile: "compiler:Languages\ChineseSample.isl"
 Name: desktopicon; Description: {cm:CreateDesktopIcon}; GroupDescription: {cm:AdditionalIcons}
 
 [Files]
-; 应用Mock客户端本身的内容    
-Source: "out/icestar-win32-x64/*"; DestDir: "{app}"           
-Source: "out/icestar-win32-x64/resources/*"; DestDir: "{app}/resources"     
-Source: "out/icestar-win32-x64/resources/app.asar.unpacked/node_modules/rcedit/*"; DestDir: "{app}/resources/app.asar.unpacked/node_modules/rcedit"       
-Source: "out/icestar-win32-x64/resources/app.asar.unpacked/node_modules/rcedit/bin/*"; DestDir: "{app}/resources/app.asar.unpacked/node_modules/rcedit/bin"  
-Source: "out/icestar-win32-x64/resources/app.asar.unpacked/node_modules/rcedit/lib/*"; DestDir: "{app}/resources/app.asar.unpacked/node_modules/rcedit/lib"    
-;NOTE: Don't use "Flags: ignoreversion" on any shared system files
+; 应用Mock客户端本身的内容      
+Source: "out/icestar-win32-x64/resources/app.asar"; DestDir: "{app}/resources"
 [Icons]
 Name: {commondesktop}\IceStar客户端; Filename: {app}\icestar.exe; Tasks: desktopicon; WorkingDir: {app}; Comment: 使用IceStar客户端; IconIndex: 0
 ;Name: "{userappdata}\Microsoft\Internet Explorer\Quick Launch\IceStar客户端"; Filename: "{app}\icestar.exe"; Tasks: quicklaunchicon
@@ -40,6 +35,13 @@ Name: {group}\IceStar客户端; Filename: {app}\electron.exe; WorkingDir: {app}; Ic
 Name: {group}\{cm:UninstallProgram,IceStar客户端}; Filename: {uninstallexe}; Comment: 卸载IceStar客户端
 [UninstallDelete]
 Name: {app}\*; Type: filesandordirs
+
+[code]
+function ShouldSkipPage(PageID: Integer): Boolean;
+begin
+if PageID=wpSelectDir then
+result := true;
+end;
 
 [Run]
 Filename: "{app}\icestar.exe";Description:"初始化程序";Flags:nowait; StatusMsg:"正在启动IceStar客户端";

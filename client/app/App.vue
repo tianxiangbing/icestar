@@ -20,7 +20,7 @@ import leftMenu from 'components/menuLeft';
 import mheader from 'components/header';
 import store from "store/store";
 import im from 'components/im';
-
+import renderer from 'renderer';
 export default {
   name: "App",
   components: {
@@ -29,6 +29,13 @@ export default {
     tabHeader,
     leftMenu,
     im
+  },
+  mounted() {
+    debugger;
+    renderer.subscribe('update',(data)=>{
+      debugger;
+      this.valert(data.msg);
+    })
   }
 };
 </script>
