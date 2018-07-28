@@ -38,7 +38,8 @@ function openWindow() {
         resizable: true
     }
     win = new BrowserWindow(mainStyle);
-    if (process.env.NODE_ENV === 'development') {
+    console.log(process.env.NODE_ENV)
+    if (process.env.NODE_ENV == 'development') {
         win.loadURL('http://localhost:52013/');
     } else {
         win.loadURL(path.join('file://', __dirname, '/client/dist/index.html'));

@@ -5,30 +5,30 @@ let os = require('os');
 const { shell } = require('electron');
 const ipc = require('electron').ipcRenderer;
 const crypto = require('crypto');//加密
-const basePath = path.join(os.homedir(),".icestar");
+const basePath = path.join(os.homedir(), ".icestar");
 let wins = BrowserWindow.getAllWindows()
 console.log(wins)
 let win = wins.pop();
 //目录不存在时创建
-if(!fs.statSync(basePath).isDirectory()){
+if (!fs.statSync(basePath).isDirectory()) {
     fs.mkdirSync(basePath);
 }
 
 let Common = {
     winArr: [],
     cachewin: [],
-    getPath(type,filename) {
+    getPath(type, filename) {
         let pa = '';
-        switch(type){
-            case "mock":{
+        switch (type) {
+            case "mock": {
                 pa = path.join(basePath, 'mockconfig.json');
                 break;
             }
-            case 'mocklist':{
-                pa = path.join(basePath,filename);
+            case 'mocklist': {
+                pa = path.join(basePath, filename);
                 break;
             }
-            case 'socket':{
+            case 'socket': {
                 pa = path.join(basePath, 'socketconfig.json');
                 break;
             }
@@ -46,21 +46,21 @@ let Common = {
         }
         return json;
     },
-    read(type){
+    read(type) {
         let path = this.getPath(type);
-        return new Promise((resolve,reject)=>{
-            fs.readFile(path,{encoding:'utf-8'},(e,data)=>{
-                if(!e){
+        return new Promise((resolve, reject) => {
+            fs.readFile(path, { encoding: 'utf-8' }, (e, data) => {
+                if (!e) {
                     resolve(JSON.parse(data));
-                }else{
+                } else {
                     reject(e);
                 }
             })
         });
     },
-    save(json, type,filename) {
-        let path = this.getPath(type,filename);
-        return new Promise((resolve,reject)=>{
+    save(json, type, filename) {
+        let path = this.getPath(type, filename);
+        return new Promise((resolve, reject) => {
             fs.writeFile(path, JSON.stringify(json), function (e) {
                 if (e) {
                     console.error(e)
@@ -69,7 +69,7 @@ let Common = {
                     resolve()
                 }
             });
-        }) 
+        })
     },
     parentWin: null,
     createCacheWin() {
@@ -141,41 +141,39 @@ let Common = {
         let key = String(+new Date());
         ipc.send('open-file-dialog', key, '*');
         return new Promise((resolve) => {
-            ipc.on(key, (e,path) => {
+            ipc.on(key, (e, path) => {
                 resolve(path[0]);
             });
         });
     },
-    getIPAdress(){  
-        var interfaces = os.networkInterfaces();  
+    getIPAdress() {
+        var interfaces = os.networkInterfaces();
         let address = '127.0.0.1';
-        for(var devName in interfaces){  
-              var iface = interfaces[devName];  
-              for(var i=0;i<iface.length;i++){  
-                   var alias = iface[i];  
-                   if(alias.family === 'IPv4' && alias.address !== '127.0.0.1' && !alias.internal){  
-                         return alias.address;
-                   }  
-              }  
-        }  
+        for (var devName in interfaces) {
+            var iface = interfaces[devName];
+            for (var i = 0; i < iface.length; i++) {
+                var alias = iface[i];
+                if (alias.family === 'IPv4' && alias.address !== '127.0.0.1' && !alias.internal) {
+                    return alias.address;
+                }
+            }
+        }
         return address;
     },
-    openUrl(url){
+    openUrl(url) {
         shell.openExternal(url);
     },
-    mockServer(port,start=true){
-        ipc.send("mockServer",{port,path:this.getPath('mock'),status:start});
+    mockServer(port, start = true) {
+        ipc.send("mockServer", { port, path: this.getPath('mock'), status: start });
     },
-    subscribe(title,data={}){
-        ipc.send('subscribe', title ,data);
-        return new Promise((resolve) => {
-            ipc.on(title, (e,res) => {
-                resolve(res);
-            });
+    subscribe(title, callback) {
+        ipc.send('subscribe', title);
+        ipc.on(`subscribe:${title}`, (e, res) => {
+            callback && callback(res);
         });
     },
-    send(title,data={}){
-        ipc.send('send',title,data);
+    send(title, data = {}) {
+        ipc.send('send', title, data);
     }
 }
 module.exports = Common;

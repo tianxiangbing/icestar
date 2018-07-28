@@ -11,8 +11,10 @@ const Updater = {
         this.mainWindow = win;
         this.folderpath = path.join(os.homedir(), ".icestar");
         setInterval(() => {
+            // message.send('update',{msg:'有新的版本更新，正在后台下载。123'})
             this.checkUpdate();
-        }, 10000);
+        }, 1000*60*60);
+        this.checkUpdate();
         this.bindEvent();
     },
     returnVersion(version) {
@@ -40,15 +42,15 @@ const Updater = {
                 }
             })
             item.once('done', (event, state) => {
-                this.isdownload = false;
                 if (state === 'completed') {
                     console.log('Download successfully')
                     console.log(this.filePath)
                     message.send('updated',{msg:'版本下载完成，即将更新!'});
-                    message.subscribe('updating',()=>{
+                    setTimeout(()=>{
+                        this.isdownload = false;
                         shell.openExternal(this.filePath);
                         app.quit();
-                    });
+                    },2000)
                 } else {
                     console.log(`Download failed: ${state}`)
                 }
@@ -60,7 +62,7 @@ const Updater = {
         var options = {
             url: feedUrl,
             headers: {
-                'User-Agent': 'Awesome-Octocat-App'
+                'User-Agent': 'tianxiangbing'
             }
         };
         request(options, (error, response, body) => {

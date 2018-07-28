@@ -31,9 +31,9 @@ const config = {
 
         hints: "warning", // 枚举
 
-        maxAssetSize: 600000, // 整数类型（以字节为单位）
+        maxAssetSize: 6000000, // 整数类型（以字节为单位）
 
-        maxEntrypointSize: 500000, // 整数类型（以字节为单位）
+        maxEntrypointSize: 5000000, // 整数类型（以字节为单位）
 
         assetFilter: function (assetFilename) {
 

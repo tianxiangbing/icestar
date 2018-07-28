@@ -31,10 +31,12 @@ export default {
     im
   },
   mounted() {
-    debugger;
     renderer.subscribe('update',(data)=>{
-      debugger;
       this.valert(data.msg);
+    })
+    renderer.subscribe('updated',(data)=>{
+      this.valert(data.msg);
+      renderer.send('updating');
     })
   }
 };
