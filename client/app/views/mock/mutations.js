@@ -1,4 +1,4 @@
-import {MOCK_UPDATE, MOCK_START, MOCK_PROJECT_ADD, MOCK_PROJECT_UPDATE, MOCK_INIT, MOCK_LIST_INIT, MOCK_ADD, MOCK_DEL } from './actionTypes';
+import {MOCK_WS_START,MOCK_UPDATE, MOCK_START, MOCK_PROJECT_ADD, MOCK_PROJECT_UPDATE, MOCK_INIT, MOCK_LIST_INIT, MOCK_ADD, MOCK_DEL } from './actionTypes';
 import Vue from 'vue';
 
 let mutations = {
@@ -86,6 +86,9 @@ let mutations = {
     [MOCK_START]: (state,obj) => {
         state.status = !state.status;
         state.url = obj.data.url;
+    },
+    [MOCK_WS_START]: (state,obj) => {
+        state.wsStatus = !state.wsStatus;
     }
 }
 export default mutations;

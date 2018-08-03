@@ -7,6 +7,9 @@ import toolFilemd5 from 'tool/filemd5';
 import formatJson from 'tool/formatJson';
 import projectAdd from 'mock/projectAdd';
 import mockConfig from 'mock/mockConfig';
+import mockSocket from 'mock/mockSocket';
+import mockSocketAdd from 'mock/mockSocketAdd';
+import mockSocketConfig from 'mock/mockSocketConfig';
 
 export default [{
     title: "添加接口",
@@ -43,5 +46,20 @@ export default [{
     name:"formatJson",
     props:[],
     component:formatJson
+},{
+    title:"模拟推送",
+    name:"mockSocket",
+    props:[],
+    component:mockSocket
+},{
+    title:"添加推送",
+    name:"mockSocketAdd",
+    props:[],
+    component:mockSocketAdd
+},{
+    title:"推送服务配置",
+    name:"wsConfig",
+    props:[],
+    component:mockSocketConfig
 }
 ];

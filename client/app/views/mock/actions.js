@@ -1,4 +1,4 @@
-import { MOCK_DEL, MOCK_START, MOCK_PROJECT_ADD, MOCK_PROJECT_UPDATE, MOCK_INIT, MOCK_LIST_INIT, MOCK_ADD, MOCK_UPDATE } from './actionTypes';
+import { MOCK_DEL, MOCK_START, MOCK_PROJECT_ADD, MOCK_PROJECT_UPDATE, MOCK_INIT, MOCK_LIST_INIT, MOCK_ADD, MOCK_UPDATE, MOCK_WS_START } from './actionTypes';
 import renderer from 'renderer';
 let action = {
     [MOCK_PROJECT_ADD]: ({ commit, state }, item) => {
@@ -116,6 +116,10 @@ let action = {
                 obj.data.callback && obj.data.callback();
             });
         }
+    },
+    [MOCK_WS_START]:({commit,state},data)=>{
+        renderer.wsServer(data.data.port,data.data.status);
+        commit(MOCK_WS_START,data);
     }
 };
 export default action;

@@ -40,8 +40,8 @@ import { codemirror } from "vue-codemirror";
 
 import "./style";
 import "codemirror/mode/javascript/javascript.js";
-// import "codemirror/lib/codemirror.css";
-// import "codemirror/theme/seti.css";
+import "codemirror/lib/codemirror.css";
+import "codemirror/theme/seti.css";
 import common from "utils/common";
 import store from "store/store";
 import { MOCK_ADD, MOCK_UPDATE } from "./actionTypes";

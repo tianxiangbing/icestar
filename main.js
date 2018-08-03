@@ -161,3 +161,6 @@ ipc.on('go-main', function (event) {
 ipc.on('mockServer',function(event,data){
     mockServer.init(data);
 });
+ipc.on('wsServer',function(event,data){
+    mockServer.initWs(data);
+});

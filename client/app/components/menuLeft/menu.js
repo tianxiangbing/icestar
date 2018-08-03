@@ -9,12 +9,16 @@ export default {
     },
     {
         to: "mockConfig",
-        title: "服务配置(开/关)"
+        title: "mock服务配置(开/关)"
     },
-        // {
-        //     to: "mockAdd",
-        //     title: "添加接口"
-        // }
+    {
+        to: "mockSocket",
+        title: "模拟推送"
+    },
+    {
+        to: "wsConfig",
+        title: "ws服务配置(开/关)"
+    }
     ],
     "tool": [{
         to: "filemd5",

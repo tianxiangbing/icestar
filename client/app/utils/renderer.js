@@ -166,6 +166,9 @@ let Common = {
     mockServer(port, start = true) {
         ipc.send("mockServer", { port, path: this.getPath('mock'), status: start });
     },
+    wsServer(port, start = true) {
+        ipc.send("wsServer", { port, path: this.getPath('socket'), status: start });
+    },
     subscribe(title, callback) {
         ipc.send('subscribe', title);
         ipc.on(`subscribe:${title}`, (e, res) => {

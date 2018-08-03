@@ -13,5 +13,14 @@ export default {
             "content":"hello world.",
             "when":""//条件,
         }]
-    }]//mock项目列表
+    }],//mock项目列表
+    wsPort:8090,
+    wsStatus:false,
+    wsList:[{
+        id:0,
+        title:"推送示例",
+        frequency:1,
+        rule:'(Math.random()*10).toFixed(2)',
+        content:'TEST.TITLE:{"price":@random}'
+    }]
 }

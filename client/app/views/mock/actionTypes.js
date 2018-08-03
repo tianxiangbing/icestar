@@ -6,3 +6,6 @@ export const MOCK_ADD = 'mock_add';
 export const MOCK_START = 'mock_start';
 export const MOCK_DEL = 'mock_del';
 export const MOCK_UPDATE = 'mock_update';
+export const MOCK_WS_DEL = 'mock_ws_del';
+export const MOCK_WS_UPDATE = 'mock_ws_update';
+export const MOCK_WS_START = 'mock_ws_start';

@@ -8,7 +8,7 @@
           <tab-view/>
         </div>
     </div>
-    <footer>qq:55342775</footer>
+    <mfooter/>
 </div>
 </template>
 
@@ -18,6 +18,7 @@ import tabView from "components/tab/tabView";
 import tabHeader from "components/tab/tabHeader";
 import leftMenu from 'components/menuLeft';
 import mheader from 'components/header';
+import mfooter from 'components/footer';
 import store from "store/store";
 import im from 'components/im';
 import renderer from 'renderer';
@@ -28,7 +29,8 @@ export default {
     tabView,
     tabHeader,
     leftMenu,
-    im
+    im,
+    mfooter
   },
   mounted() {
     renderer.subscribe('update',(data)=>{
