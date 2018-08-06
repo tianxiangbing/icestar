@@ -144,16 +144,16 @@ const config = {
 };
 if (!isDev) {
     // console.log('production...')
-    let extractCSS = new ExtractTextPlugin({ filename: 'app.css', allChunks: true });
-    config.module.rules.push({
-        test: /\.css$/,
-        use: extractCSS.extract({
-            use: ['css-loader']
-        })
-    });
-    config.plugins.concat([
-        extractCSS
-    ]);
+    // let extractCSS = new ExtractTextPlugin({ filename: 'app.css', allChunks: true });
+    // config.module.rules.push({
+    //     test: /\.css$/,
+    //     use: extractCSS.extract({
+    //         use: ['css-loader']
+    //     })
+    // });
+    // config.plugins.concat([
+    //     extractCSS
+    // ]);
 }else{
     config.devtool = "source-map";
 }

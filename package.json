@@ -1,12 +1,12 @@
 {
   "name": "icestar",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "IceStar:该工具可以模拟本地的http服务后端接口，以方便前端联调接口，支持多种请求类型，自定义url和参数。",
   "main": "main.js",
   "scripts": {
     "start": "cross-env  NODE_ENV=development && cd client && npm start",
     "build": "cross-env  NODE_ENV=production && electron .",
-    "test":"cross-env  NODE_ENV=development && electron .",
+    "test": "cross-env  NODE_ENV=development && electron .",
     "packager": "electron-packager . icestar --electron-version=1.6.6 --asar.unpack=**/rcedit/**/*.* --overwrite --platform=win32 --arch=x64 --icon=client/favicon.ico --out=out  --version-string.FileDescription=icestar --version-string.ProductName=icestar --ignore=\"/docs,/out,/client/app,/client/node_modules,/download,/imgs\"",
     "installer": "node ./script/installer.js"
   },
@@ -26,6 +26,7 @@
     "electron-log": "^2.2.16",
     "express": "^4.16.2",
     "rcedit": "^0.9.0",
+    "request": "^2.87.0",
     "socket.io": "^1.7.4",
     "update-electron-app": "^1.3.0",
     "ws": "^2.3.1"
