@@ -14,7 +14,7 @@ const Updater = {
             // message.send('update',{msg:'有新的版本更新，正在后台下载。123'})
             this.checkUpdate();
         }, 1000*60*60);
-        this.checkUpdate();
+        // this.checkUpdate();
         this.bindEvent();
     },
     returnVersion(version) {
@@ -57,6 +57,18 @@ const Updater = {
             })
         });
     },
+    update(version,url){
+        let currVersion = this.returnVersion(package.version);
+        let originVersion =this.returnVersion(version);
+        if (originVersion > currVersion) {
+            let downloadUrl = url;
+            if(!this.isdownload){
+                this.isdownload = true;
+                message.send('update',{msg:'有新的版本更新，正在后台下载。'})
+                this.mainWindow.webContents.downloadURL(downloadUrl);
+            }
+        }
+    },
     checkUpdate() {
         let feedUrl = 'https://api.github.com/repos/tianxiangbing/icestar/releases/latest';
         var options = {
@@ -69,16 +81,17 @@ const Updater = {
             if (!error && response.statusCode == 200) {
                 console.log(body) // 
                 let result = JSON.parse(body);
-                let currVersion = this.returnVersion(package.version);
-                let originVersion = this.returnVersion(result.name);
-                if (originVersion > currVersion) {
-                    let downloadUrl = result.assets[1].browser_download_url;
-                    if(!this.isdownload){
-                        this.isdownload = true;
-                        message.send('update',{msg:'有新的版本更新，正在后台下载。'})
-                        this.mainWindow.webContents.downloadURL(downloadUrl);
-                    }
-                }
+                // let currVersion = this.returnVersion(package.version);
+                let originVersion = result.name;
+                this.update(originVersion, result.assets[1].browser_download_url);
+                // if (originVersion > currVersion) {
+                //     let downloadUrl = result.assets[1].browser_download_url;
+                //     if(!this.isdownload){
+                //         this.isdownload = true;
+                //         message.send('update',{msg:'有新的版本更新，正在后台下载。'})
+                //         this.mainWindow.webContents.downloadURL(downloadUrl);
+                //     }
+                // }
             }
         })
         // $.getJSON('https://tianxiangbing.github.io/mock/checkUpdate.html', (result) => {

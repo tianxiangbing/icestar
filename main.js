@@ -59,7 +59,7 @@ function openWindow() {
             loadingScreen.close();
         }
         updater.init(win);
-        message.init();
+        message.init(updater);
     });
     win.on('closed', () => {
         win = null;

@@ -38,8 +38,7 @@ Name: {app}\*; Type: filesandordirs
 
 [code]
 function ShouldSkipPage(PageID: Integer): Boolean;
-begin
-if PageID=wpSelectDir then
+begin//if PageID=wpSelectDir then
 result := true;
 end;
 

@@ -6,6 +6,7 @@
           <ul class="help-sub" v-show="clickHelp">
               <li @click="openDevTool()">开发人员工具</li>
               <li @click="openSuport()">对作者支持</li>
+              <li @click="about()">关于IceStar</li>
           </ul>
         </a>
         <span class="win-act">
@@ -25,6 +26,7 @@ import tab from "components/tab/tab";
 import store from "store/store";
 import { MAX, RESET } from "store/actionTypes";
 import supportModal from './supportModal';
+import aboutModal from './aboutModal';
 
 export default {
   name: "Header",
@@ -79,10 +81,16 @@ export default {
       renderer.openDevTool();
     },
     openSuport(){
-        this.vdialog({
+      this.vdialog({
         content: supportModal,
         title: "给作者支持"
-        });
+      });
+    },
+    about(){
+      this.vdialog({
+        content: aboutModal,
+        title: "关于IceStar"
+      });
     }
   }
 };

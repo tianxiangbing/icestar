@@ -175,8 +175,25 @@ let Common = {
             callback && callback(res);
         });
     },
+    subscribeM(title,data={}, callback) {
+        ipc.send('subscribeM', title,data);
+        ipc.on(`subscribeM:${title}`, (e, res) => {
+            callback && callback(res);
+        });
+    },
     send(title, data = {}) {
         ipc.send('send', title, data);
+    },
+    getVersion(){
+        let pr= new Promise((resolve)=>{
+            this.subscribeM('getVersion',(version)=>{
+                resolve(version)
+            });
+        });
+        return pr;
+    },
+    checkUpdate(version,url){
+        this.subscribeM('checkUpdate',{version,url});
     }
 }
 module.exports = Common;
