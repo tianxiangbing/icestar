@@ -2,6 +2,7 @@
 import Vue from 'vue';
 import App from './App.vue';
 import tab from "components/tab/tab";
+import aa from "components/aa/aa";
 import Tab from 'components/tab/index';
 import Dialog from "components/dialog/index";
 import Alert from './components/alert/index';
@@ -12,6 +13,7 @@ console.log(tab)
 const install = function (Vue) {
   Vue.component('Dialog', Dialog);
   Vue.component('Alert', Alert);
+  Vue.component('aa', aa);
 }
 Vue.use(install)
 Vue.prototype.valert = Alert;
