@@ -5,8 +5,7 @@ export default {
     isExpands:false,
     submenu:[],
     currentActive:'',
-    tabList:[
-    ],
+    tabList:[],
     tabActive:0,
     title:"为前端开发而生",
     projectList:[{

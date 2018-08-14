@@ -47,3 +47,12 @@ input:-ms-input-placeholder{  /* Internet Explorer 10-11 */
 input[type="checkbox"]{
     vertical-align: -3px;
 }
+.formBox{
+    padding:15px;
+    p{
+        padding:5px 0;
+        span{
+            display:inline-block;
+        }
+    }
+}

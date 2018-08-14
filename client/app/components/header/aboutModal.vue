@@ -1,11 +1,11 @@
 <template>
-    <div>
+    <div class="formBox">
         <h1>IceStar 前端开发工具</h1>
         <p>
-            版本号:{{version}}
+            版本号：{{version}}
         </p>
         <p>
-            github地址:<aa href="https://github.com/tianxiangbing/icestar">https://github.com/tianxiangbing/icestar</aa>
+            github地址：<aa href="https://github.com/tianxiangbing/icestar">https://github.com/tianxiangbing/icestar</aa>
         </p>
     </div>
 </template>
@@ -19,6 +19,7 @@ import renderer from 'renderer';
         mounted() {
             renderer.getVersion().then(version=>{
                 this.version = version;
+                console.log(this.version)
             });
         }
     }

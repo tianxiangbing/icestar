@@ -1,11 +1,13 @@
 <template>
     <header class="top-menu">
         <div class="title"><a class="logo"></a>{{title}} - IceStar</div>
-        <tab to="home"><i class="tianxiangbing txb-wxbzhuye"></i><span>首页</span></tab>
-        <a @click="openHelp()" class="help"><i class="tianxiangbing txb-help" :class="{active:clickHelp}"></i><span>帮助</span>
+        <tab class="item" to="home"><i class="tianxiangbing txb-wxbzhuye"></i><span>首页</span></tab>
+        <a @click="openHelp()" class="help item"><i class="tianxiangbing txb-help" :class="{active:clickHelp}"></i><span>帮助</span>
           <ul class="help-sub" v-show="clickHelp">
               <li @click="openDevTool()">开发人员工具</li>
               <li @click="openSuport()">对作者支持</li>
+              <li><tab to="wview" title="jsJY游戏库" :prop="{src:'http://www.lovewebgames.com/'}">jsJY游戏库</tab></li>
+              <li><tab to="wview" title="jquery插件库" :prop="{src:'http://www.lovewebgames.com/jsmodules/'}">jquery插件库</tab></li>
               <li @click="about()">关于IceStar</li>
           </ul>
         </a>

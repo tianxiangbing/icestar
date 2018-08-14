@@ -186,7 +186,7 @@ let Common = {
     },
     getVersion(){
         let pr= new Promise((resolve)=>{
-            this.subscribeM('getVersion',(version)=>{
+            this.subscribeM('getVersion',undefined,(version)=>{
                 resolve(version)
             });
         });
@@ -194,6 +194,9 @@ let Common = {
     },
     checkUpdate(version,url){
         this.subscribeM('checkUpdate',{version,url});
+    },
+    resolvePath(pa){
+        return path.resolve(pa);
     }
 }
 module.exports = Common;

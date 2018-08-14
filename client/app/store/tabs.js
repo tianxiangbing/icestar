@@ -10,8 +10,19 @@ import mockConfig from 'mock/mockConfig';
 import mockSocket from 'mock/mockSocket';
 import mockSocketAdd from 'mock/mockSocketAdd';
 import mockSocketConfig from 'mock/mockSocketConfig';
-
+import home from 'home';
+import viewpage from 'viewpage';
 export default [{
+    title: "首页",
+    name:'home',
+    component:home,
+    props:[]
+},{
+    title: "",
+    name:'wview',
+    component:viewpage,
+    props:[]
+},{
     title: "添加接口",
     name:'mockAdd',
     component:mockAdd,

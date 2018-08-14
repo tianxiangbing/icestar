@@ -12,7 +12,7 @@ const Message = {
             this.list[key].sender = event.sender;
         });
         //单向主进程通信
-        ipc.once('subscribeM',(event,key,data)=>{
+        ipc.on('subscribeM',(event,key,data)=>{
             if(this.hasOwnProperty(key)){
                 let sender = function(){
                     return function(data){
