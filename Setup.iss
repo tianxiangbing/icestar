@@ -29,8 +29,8 @@ Name: desktopicon; Description: {cm:CreateDesktopIcon}; GroupDescription: {cm:Ad
 ; 应用Mock客户端本身的内容    
 Source: "out/icestar-win32-x64/*"; DestDir: "{app}"           
 Source: "out/icestar-win32-x64/resources/*"; DestDir: "{app}/resources"      
-Source: "out/icestar-win32-x64/docs/*"; DestDir: "{app}/docs"     
-Source: "out/icestar-win32-x64/docs/imgs/*"; DestDir: "{app}/docs/imgs"     
+Source: "docs/*"; DestDir: "{app}/docs"     
+Source: "docs/imgs/*"; DestDir: "{app}/docs/imgs"     
 Source: "out/icestar-win32-x64/resources/app.asar.unpacked/node_modules/rcedit/*"; DestDir: "{app}/resources/app.asar.unpacked/node_modules/rcedit"       
 Source: "out/icestar-win32-x64/resources/app.asar.unpacked/node_modules/rcedit/bin/*"; DestDir: "{app}/resources/app.asar.unpacked/node_modules/rcedit/bin"  
 Source: "out/icestar-win32-x64/resources/app.asar.unpacked/node_modules/rcedit/lib/*"; DestDir: "{app}/resources/app.asar.unpacked/node_modules/rcedit/lib"    

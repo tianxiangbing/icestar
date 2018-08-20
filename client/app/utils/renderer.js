@@ -9,11 +9,6 @@ const basePath = path.join(os.homedir(), ".icestar");
 let wins = BrowserWindow.getAllWindows()
 console.log(wins)
 let win = wins.pop();
-//目录不存在时创建
-if (!fs.statSync(basePath).isDirectory()) {
-    fs.mkdirSync(basePath);
-}
-
 let Common = {
     winArr: [],
     cachewin: [],

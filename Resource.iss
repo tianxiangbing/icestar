@@ -28,8 +28,8 @@ Name: desktopicon; Description: {cm:CreateDesktopIcon}; GroupDescription: {cm:Ad
 [Files]
 ; 应用Mock客户端本身的内容      
 Source: "out/icestar-win32-x64/resources/app.asar"; DestDir: "{app}/resources"  
-Source: "out/icestar-win32-x64/docs/*"; DestDir: "{app}/docs"     
-Source: "out/icestar-win32-x64/docs/imgs/*"; DestDir: "{app}/docs/imgs"    
+Source: "docs/*"; DestDir: "{app}/docs"     
+Source: "docs/imgs/*"; DestDir: "{app}/docs/imgs"    
 [Icons]
 Name: {commondesktop}\IceStar客户端; Filename: {app}\icestar.exe; Tasks: desktopicon; WorkingDir: {app}; Comment: 使用IceStar客户端; IconIndex: 0
 ;Name: "{userappdata}\Microsoft\Internet Explorer\Quick Launch\IceStar客户端"; Filename: "{app}\icestar.exe"; Tasks: quicklaunchicon

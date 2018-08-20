@@ -1,0 +1,7 @@
+[{
+    "id":0,
+    "title":"推送示例",
+    "frequency":1,
+    "rule":"(Math.random()*10).toFixed(2)",
+    "content":"TEST.TITLE:{\"price\":@random}"
+}]
