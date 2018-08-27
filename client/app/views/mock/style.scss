@@ -133,4 +133,12 @@
     .bigBtn{
         margin:20px 0 0 132px;
     }
+    .wsResult{
+        position: absolute;
+        bottom: 0;
+        top: 380px;
+        overflow: auto;
+        right: 0;
+        left: 0;
+    }
 }

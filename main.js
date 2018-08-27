@@ -38,6 +38,8 @@ function openWindow() {
         resizable: true
     }
     win = new BrowserWindow(mainStyle);
+    updater.init(win);
+    message.init(updater);
     console.log(process.env.NODE_ENV)
     if (process.env.NODE_ENV == 'development') {
         win.loadURL('http://localhost:52013/');
@@ -58,13 +60,11 @@ function openWindow() {
         if (loadingScreen) {
             loadingScreen.close();
         }
-        updater.init(win);
-        message.init(updater);
     });
     win.on('closed', () => {
         win = null;
     });
-    win.webContents.openDevTools();
+    // win.webContents.openDevTools();
     //目录不存在时创建
     const basePath = path.join(os.homedir(), ".icestar");
     if (!fs.existsSync(basePath)) {

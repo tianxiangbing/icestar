@@ -38,7 +38,11 @@
           console.log(received_msg);
         };
     </pre>
-    <div class="wsResult">{{result}}</div>
+    <div class="wsResult">
+      <div  v-for="(item,index) in list" :key="index">
+        {{item}}
+      </div>
+    </div>
 </div>
 </template>
 
@@ -53,7 +57,8 @@ export default {
   data() {
     return {
       vport: store.state.mock.wsPort,
-      result: ""
+      result: "",
+      list:[]
     };
   },
   computed: {
@@ -101,12 +106,17 @@ export default {
         ws.onopen = function() {
           // 使用 send() 方法发送数据
           _self.result = '连接成功!'
+          _self.list.push(_self.result);
         };
 
         // 接收服务端数据时触发事件
         ws.onmessage = function(evt) {
           var received_msg = evt.data;
           _self.result =received_msg
+          _self.list.push(received_msg);
+          if(_self.list.length>100){
+            _self.list.shift();
+          }
         };
       }
     }

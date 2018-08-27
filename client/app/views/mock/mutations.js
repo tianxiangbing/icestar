@@ -1,4 +1,4 @@
-import {MOCK_WS_START,MOCK_UPDATE, MOCK_START, MOCK_PROJECT_ADD, MOCK_PROJECT_UPDATE, MOCK_INIT, MOCK_LIST_INIT, MOCK_ADD, MOCK_DEL } from './actionTypes';
+import {MOCK_WS_START,MOCK_UPDATE, MOCK_START, MOCK_PROJECT_ADD, MOCK_PROJECT_UPDATE, MOCK_INIT, MOCK_LIST_INIT, MOCK_ADD, MOCK_DEL, MOCK_WS_ADD,MOCK_WS_INIT, MOCK_WS_DEL } from './actionTypes';
 import Vue from 'vue';
 
 let mutations = {
@@ -23,6 +23,9 @@ let mutations = {
     },
     [MOCK_INIT]: (state, data) => {
         state.projectList = data;
+    },
+    [MOCK_WS_INIT]: (state, data) => {
+        state.wsList = data;
     },
     [MOCK_LIST_INIT]: (state, id) => {
 
@@ -59,6 +62,11 @@ let mutations = {
         }
         data[index].list.splice(delIndex,1);
     },
+    [MOCK_WS_DEL]:(state,obj)=>{
+        let delIndex = obj.data.index;
+        let data =  state.wsList;
+        data.splice(delIndex,1);
+    },
     [MOCK_UPDATE]:(state,obj)=>{
         let data = state.projectList;
         let pid = obj.data.pid;
@@ -89,6 +97,9 @@ let mutations = {
     },
     [MOCK_WS_START]: (state,obj) => {
         state.wsStatus = !state.wsStatus;
+    },
+    [MOCK_WS_ADD]:(state,obj)=>{
+        state.wsList.push(obj)
     }
 }
 export default mutations;

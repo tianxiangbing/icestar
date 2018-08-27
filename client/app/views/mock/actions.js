@@ -1,4 +1,4 @@
-import { MOCK_DEL, MOCK_START, MOCK_PROJECT_ADD, MOCK_PROJECT_UPDATE, MOCK_INIT, MOCK_LIST_INIT, MOCK_ADD, MOCK_UPDATE, MOCK_WS_START } from './actionTypes';
+import { MOCK_DEL, MOCK_START, MOCK_PROJECT_ADD, MOCK_PROJECT_UPDATE, MOCK_INIT, MOCK_LIST_INIT, MOCK_ADD, MOCK_UPDATE, MOCK_WS_START, MOCK_WS_ADD,MOCK_WS_INIT, MOCK_WS_DEL } from './actionTypes';
 import renderer from 'renderer';
 let action = {
     [MOCK_PROJECT_ADD]: ({ commit, state }, item) => {
@@ -31,6 +31,11 @@ let action = {
     [MOCK_INIT]: ({ commit, state }) => {
         renderer.read('mock').then(data => {
             commit(MOCK_INIT, data);
+        });
+    },
+    [MOCK_WS_INIT]: ({ commit, state }) => {
+        renderer.read('socket').then(data => {
+            commit(MOCK_WS_INIT, data);
         });
     },
     [MOCK_LIST_INIT]: ({ commit, state }, item) => {
@@ -89,6 +94,16 @@ let action = {
             obj.data.callback && obj.data.callback();
         });
     },
+    [MOCK_WS_DEL]:({commit,state},obj)=>{
+        let data = JSON.parse(JSON.stringify(state.wsList));
+        let delIndex = obj.data.index;
+        
+        data.splice(delIndex,1);
+        renderer.save(data, 'socket').then(() => {
+            commit(MOCK_WS_DEL, obj);
+            obj.data.callback && obj.data.callback();
+        });
+    },
     [MOCK_UPDATE]:({commit,state},obj)=>{
         let data = JSON.parse(JSON.stringify(state.projectList));
         
@@ -120,6 +135,17 @@ let action = {
     [MOCK_WS_START]:({commit,state},data)=>{
         renderer.wsServer(data.data.port,data.data.status);
         commit(MOCK_WS_START,data);
+    },
+    [MOCK_WS_ADD]:({commit,state},item)=>{
+        let data = JSON.parse(JSON.stringify(state.wsList));
+        let len = data.length;
+        let obj = item.data;
+        obj.id  = data.length;
+        data.push(obj)
+        renderer.save(data, 'socket').then(() => {
+            commit(MOCK_WS_ADD, obj);
+            obj.callback && obj.callback();
+        });
     }
 };
 export default action;

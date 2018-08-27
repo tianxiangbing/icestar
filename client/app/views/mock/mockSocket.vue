@@ -22,7 +22,7 @@
 <script>
 import "./style";
 import store from "store/store";
-import { MOCK_WS_DEL } from "./actionTypes";
+import { MOCK_WS_DEL,MOCK_WS_INIT } from "./actionTypes";
 import renderer from "renderer";
 
 export default {
@@ -30,6 +30,13 @@ export default {
   props: [],
   data() {
     return { activeIndex: -1,key:'' };
+  },
+  
+  beforeCreate() {
+    //初始化state
+    store.dispatch({
+      type: MOCK_WS_INIT
+    });
   },
   computed: {
     list() {
@@ -68,7 +75,7 @@ export default {
     },
     edit(index) {
       this.vtab.to({
-        to: "mockAdd",
+        to: "mockSocketAdd",
         title: "修改",
         prop: {  index: index }
       });
