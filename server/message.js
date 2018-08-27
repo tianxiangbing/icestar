@@ -1,5 +1,6 @@
 const electron = require('electron');
 const ipc = electron.ipcMain;
+const request = require('request');
 const Message = {
     list:{},
     init(updater) {
@@ -45,6 +46,24 @@ const Message = {
     checkUpdate(sender,data){
         let {version,url} =data;
         this.updater.update(version,url);
+    },
+    post(sender,data){
+        var options = {
+            url: data.url,
+            headers: data.headers||{},
+            method:data.method,
+            postData: {
+                mimeType: 'application/x-www-form-urlencoded',
+                params:JSON.parse(data.params)||[]
+            }
+        };
+        request(options, (error, response, body) => {
+            if (!error && response.statusCode == 200) {
+                sender(body);
+            }else{
+                sender(error.message|| response.statusCode + response.statusMessage);
+            }
+        });
     }
 }
 module.exports = Message;

@@ -12,6 +12,8 @@ import mockSocketAdd from 'mock/mockSocketAdd';
 import mockSocketConfig from 'mock/mockSocketConfig';
 import home from 'home';
 import viewpage from 'viewpage';
+import post from 'post/index';
+
 export default [{
     title: "首页",
     name:'home',
@@ -72,5 +74,9 @@ export default [{
     name:"wsConfig",
     props:[],
     component:mockSocketConfig
-}
-];
+},{
+    title:"请求测试",
+    name:"post",
+    props:[],
+    component:post
+}];

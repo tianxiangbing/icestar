@@ -1,0 +1,18 @@
+.post{
+    select{
+        height: 30px;
+    }
+    .form-row{
+        display: flex;
+        .url{
+            flex:1;
+            input{
+                width: 100%;
+            }
+        }
+        .codeView{
+            flex:1;
+            margin: 5px 0;
+        }
+    }
+}

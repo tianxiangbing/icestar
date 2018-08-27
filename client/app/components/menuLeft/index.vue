@@ -3,7 +3,7 @@
         <nav class="left-menu">
             <!-- <a title="首页" @click="showSubMenu('home')" :class="{active:homeActive}"><i class="tianxiangbing txb-wxbzhuye"></i></a> -->
             <a title="mock接口" @click="showSubMenu('mock')" :class="{active:mockActive}"><i class="tianxiangbing txb-M"></i></a>
-            <a title="Post请求" @click="showSubMenu('ws')" :class="{active:wsActive}"><i class="tianxiangbing txb-p"></i></a>
+            <a title="Post请求" @click="showSubMenu('post')" :class="{active:wsActive}"><i class="tianxiangbing txb-p"></i></a>
             <a title="工具" @click="showSubMenu('tool')" :class="{active:toolActive}"><i class="tianxiangbing txb-iconfontwujingongju"></i></a>
         </nav>
         <nav class="sub-menu" v-show="isExpands">

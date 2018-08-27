@@ -20,6 +20,10 @@ export default {
         title: "ws服务配置(开/关)"
     }
     ],
+    "post":[{
+        to:'post',
+        title:'请求测试'
+    }],
     "tool": [{
         to: "filemd5",
         title: "文件md5加密"
