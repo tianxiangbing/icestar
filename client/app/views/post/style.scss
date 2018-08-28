@@ -13,6 +13,12 @@
         .codeView{
             flex:1;
             margin: 5px 0;
+            font-size:12px;
+            line-height: 20px;
+            overflow: auto;
+        }
+        .headerEdit,.paramsEdit{
+            height:100px;
         }
     }
 }

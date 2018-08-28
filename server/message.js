@@ -53,15 +53,28 @@ const Message = {
             headers: data.headers||{},
             method:data.method,
             postData: {
-                mimeType: 'application/x-www-form-urlencoded',
-                params:JSON.parse(data.params)||[]
+                mimeType: 'application/x-www-form-urlencoded'
             }
         };
+        if(data.method =='POST'){
+            options.form = data.params;
+        }else{
+            if(options.url.indexOf('?')==-1){
+                options.url+='?';
+            }else{
+                options.url+='&';
+            }
+            options.url +=data.params;
+        }
         request(options, (error, response, body) => {
             if (!error && response.statusCode == 200) {
                 sender(body);
             }else{
-                sender(error.message|| response.statusCode + response.statusMessage);
+                if(error){
+                    sender(error.message);
+                }else{
+                    sender(response.statusCode + response.statusMessage);
+                }
             }
         });
     }

@@ -14,6 +14,7 @@ var bodyParser = require("body-parser");
 const WebSocket = require('ws');
 var app = express();
 var fs = require('fs');
+var qs = require('qs');
 app.use(bodyParser.urlencoded({ extended: false }));
 let httpserver = {
     port: 8080,
@@ -124,21 +125,98 @@ let httpserver = {
                     } else {
                         this.config = JSON.parse(data);
                         let url = req.params[0];
-                        let query = req.method === 'GET' ? req.query : req.body;
+                        let query = req.query ;
+                        let formdata = req.body;
                         let urlArr = url.split('/');
                         let reqPrefix = urlArr[1];
                         let ishas = false;
+                        let temp = {};
+                        for (let key in query) {
+                            temp[key] = query[key];
+                            //存入变量中
+                        }
+                        for (let key in formdata) {
+                            temp[key] = formdata[key];
+                            //存入变量中
+                        }
                         this.config.forEach(item => {
                             let prefix = item.prefix;
                             if (reqPrefix == prefix) {
                                 item.list.forEach(u => {
                                     let methods = u.methods || [];
-                                    if (`/${prefix}${u.url}` == url && methods.indexOf(req.method) > -1) {
-                                        ishas = true;
-                                        let returnvalue = u.content;
-                                        res.send(returnvalue);
-                                        res.end();
-                                        return false;
+                                    if(methods.indexOf(req.method) > -1){
+                                        let uri = u.url.split('?')[0];
+                                        if(`/${prefix}${uri}` == url) {
+                                            ishas = true;
+                                            let returnvalue = '';
+                                            if(typeof u.content =='string'){
+                                                returnvalue = u.content;
+                                                res.send(returnvalue);
+                                                res.end();
+                                                return false;
+                                            } else{
+                                                try {
+                                                    //执行所有的表达式，判断满足条件的返回
+                                                    for (let k in u.content) {
+                                                        if (k != 'default') {
+                                                            try {
+                                                                with (temp) {
+                                                                    if (eval(unescape(k))) {
+                                                                        returnvalue = u.content[k];
+                                                                        break;
+                                                                    }
+                                                                }
+                                                            } catch (e) {
+                                                                console.log(e)
+                                                            }
+                                                        }
+                                                    }
+                                                } catch (e) {
+                                                    console.log(e)
+                                                    returnvalue = e;
+                                                }
+                                                if(returnvalue===''){
+                                                    returnvalue = u.content.default;
+                                                }
+                                                res.send(returnvalue);
+                                                res.end();
+                                                return false;
+                                            }
+                                        }
+                                        // if(u.url.indexOf('?')==-1){
+                                        //     if ( `/${prefix}${u.url}` == url) {
+                                        //         ishas = true;
+                                        //         let returnvalue = u.content;
+                                        //         res.send(returnvalue);
+                                        //         res.end();
+                                        //         return false;
+                                        //     }
+                                        // } else{
+                                            // let uri = u.url.split('?')[0];
+                                            // if ( `/${prefix}${uri}` == url) {
+                                            //     //作为参数不一样的url特殊处理判断参数
+                                            //     let istrue = false;
+                                            //     if(u.url.indexOf('?')!=-1){
+                                            //         let params= qs.parse(u.url.split('?')[1]);
+                                            //         for(var key in params){
+                                            //             if(query.hasOwnProperty(key) || params[key] ==query[key]){
+                                            //                 istrue=true;
+                                            //             }else{
+                                            //                 istrue= false;
+                                            //             }
+                                            //         }
+                                            //     }else{
+                                            //         istrue = true;
+                                            //     }
+                                            //     if(istrue){
+                                            //         ishas = true;
+                                            //         let returnvalue = u.content;
+                                            //         res.send(returnvalue);
+                                            //         res.end();
+                                            //         return false;
+                                            //     }
+                                            // }
+                                        // }
                                     }
                                 })
                             }

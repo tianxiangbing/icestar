@@ -9,3 +9,5 @@ socket.io的服务直接基于当前的http服务，websocket服务要设置不�
 ![mock](docs/imgs/mock.gif)
 ## websocket推送模拟
 ![wsmock](docs/imgs/wsmock.gif)
+## 接口请求测试
+![post](docs/imgs/post.gif)

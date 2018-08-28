@@ -14,20 +14,23 @@
                     <input type="text" placeholder="请输入要请求的url地址 ，例如：https://www.baidu.com/" ref="url"/>
                 </span>
                 <button class="btn bigBtn" @click="sendRequest()">发起请求</button>
+                <button class="btn bigBtn" @click="setHeader()">设置头</button>
+                <button class="btn bigBtn" @click="setParams()">请求参数</button>
             </div>
-            <div class="form-row">
+            <div class="form-row" v-show="isheader">
                 <label class="from-title">请求头:</label>
-                <span class="form-input codeView">
+                <span class="form-input codeView headerEdit">
                     <codemirror v-model="headers" :options="cmOptions"/>
                 </span>
             </div>
-            <div class="form-row">
+            <div class="form-row" v-show="isparams">
                 <label class="from-title">请求参数:</label>
-                <span class="form-input codeView">
+                <span class="form-input codeView paramsEdit">
                     <codemirror v-model="params" :options="cmOptions"/>
                 </span>
             </div>
             <div class="form-row">
+                <label class="from-title">返回结果:</label>
                  <span class="form-input codeView">
                     <codemirror v-model="result" :options="cmOptions"/>
                 </span>
@@ -43,7 +46,7 @@ import "codemirror/mode/javascript/javascript.js";
 import "codemirror/lib/codemirror.css";
 import "codemirror/theme/seti.css";
 import common from "utils/common";
-import renderer from 'renderer';
+import renderer from "renderer";
 
 export default {
   name: "post",
@@ -52,9 +55,11 @@ export default {
   },
   data() {
     return {
+      isheader: false,
+      isparams: false,
       headers: "{}",
-      params:'[]',
-      result:'',
+      params: "",
+      result: "",
       cmOptions: {
         tabSize: 4,
         mode: "javascript",
@@ -65,17 +70,23 @@ export default {
     };
   },
   methods: {
+    setHeader() {
+      this.isheader = !this.isheader;
+    },
+    setParams() {
+      this.isparams = !this.isparams;
+    },
     sendRequest() {
-        let ops = {
-            url:this.$refs.url.value,
-            method:this.$refs.method.value,
-            headers:this.headers,
-            params:this.params
-        }
-        renderer.subscribeM('post',ops,(res)=>{
-            this.result = res;
-            this.formatJson();
-        })
+      let ops = {
+        url: this.$refs.url.value,
+        method: this.$refs.method.value,
+        headers: this.headers,
+        params: this.params
+      };
+      renderer.subscribeM("post", ops, res => {
+        this.result = res;
+        this.formatJson();
+      });
     },
     formatJson() {
       common.formatJson(this.result, (state, json) => {
