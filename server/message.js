@@ -1,6 +1,7 @@
 const electron = require('electron');
 const ipc = electron.ipcMain;
 const request = require('request');
+let headers = {};
 const Message = {
     list:{},
     init(updater) {
@@ -50,8 +51,9 @@ const Message = {
     post(sender,data){
         var options = {
             url: data.url,
-            headers: data.headers||{},
+            headers: Object.assign({},headers, data.headers),
             method:data.method,
+            encoding:'utf8',
             postData: {
                 mimeType: 'application/x-www-form-urlencoded'
             }
@@ -68,6 +70,9 @@ const Message = {
         }
         request(options, (error, response, body) => {
             if (!error && response.statusCode == 200) {
+                if(response.headers.hasOwnProperty("set-cookie")){
+                    headers.Cookie = response.headers["set-cookie"].join(';');
+                }
                 sender(body);
             }else{
                 if(error){

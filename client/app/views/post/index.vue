@@ -17,13 +17,13 @@
                 <button class="btn bigBtn" @click="setHeader()">设置头</button>
                 <button class="btn bigBtn" @click="setParams()">请求参数</button>
             </div>
-            <div class="form-row" v-show="isheader">
+            <div class="form-row" v-if="isheader">
                 <label class="from-title">请求头:</label>
                 <span class="form-input codeView headerEdit">
                     <codemirror v-model="headers" :options="cmOptions"/>
                 </span>
             </div>
-            <div class="form-row" v-show="isparams">
+            <div class="form-row" v-if="isparams">
                 <label class="from-title">请求参数:</label>
                 <span class="form-input codeView paramsEdit">
                     <codemirror v-model="params" :options="cmOptions"/>
@@ -48,6 +48,7 @@ import "codemirror/theme/seti.css";
 import common from "utils/common";
 import renderer from "renderer";
 
+
 export default {
   name: "post",
   components: {
@@ -57,7 +58,7 @@ export default {
     return {
       isheader: false,
       isparams: false,
-      headers: "{}",
+      headers: "",
       params: "",
       result: "",
       cmOptions: {
@@ -77,21 +78,34 @@ export default {
       this.isparams = !this.isparams;
     },
     sendRequest() {
-      let ops = {
-        url: this.$refs.url.value,
-        method: this.$refs.method.value,
-        headers: this.headers,
-        params: this.params
-      };
-      renderer.subscribeM("post", ops, res => {
-        this.result = res;
-        this.formatJson();
+       common.toJson(this.headers,(res)=>{
+        let result =res;
+        this.headers = JSON.stringify(result);
+        common.formatJson(this.headers, (state, json) => {
+          if (state) {
+            this.headers = json;
+          }
+        });
+        let ops = {
+          url: this.$refs.url.value,
+          method: this.$refs.method.value,
+          headers: result,
+          params: this.params
+        };
+        if(/^\{/.test(ops.params)){
+          //是json格式转化成url
+          ops.params = common.param(JSON.parse(ops.params))
+        }
+        renderer.subscribeM("post", ops, res => {
+          this.result = res;
+          this.formatJson();
+        });
       });
     },
     formatJson() {
       common.formatJson(this.result, (state, json) => {
         if (state) {
-          this.code = json;
+          this.result = json;
         }
       });
     }
