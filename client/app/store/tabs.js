@@ -13,6 +13,7 @@ import mockSocketConfig from 'mock/mockSocketConfig';
 import home from 'home';
 import viewpage from 'viewpage';
 import post from 'post/index';
+import wsTest from 'mock/wsTest';
 
 export default [{
     title: "首页",
@@ -79,4 +80,9 @@ export default [{
     name:"post",
     props:[],
     component:post
+},{
+    title:"推送测试",
+    name:"wsTest",
+    props:[],
+    component:wsTest
 }];

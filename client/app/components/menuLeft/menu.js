@@ -23,6 +23,10 @@ export default {
     "post":[{
         to:'post',
         title:'请求测试'
+    },
+    {
+        to: "wsTest",
+        title: "ws推送监听"
     }],
     "tool": [{
         to: "filemd5",

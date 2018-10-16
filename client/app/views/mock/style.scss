@@ -143,3 +143,26 @@
         left: 0;
     }
 }
+.wsTest{
+    .wsResult{
+        position: absolute;
+        bottom: 0;
+        top: 60px;
+        padding:10px;
+        overflow: auto;
+        right: 0;
+        left: 0;
+        user-select:initial;
+        .btnCancel{
+            position: absolute;
+            right:10px;
+            top:10px;
+        }
+    }
+    .ws-Test{
+        display: flex;
+        .url_input{
+            flex:1;
+        }
+    }
+}
