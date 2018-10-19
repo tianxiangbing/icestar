@@ -43,7 +43,15 @@ function ShouldSkipPage(PageID: Integer): Boolean;
 begin//if PageID=wpSelectDir then
 result := true;
 end;
-
+// 安装前强制杀进
+// 该函数在安装程序初始化时调用，返回False 将中断安装，True则继续安装.程
+function InitializeSetup(): Boolean;
+  var ErrorCode: Integer;
+  begin
+    ShellExec('open','taskkill.exe','/f /im icestar.exe','',SW_HIDE,ewNoWait,ErrorCode);
+    ShellExec('open','tskill.exe',' IceStar客户端','',SW_HIDE,ewNoWait,ErrorCode);
+    result := True;
+  end;
 [Run]
 Filename: "{app}\icestar.exe";Description:"初始化程序";Flags:nowait; StatusMsg:"正在启动IceStar客户端";
 [Messages]

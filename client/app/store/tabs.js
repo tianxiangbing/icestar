@@ -14,6 +14,7 @@ import home from 'home';
 import viewpage from 'viewpage';
 import post from 'post/index';
 import wsTest from 'mock/wsTest';
+import formatImport from 'tool/formatImport';
 
 export default [{
     title: "首页",
@@ -85,4 +86,9 @@ export default [{
     name:"wsTest",
     props:[],
     component:wsTest
+},{
+    title:"接口数据生成",
+    name:'formatImport',
+    props:[],
+    component:formatImport
 }];

@@ -34,5 +34,8 @@ export default {
     },{
         to: "formatJson",
         title: "json格式验证"
+    },{
+        to: "formatImport",
+        title: "接口数据生成"
     }]
 }

@@ -10,7 +10,7 @@
             <button class="btnCancel" @click="clear()">清空日志</button>
         </div>
         <div class="wsResult">
-            <div  v-for="(item,index) in list" :key="index">
+            <div  :class="{active:index == activeIndex}" @click="select(index)"  v-for="(item,index) in list" :key="index">
                 {{item}}
             </div>
         </div>
@@ -21,7 +21,7 @@ import common from "utils/common";
 export default {
   name: "wsTest",
   data() {
-    return { key: "", list: [] };
+    return { key: "", list: [],activeIndex:-1 };
   },
   mounted() {
     common.copy(
@@ -33,6 +33,11 @@ export default {
     );
   },
   methods: {
+    select(index) {
+      this.activeIndex == index
+        ? (this.activeIndex = -1)
+        : (this.activeIndex = index);
+    },
     start() {
     let _self = this;   
       try {

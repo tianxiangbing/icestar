@@ -72,10 +72,10 @@
         overflow: hidden;
         border-bottom: 1px solid $borderColor;
         &.active {
-            background-color: rgba(69, 69, 69, .8);
+            @extend .active;
         }
         &:hover {
-            background-color: rgba(69, 69, 69, .5);
+            @extend .hover;
         }
         &>div {
             padding: 0 12px;
@@ -150,13 +150,21 @@
         top: 60px;
         padding:10px;
         overflow: auto;
-        right: 0;
         left: 0;
         user-select:initial;
-        .btnCancel{
-            position: absolute;
-            right:10px;
-            top:10px;
+        &>div{
+            width:1000px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            &:hover{
+                @extend .hover;
+            }
+            &.active{
+                @extend .active;
+                height:auto;
+                width:auto;
+            }
         }
     }
     .ws-Test{

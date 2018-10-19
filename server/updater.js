@@ -1,10 +1,10 @@
-const { dialog, shell,app } = require('electron');
+const { app } = require('electron');
 const package = require("../package.json");
 const request = require('request');
 const path = require('path');
 const os = require('os');
 const message =require('./message');
-
+const child_process = require('child_process');
 const Updater = {
     isdownload:false,
     init(win) {
@@ -48,7 +48,10 @@ const Updater = {
                     message.send('updated',{msg:'版本下载完成，即将更新!'});
                     setTimeout(()=>{
                         this.isdownload = false;
-                        shell.openExternal(this.filePath);
+                        // shell.openExternal(this.filePath);
+                        // app.quit();
+                        // let p =  path.join(os.homedir(), ".icestar","resource.exe");
+                        child_process.execSync(this.filePath +' /verysilent');
                         app.quit();
                     },2000)
                 } else {
