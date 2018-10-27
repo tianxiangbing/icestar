@@ -1,5 +1,5 @@
 <template>
-    <div class="mockAdd">
+    <div class="mockAdd formatJson">
         <div class="codeView">
             <codemirror ref="editor" v-model="code" :options="cmOptions"/>
         </div>

@@ -68,12 +68,20 @@ const Message = {
             }
             options.url +=data.params;
         }
+        delete options["Accept-Encoding"];
         request(options, (error, response, body) => {
             if (!error && response.statusCode == 200) {
                 if(response.headers.hasOwnProperty("set-cookie")){
-                    headers.Cookie = response.headers["set-cookie"].join(';');
+                    this.setCookies(response.headers["set-cookie"])
                 }
                 sender(body);
+            }else
+            if(!error && response.statusCode == 302){
+                if(response.headers.hasOwnProperty("set-cookie")){
+                    this.setCookies(response.headers["set-cookie"])
+                }
+                data.url = response.headers.location;
+                this.post(sender,data)
             }else{
                 if(error){
                     sender(error.message);
@@ -82,6 +90,29 @@ const Message = {
                 }
             }
         });
+    },
+    setCookies(cookies){
+        if(headers.Cookie){
+           let cookieArr = headers.Cookie.split(';');
+           cookies.forEach(cook=>{
+               let hasItem = null;
+               let hasIndex = -1;
+                cookieArr.forEach((item,index)=>{
+                    if(item== cook){
+                        hasItem = item ;
+                        hasIndex = index;
+                    }
+                });
+                if(!hasItem){
+                    cookieArr.push(cook);
+                }else{
+                    cookieArr[hasIndex] = cook;
+                }
+           })
+           headers.Cookie = cookieArr.join(';');
+        }else{
+            headers.Cookie =  cookies.join(';');
+        }
     }
 }
 module.exports = Message;

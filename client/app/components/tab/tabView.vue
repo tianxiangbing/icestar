@@ -1,9 +1,11 @@
 <template>
 <div class="tab-view">
-<div v-if="tabList.length>0" v-for="(item,index) in tabList" :key="index" class="view-item" v-show="tabActive==index">
-  <component :is="item.name" :prop="item.prop"/>
-</div>
-<home  v-if="tabList.length===0"/>
+  <div v-if="tabList.length>0" v-for="(item,index) in tabList" :key="index" class="view-item" v-show="tabActive==index">
+    <component :is="item.name" :prop="item.prop"/>
+  </div>
+  <div class="centermiddle defaultHome">
+    <a class="logo"></a>欢迎使用icestar开发工具
+  </div>
 </div>
 </template>
 <script>

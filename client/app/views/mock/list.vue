@@ -34,7 +34,7 @@ export default {
   computed: {
     list() {
       console.log(store.state.mock.projectList[this.prop]);
-      return store.state.mock.projectList[this.prop].list.filter(item=>{
+      return store.state.mock.projectList.filter(item=>item.id == this.prop)[0].list.filter(item=>{
         return item.url.indexOf(this.key)>-1 || item.title.indexOf(this.key)>-1;
       });
     }

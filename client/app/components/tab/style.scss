@@ -1,11 +1,12 @@
+@import 'baseCss';
 .tab-header {
     display: flex;
     overflow:hidden;
     height:35px;
     line-height:35px;
-    background-color: rgb(37, 37, 38);
+    background-color: $bgColor;
     .item {
-        background-color: rgb(45, 45, 45);    
+        background-color: $bgColor;    
         border-left:1px solid rgb(37, 37, 38);
         display: flex;
         white-space: nowrap;
@@ -28,7 +29,7 @@
             color:#fff;
         }
         &.active{
-            background-color: rgb(30, 30, 30);
+            background-color: $focusBgColor;
         }
     }
 }
@@ -43,6 +44,8 @@
         bottom:0;
         left:0;
         right:0;
+        z-index:1;
+        background-color:$focusBgColor;
     }
     webview{
         position: absolute;
@@ -51,4 +54,17 @@
         left:0;
         right:0;
     }
+}
+.defaultHome{
+    line-height: 32px;
+    z-index:0;
+}
+.logo{
+    width:28px;
+    height:28px;
+    background: url("../../assets/logo.png") no-repeat;
+    background-size: 100% 100%;
+    float: left;
+    opacity: .6;
+    margin:6px 6px 0 15px;
 }

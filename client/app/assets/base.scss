@@ -14,7 +14,7 @@ $titleBgColor:#2d2d30;
     left:50%;
     transform: translate(-50%,-50%);
 }
-.btnOk,.btnCancel{
+.btnOk,.btnCancel,.btnSmall{
     background-color:#1E1E1E;
     height:24px;
     line-height: 24px;
@@ -61,4 +61,13 @@ input[type="checkbox"]{
 }
 .active{
     background-color: rgba(69, 69, 69, .8);
+}
+.centermiddle{
+    text-align: center;
+    position:absolute;
+    top:50%;
+    left:50%;
+    -webkit-transform: translate(-50%,-50%);
+    -moz-transform: translate(-50%,-50%);
+    transform:translate(-50%,-50%);
 }

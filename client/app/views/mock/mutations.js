@@ -1,4 +1,4 @@
-import {MOCK_WS_START,MOCK_UPDATE, MOCK_START, MOCK_PROJECT_ADD, MOCK_PROJECT_UPDATE, MOCK_INIT, MOCK_LIST_INIT, MOCK_ADD, MOCK_DEL, MOCK_WS_ADD,MOCK_WS_INIT, MOCK_WS_DEL } from './actionTypes';
+import {MOCK_WS_START,MOCK_UPDATE, MOCK_START, MOCK_PROJECT_ADD, MOCK_PROJECT_UPDATE, MOCK_INIT, MOCK_LIST_INIT, MOCK_ADD, MOCK_DEL, MOCK_WS_ADD,MOCK_WS_INIT, MOCK_WS_DEL,MOCK_PROJECT_DEL } from './actionTypes';
 import Vue from 'vue';
 
 let mutations = {
@@ -7,19 +7,22 @@ let mutations = {
         let len = state.projectList.length;
         let lastItem = state.projectList[len - 1];
         newValue.id = lastItem.id++;
-        newValue.list = [];
         state.projectList.push(newValue)
     },
+    [MOCK_PROJECT_DEL]:(state,data)=>{
+        state.projectList.splice(data.index, 1);
+    },
     [MOCK_PROJECT_UPDATE]: (state, data) => {
-        let id = data.id;
-        let index = -1;
-        state.projectList.forEach((element, i) => {
-            if (id == element.id) {
-                index = i;
-                return false;
-            }
-        });
-        state.projectList.splice(index, 1, data);
+        // state.projectList[data.index]=data.data;
+        // let id = data.id;
+        // let index = -1;
+        // state.projectList.forEach((element, i) => {
+        //     if (id == element.id) {
+        //         index = i;
+        //         return false;
+        //     }
+        // });
+        state.projectList.splice(data.index, 1, data.data);
     },
     [MOCK_INIT]: (state, data) => {
         state.projectList = data;

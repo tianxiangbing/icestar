@@ -18,6 +18,8 @@ header {
     height: 40px;
     line-height: 40px;
     position: relative;
+    background-color: #333333;
+    color: rgb(204, 204, 204);
     .win-act {
         -webkit-app-region: no-drag;
         float: right;
@@ -41,7 +43,6 @@ header {
     }
     a.item {
         -webkit-app-region: no-drag;
-        color: #666;
         padding: 5px;
         display: inline-block;
         width: 30px;

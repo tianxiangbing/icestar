@@ -16,7 +16,7 @@ export default {
     console.log(this.src)
     let p = renderer.resolvePath('docs/index.html').replace(/\\/g,'/');
     this.src = `file://${p}`;
-    console.log(this.src)
+    // console.log(this.src)
   }
 }
 </script>

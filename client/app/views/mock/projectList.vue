@@ -1,9 +1,10 @@
 <template>
     <div class="projectList">
         <h1>项目列表</h1>
-        <tab to="mockList" :prop="item.id" :title="item.name" class="item" v-for="item in projectList" :key="item.id">
+        <tab to="mockList" :prop="item.id" :title="item.name" class="item" v-for="(item,index) in projectList" :key="item.id">
             <h2><i class="tianxiangbing txb-bianji" @click="edit(item)"></i>{{item.title}}</h2>
             <p class="desc">{{item.desc}}</p>
+            <i class="tianxiangbing txb-error del" title="删除" @click="del(index)"></i>
         </tab>
         <a @click="projectAdd" class="projectAdd item"><i class="tianxiangbing txb-add1" ></i></a>
     </div>
@@ -16,7 +17,8 @@ import store from "store/store";
 import {
   MOCK_PROJECT_ADD,
   MOCK_PROJECT_UPDATE,
-  MOCK_INIT
+  MOCK_INIT,
+  MOCK_PROJECT_DEL
 } from "./actionTypes";
 
 export default {
@@ -36,6 +38,13 @@ export default {
     });
   },
   methods: {
+    del(index){
+      store.dispatch({
+        type: MOCK_PROJECT_DEL,
+        data: { index: index }
+      });
+      event.stopPropagation();
+    },
     projectAdd() {
       this.vdialog({
         content: projectAdd,

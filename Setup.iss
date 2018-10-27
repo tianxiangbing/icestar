@@ -27,13 +27,13 @@ Name: desktopicon; Description: {cm:CreateDesktopIcon}; GroupDescription: {cm:Ad
 
 [Files]
 ; 应用Mock客户端本身的内容    
-Source: "out/icestar-win32-x64/*"; DestDir: "{app}"           
-Source: "out/icestar-win32-x64/resources/*"; DestDir: "{app}/resources"      
+Source: "out/icestar-win32-ia32/*"; DestDir: "{app}"           
+Source: "out/icestar-win32-ia32/resources/*"; DestDir: "{app}/resources"      
 Source: "docs/*"; DestDir: "{app}/docs"     
 Source: "docs/imgs/*"; DestDir: "{app}/docs/imgs"     
-Source: "out/icestar-win32-x64/resources/app.asar.unpacked/node_modules/rcedit/*"; DestDir: "{app}/resources/app.asar.unpacked/node_modules/rcedit"       
-Source: "out/icestar-win32-x64/resources/app.asar.unpacked/node_modules/rcedit/bin/*"; DestDir: "{app}/resources/app.asar.unpacked/node_modules/rcedit/bin"  
-Source: "out/icestar-win32-x64/resources/app.asar.unpacked/node_modules/rcedit/lib/*"; DestDir: "{app}/resources/app.asar.unpacked/node_modules/rcedit/lib"    
+Source: "out/icestar-win32-ia32/resources/app.asar.unpacked/node_modules/rcedit/*"; DestDir: "{app}/resources/app.asar.unpacked/node_modules/rcedit"       
+Source: "out/icestar-win32-ia32/resources/app.asar.unpacked/node_modules/rcedit/bin/*"; DestDir: "{app}/resources/app.asar.unpacked/node_modules/rcedit/bin"  
+Source: "out/icestar-win32-ia32/resources/app.asar.unpacked/node_modules/rcedit/lib/*"; DestDir: "{app}/resources/app.asar.unpacked/node_modules/rcedit/lib"    
 ;NOTE: Don't use "Flags: ignoreversion" on any shared system files
 [Icons]
 Name: {commondesktop}\IceStar客户端; Filename: {app}\icestar.exe; Tasks: desktopicon; WorkingDir: {app}; Comment: 使用IceStar客户端; IconIndex: 0

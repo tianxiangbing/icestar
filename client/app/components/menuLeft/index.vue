@@ -2,9 +2,9 @@
     <div class="menus" v-bind:style="styleObject">
         <nav class="left-menu">
             <!-- <a title="首页" @click="showSubMenu('home')" :class="{active:homeActive}"><i class="tianxiangbing txb-wxbzhuye"></i></a> -->
-            <a title="mock接口" @click="showSubMenu('mock')" :class="{active:mockActive}"><i class="tianxiangbing txb-M"></i></a>
-            <a title="Post请求" @click="showSubMenu('post')" :class="{active:wsActive}"><i class="tianxiangbing txb-p"></i></a>
-            <a title="工具" @click="showSubMenu('tool')" :class="{active:toolActive}"><i class="tianxiangbing txb-iconfontwujingongju"></i></a>
+            <a title="mock接口" @click="showSubMenu('mock',0)" :class="{active:activeIndex==0}"><i class="tianxiangbing txb-M"></i></a>
+            <a title="Post请求" @click="showSubMenu('post',1)" :class="{active:activeIndex==1}"><i class="tianxiangbing txb-p"></i></a>
+            <a title="工具" @click="showSubMenu('tool',2)" :class="{active:activeIndex==2}"><i class="tianxiangbing txb-iconfontwujingongju"></i></a>
         </nav>
         <nav class="sub-menu" v-show="isExpands">
             <div class="sub-menu-title">{{currentTitle}}</div>
@@ -24,10 +24,7 @@ export default {
   data() {
     return {
       styleObject: "",
-      homeActive: "",
-      mockActive: "",
-      wsActive: "",
-      toolActive: "",
+      activeIndex:-1,
       currentTitle:""
     };
   },
@@ -56,20 +53,13 @@ export default {
     }
   },
   methods: {
-    showSubMenu(title) {
+    showSubMenu(title,index) {
+      this.activeIndex = index;
       store.dispatch({
         type: TOGGLESUBMENU,
         title:title
       });
       this.currentTitle = event.currentTarget.getAttribute('title');
-      if (store.state.base.isExpands) {
-        this[`${title}Active`] = true;
-      } else {
-        this.homeActive = false;
-        this.mockActive = false;
-        this.wsActive = false;
-        this.toolActive = false;
-      }
     }
   }
 };

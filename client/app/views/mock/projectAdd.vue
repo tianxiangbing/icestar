@@ -36,6 +36,7 @@
                 this.title = this.params.title;
                 this.prefix = this.params.prefix;
                 this.desc = this.params.desc;
+                this.list = this.params.list;
             }
         },
         beforeUpdate(){

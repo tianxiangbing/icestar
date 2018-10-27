@@ -12,6 +12,14 @@
         line-height: 30px;
         position: relative;
         margin: 0 10px 10px 0;
+        .del{
+            position:absolute;
+            bottom:-15px;
+            right:-5px;
+            background: $focusBgColor;
+            border-radius: 10px;
+            font-size:20px;
+        }
         h2 {
             border-bottom: 1px solid $borderColor;
             @extend .textPadding;

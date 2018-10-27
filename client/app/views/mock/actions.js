@@ -1,4 +1,4 @@
-import { MOCK_DEL, MOCK_START, MOCK_PROJECT_ADD, MOCK_PROJECT_UPDATE, MOCK_INIT, MOCK_LIST_INIT, MOCK_ADD, MOCK_UPDATE, MOCK_WS_START, MOCK_WS_ADD,MOCK_WS_INIT, MOCK_WS_DEL } from './actionTypes';
+import { MOCK_DEL, MOCK_PROJECT_DEL,MOCK_START, MOCK_PROJECT_ADD, MOCK_PROJECT_UPDATE, MOCK_INIT, MOCK_LIST_INIT, MOCK_ADD, MOCK_UPDATE, MOCK_WS_START, MOCK_WS_ADD,MOCK_WS_INIT, MOCK_WS_DEL } from './actionTypes';
 import renderer from 'renderer';
 let action = {
     [MOCK_PROJECT_ADD]: ({ commit, state }, item) => {
@@ -6,6 +6,7 @@ let action = {
         let len = data.length;
         let obj = item.data;
         obj.id = len;
+        obj.list = [];
         data.push(obj)
         // renderer.save('[]','mocklist',`mock_${obj.id}.json`);
         renderer.save(data, 'mock').then(() => {
@@ -25,8 +26,18 @@ let action = {
         });
         data.splice(index, 1, obj);
         renderer.save(data, 'mock').then(() => {
-            commit(MOCK_PROJECT_UPDATE, obj)
+            commit(MOCK_PROJECT_UPDATE, {data:obj,index:index})
         });
+    },
+    [MOCK_PROJECT_DEL]:({commit,state},item)=>{
+        // debugger
+        let index = item.data.index;
+        let data = Object.assign([], state.projectList);
+        data.splice(index, 1);
+        // state.projectList.splice(index,1);
+        renderer.save(data,'mock').then(()=>{
+            commit(MOCK_PROJECT_DEL, {index:index})
+        }) ;
     },
     [MOCK_INIT]: ({ commit, state }) => {
         renderer.read('mock').then(data => {

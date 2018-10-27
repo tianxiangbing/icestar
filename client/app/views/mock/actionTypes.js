@@ -11,3 +11,4 @@ export const MOCK_WS_UPDATE = 'mock_ws_update';
 export const MOCK_WS_START = 'mock_ws_start';
 export const MOCK_WS_ADD = 'mock_ws_add';
 export const MOCK_WS_INIT = 'mock_ws_init';
+export const MOCK_PROJECT_DEL = 'mock_project_del';

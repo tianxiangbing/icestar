@@ -27,7 +27,7 @@ Name: desktopicon; Description: {cm:CreateDesktopIcon}; GroupDescription: {cm:Ad
 
 [Files]
 ; 应用Mock客户端本身的内容      
-Source: "out/icestar-win32-x64/resources/app.asar"; DestDir: "{app}/resources"  
+Source: "out/icestar-win32-ia32/resources/app.asar"; DestDir: "{app}/resources"  
 Source: "docs/*"; DestDir: "{app}/docs"     
 Source: "docs/imgs/*"; DestDir: "{app}/docs/imgs"    
 [Icons]
