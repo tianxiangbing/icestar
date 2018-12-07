@@ -7,7 +7,7 @@
     "start": "cross-env  NODE_ENV=development && cd client && npm start",
     "build": "cross-env  NODE_ENV=production && electron .",
     "test": "cross-env  NODE_ENV=development && electron .",
-    "packager": "electron-packager . icestar --electron-version=3.0.6 --asar.unpack=**/rcedit/**/*.* --overwrite --platform=win32 --arch=ia32 --icon=client/favicon.ico --out=out  --version-string.FileDescription=icestar --version-string.ProductName=icestar --ignore=\"/out,/client/app,/client/node_modules,/download,/imgs\"",
+    "packager": "electron-packager . icestar --electron-version=3.0.6 --asar.unpack=**/rcedit/**/*.* --overwrite --platform=win32 --arch=ia32 --icon=client/favicon.ico --out=out  --version-string.FileDescription=icestar --version-string.ProductName=icestar --ignore=\"(client/node_modules|download)\"",
     "installer": "node ./script/installer.js"
   },
   "repository": {
