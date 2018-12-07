@@ -15,6 +15,7 @@ import viewpage from 'viewpage';
 import post from 'post/index';
 import wsTest from 'mock/wsTest';
 import formatImport from 'tool/formatImport';
+import money from 'tool/money';
 
 export default [{
     title: "首页",
@@ -91,4 +92,9 @@ export default [{
     name:'formatImport',
     props:[],
     component:formatImport
+},{
+    title:"money",
+    name:'money',
+    props:[],
+    component:money
 }];

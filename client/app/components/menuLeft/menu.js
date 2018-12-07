@@ -37,5 +37,8 @@ export default {
     },{
         to: "formatImport",
         title: "接口数据生成"
+    },{
+        to: "money",
+        title: "money"
     }]
 }
