@@ -191,7 +191,8 @@ let Common = {
         this.subscribeM('checkUpdate',{version,url});
     },
     resolvePath(pa){
-        return path.resolve(pa);
+        let isdev = process.env.NODE_ENV;
+        return isdev ? path.resolve(pa):path.resolve(path.join('resources/app.asar',pa));
     }
 }
 module.exports = Common;
