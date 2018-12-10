@@ -1,0 +1,79 @@
+@borderColor:rgba(128, 128, 128, 0.35);
+@bgColor:#2d2d2d;
+@color:#d4d4d4;
+@colorHover:#C1C1C1;
+@focusBgColor:#1E1E1E;
+@titleBgColor:#2d2d30;
+html,
+body {
+    font-size: 12px;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    background-color: @bgColor;
+    user-select: none;
+    color:@color;
+}
+.list{
+    width:100%;
+    min-width: 1000px;
+}
+button{
+    background-color:#1E1E1E;
+    height:24px;
+    line-height: 24px;
+    padding:0 6px;
+    border:1px solid @borderColor;
+    cursor: pointer;
+    color:@color;
+    margin:0 3px;
+    &:hover{
+        background-color:#2E2E2E;
+        color:#fff;
+    }
+}
+table.list {
+    font-family: verdana,arial,sans-serif;
+    font-size:11px;
+    border-width: 1px;
+    border-color: @borderColor;
+    /*为表格设置合并边框模型*/
+    border-collapse: collapse;
+    /*列宽由表格宽度和列宽度设定*/
+    table-layout: fixed;
+    a,a:link{
+        color:@color;
+    }
+}
+table.list th {
+    background-color:#c3dde0;
+    border-width: 1px;
+    padding: 8px;
+    border-style: solid;
+    border-color: #a9c6c9;
+}
+table.list tr {
+    background-color:@bgColor;
+    &:hover{
+        background-color:@focusBgColor;
+    }
+}
+table.list td {
+    border-width: 1px;
+    padding: 8px;
+    border-style: solid;
+    border-color: #a9c6c9;
+    &.red{
+        background-color:red;
+    }
+    &.green{
+        background-color:green;
+    }
+}
+.half{
+    max-height:360px;
+    overflow:auto;
+}
+.txt_cb{
+    width:40px;
+}

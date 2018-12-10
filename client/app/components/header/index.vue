@@ -12,6 +12,8 @@
           </ul>
         </a>
         <span class="win-act">
+        <i v-if="istop" @click="settop" class="tianxiangbing txb-ding2" title="置顶"></i>
+        <i v-else @click="settop" class="tianxiangbing txb-ding" title="置顶"></i>
         <i @click="minSys" class="tianxiangbing txb-tuopantray17" title="托盘"></i>
         <i @click="min" class="tianxiangbing txb-minus1" title="最小化"></i>
         <i @click="reset" class="tianxiangbing txb-huanyuan" v-if="isMax" title="还原"></i>
@@ -33,7 +35,7 @@ import aboutModal from './aboutModal';
 export default {
   name: "Header",
   data() {
-    return { clickHelp: false };
+    return { clickHelp: false,istop:false };
   },
   components: {
     tab
@@ -55,6 +57,10 @@ export default {
     });
   },
   methods: {
+    settop(){
+      this.istop  = !this.istop;
+      renderer.setTop(this.istop)
+    },
     openHelp() {
       this.clickHelp = !this.clickHelp;
     },

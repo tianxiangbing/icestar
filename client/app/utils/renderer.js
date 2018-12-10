@@ -108,6 +108,9 @@ let Common = {
     max() {
         win.maximize()
     },
+    setTop(bol){
+        win.setAlwaysOnTop(bol);
+    },
     reset() {
         win.unmaximize()
     },

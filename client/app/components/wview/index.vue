@@ -1,6 +1,6 @@
 <template>
     <div>
-        <webview :src="src" autosize></webview>
+        <webview :src="src" ref="foo" autosize></webview>
     </div>
 </template>
 <script>
@@ -8,6 +8,16 @@
         name:"wview",
         props:{
             src:""
+        },
+        mounted(){
+            const webview = this.$refs.foo;
+            webview.addEventListener('new-window', (e) => {
+                // const protocol = require('url').parse(e.url).protocol;
+                // if (protocol === 'http:' || protocol === 'https:') {
+                    webview.src = e.url;
+                // }
+                e.preventDefault()
+            });
         }
     }
 </script>

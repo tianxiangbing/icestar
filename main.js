@@ -30,7 +30,6 @@ function openWindow() {
         title: 'IceStar V' + package.version,
         show: false,
         backgroundColor: 'rgb(30, 30, 30)',
-        minWidth: 1000,
         titleBarStyle: 'hidden',
         width: width-100,
         height: height-100,
@@ -66,30 +65,26 @@ function openWindow() {
     });
     // win.webContents.openDevTools();
     //目录不存在时创建
-    try{
-        const basePath = path.join(os.homedir(), ".icestar");
-        if (!fs.existsSync(basePath)) {
-            fs.mkdirSync(basePath);
-        }
-        let p = path.join(basePath, 'mockconfig.json');
-        fs.exists(p, (ex) => {
-            if (!ex) {
-                fs.readFile(path.join(__dirname, '/mock/mockconfig.json'), 'utf8', (err, data) => {
-                    fs.writeFile(p, data, { encoding: 'utf8' });
-                })
-            }
-        });
-        let s = path.join(basePath, 'socketconfig.json');
-        fs.exists(s, (ex) => {
-            if (!ex) {
-                fs.readFile(path.join(__dirname, '/mock/socketconfig.json'), 'utf8', (err, data) => {
-                    fs.writeFile(s, data, { encoding: 'utf8' });
-                })
-            }
-        });
-    }catch(ex){
-
+    const basePath = path.join(os.homedir(), ".icestar");
+    if (!fs.existsSync(basePath)) {
+        fs.mkdirSync(basePath);
     }
+    let p = path.join(basePath, 'mockconfig.json');
+    fs.exists(p, (ex) => {
+        if (!ex) {
+            fs.readFile(path.join(__dirname, '/mock/mockconfig.json'), 'utf8', function(err, data) {
+                fs.writeFile(p, data, { encoding: 'utf8' });
+            })
+        }
+    });
+    let s = path.join(basePath, 'socketconfig.json');
+    fs.exists(s, (ex) => {
+        if (!ex) {
+            fs.readFile(path.join(__dirname, '/mock/socketconfig.json'), 'utf8', function(err, data) {
+                fs.writeFile(s, data, { encoding: 'utf8' });
+            })
+        }
+    });
 }
 let loadingParams = {
     width: 580,

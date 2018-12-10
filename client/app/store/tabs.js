@@ -93,7 +93,7 @@ export default [{
     props:[],
     component:formatImport
 },{
-    title:"money",
+    title:"行情",
     name:'money',
     props:[],
     component:money
