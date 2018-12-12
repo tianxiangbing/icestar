@@ -10,7 +10,7 @@
             src:""
         },
         mounted(){
-            // const webview = this.$refs.foo;
+            const webview = this.$refs.foo;
             webview.addEventListener('event-will-navigate', (e) => {
                 // debugger;
                 // const protocol = require('url').parse(e.url).protocol;

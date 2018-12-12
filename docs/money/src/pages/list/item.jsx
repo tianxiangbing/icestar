@@ -115,7 +115,8 @@ export default class Item extends PureComponent{
         }
         return (
             <tr>
-                <td><a target="blank" href={"http://stockpage.10jqka.com.cn/HQ_v4.html?v=_yk_2222#hs_"+code.substr(0,6)}>{code}</a> {name}</td>
+                <td><nobr>
+                    <a target="blank" href={"http://stockpage.10jqka.com.cn/HQ_v4.html?v=_yk_2222#hs_"+code.substr(0,6)}>{code}</a> {name}</nobr></td>
                 {this.props.type ==='data'?
                     <td>{info}</td>:
                     <td>

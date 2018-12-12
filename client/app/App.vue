@@ -1,14 +1,14 @@
 <template>
 <div class="container">
-    <mheader/>
+    <mheader v-show="easy"/>
     <div class="body">
-        <left-menu/>
+        <left-menu  v-show="easy"/>
         <div class="content">
-          <tab-header/>
+          <tab-header v-show="easy"/>
           <tab-view/>
         </div>
     </div>
-    <mfooter/>
+    <mfooter v-show="easy"/>
 </div>
 </template>
 
@@ -26,6 +26,9 @@ import axios from 'axios';
 
 export default {
   name: "App",
+  data(){
+    return {easy:true}
+  },
   components: {
     mheader,
     tabView,
@@ -37,6 +40,11 @@ export default {
   mounted() {
     renderer.subscribe('update',(data)=>{
       this.valert(data.msg);
+    })
+    renderer.subscribe('easy',(data)=>{
+      // this.valert(data.msg);
+      console.log(data);
+      this.easy = !data;
     })
     renderer.subscribe('updated',(data)=>{
       this.valert(data.msg);

@@ -35,7 +35,8 @@ function openWindow() {
         frame: false,
         resizable: true,
         opacity :1,
-        transparent :true
+        transparent :true,
+        skipTaskbar :false
     }
     win = new BrowserWindow(mainStyle);
     updater.init(win);
@@ -110,9 +111,11 @@ function createLoadingScreen() {
     });
 }
 
-let iswinshow=true; 
-let opacity =1;
-let ignore = false;
+let iswinshow=true; //是否托盘
+let opacity =1;//透明度
+let ignore = false;//忽略鼠标事件
+let skipTaskbar = false;//任务栏图标
+let easy = false;
 app.on('ready', () => {
     createLoadingScreen();
     openWindow();
@@ -132,16 +135,24 @@ app.on('ready', () => {
         iswinshow ? win.hide():win.show();
     })
     globalShortcut.register('CommandOrControl+Up', () => {
-        opacity = Math.min(1, opacity+ 0.1);
+        opacity = Math.min(1, opacity+ 0.05);
         win.setOpacity(opacity);
     })
     globalShortcut.register('CommandOrControl+Down', () => {
-        opacity = Math.max(0, opacity - 0.1);
+        opacity = Math.max(0, opacity - 0.05);
         win.setOpacity(opacity);
     })
     globalShortcut.register('CommandOrControl+W', () => {
         ignore = !ignore;
         win.setIgnoreMouseEvents(ignore)
+    })
+    globalShortcut.register('CommandOrControl+E', () => {
+        skipTaskbar = !skipTaskbar;
+        win.setSkipTaskbar(skipTaskbar)
+    })
+    globalShortcut.register('CommandOrControl+T', () => {
+        easy = !easy;
+        message.send('easy',easy)
     })
     
     win.on('hide',()=>{
