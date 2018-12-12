@@ -163,7 +163,6 @@ export default class List extends React.Component{
             });
         }
         if(type==='updatecb'){
-            debugger;
             data = this.state.owner;
             let arr = data.filter(item=>item.code ==code);
             arr[0].cb = v;
@@ -188,16 +187,12 @@ export default class List extends React.Component{
                 {this.state.showdata ?<table className="list">
                     <thead>
                         <tr>
-                            <td width="30">序号</td>
-                            <td>代码</td>
-                            <td>名称</td>
+                            <td>名称(代码)</td>
                             <td>信息</td>
                             <td onClick={this.sortData.bind(this,'zf','data')}>涨幅</td>
                             <td>价格</td>
                             <td>今开</td>
                             <td>昨收</td>
-                            <td>最高</td>
-                            <td>最低</td>
                             <td onClick={this.sortData.bind(this,'ltsz','data')} >流通</td>
                             <td onClick={this.sortData.bind(this,'hsl','data')}>换手率</td>
                             <td onClick={this.sortData.bind(this,'sy','data')}>市盈</td>
@@ -222,16 +217,14 @@ export default class List extends React.Component{
                 <table className="list">
                     <thead>
                         <tr>
-                            <td width="30">序号</td>
-                            <td>代码</td>
-                            <td>名称</td>
-                            <td>信息</td>
+                            <td>名称(代码)</td>
+                            <td onClick={this.sortData.bind(this,'yk','owner')}>盈亏</td>
                             <td onClick={this.sortData.bind(this,'zf','owner')}>涨幅</td>
                             <td>价格</td>
                             <td>今开</td>
                             <td>昨收</td>
-                            <td>最高</td>
-                            <td>最低</td>
+                            {/* <td>最高</td>
+                            <td>最低</td> */}
                             <td onClick={this.sortData.bind(this,'ltsz','data')} >流通</td>
                             <td onClick={this.sortData.bind(this,'hsl','owner')}>换手率</td>
                             <td onClick={this.sortData.bind(this,'sy','owner')}>市盈</td>

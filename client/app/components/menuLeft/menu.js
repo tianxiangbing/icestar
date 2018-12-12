@@ -39,6 +39,6 @@ export default {
         title: "接口数据生成"
     },{
         to: "money",
-        title: "money"
+        title: "行情"
     }]
 }

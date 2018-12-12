@@ -10,8 +10,7 @@
  */
 let electron = require('electron');
 let path = require('path');
-const { app, Menu, Tray } = electron;
-const { BrowserWindow } = electron;
+const { app, Menu, Tray ,globalShortcut,BrowserWindow } = electron;
 const fs = require('fs');
 // const com = require('./js/common');
 const os = require('os');
@@ -29,12 +28,14 @@ function openWindow() {
         icon: __dirname + '/client/favicon.ico',
         title: 'IceStar V' + package.version,
         show: false,
-        backgroundColor: 'rgb(30, 30, 30)',
+        backgroundColor: 'rgba(30, 30, 30,1)',
         titleBarStyle: 'hidden',
         width: width-100,
         height: height-100,
         frame: false,
-        resizable: true
+        resizable: true,
+        opacity :1,
+        transparent :true
     }
     win = new BrowserWindow(mainStyle);
     updater.init(win);
@@ -109,6 +110,9 @@ function createLoadingScreen() {
     });
 }
 
+let iswinshow=true; 
+let opacity =1;
+let ignore = false;
 app.on('ready', () => {
     createLoadingScreen();
     openWindow();
@@ -124,6 +128,28 @@ app.on('ready', () => {
     // win.on('hide', () => {
     //     tray.setHighlightMode('never')
     // })
+    globalShortcut.register('CommandOrControl+Q', () => {
+        iswinshow ? win.hide():win.show();
+    })
+    globalShortcut.register('CommandOrControl+Up', () => {
+        opacity = Math.min(1, opacity+ 0.1);
+        win.setOpacity(opacity);
+    })
+    globalShortcut.register('CommandOrControl+Down', () => {
+        opacity = Math.max(0, opacity - 0.1);
+        win.setOpacity(opacity);
+    })
+    globalShortcut.register('CommandOrControl+W', () => {
+        ignore = !ignore;
+        win.setIgnoreMouseEvents(ignore)
+    })
+    
+    win.on('hide',()=>{
+        iswinshow = false;
+    })
+    win.on('show',()=>{
+        iswinshow = true;
+    })
 });
 
 app.on('activate', () => {

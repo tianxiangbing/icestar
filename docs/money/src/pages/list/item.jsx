@@ -115,19 +115,21 @@ export default class Item extends PureComponent{
         }
         return (
             <tr>
-                <td>{index}</td>
-                <td><a href={"http://stockpage.10jqka.com.cn/HQ_v4.html?v=_yk_2222#hs_"+code.substr(0,6)}>{code}</a></td>
-                <td>{name}</td>
+                <td><a target="blank" href={"http://stockpage.10jqka.com.cn/HQ_v4.html?v=_yk_2222#hs_"+code.substr(0,6)}>{code}</a> {name}</td>
                 {this.props.type ==='data'?
                     <td>{info}</td>:
-                    <td><NumericInput className="txt_cb" placeholder="成本价" type="text" onChange={this.cbChange} value={cb}/>{yk}%</td>
+                    <td>
+                        <nobr>
+                        <NumericInput className="txt_cb" placeholder="成本价" type="text" onChange={this.cbChange} value={cb}/>{yk}%
+                        </nobr>
+                    </td>
                 }
                 <td className={this.state.zf>0?'red':'green'}>{this.state.zf}%</td>
                 <td>{this.state.jg}</td>
                 <td>{this.state.jk}</td>
                 <td>{this.state.zs}</td>
-                <td>{this.state.zg}</td>
-                <td>{this.state.zd}</td>
+                {/* <td>{this.state.zg}</td>
+                <td>{this.state.zd}</td> */}
                 <td>{this.state.ltsz}亿</td>
                 <td>{this.state.hsl}</td>
                 <td>{this.state.sy}</td>
