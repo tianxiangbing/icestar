@@ -196,6 +196,9 @@ let Common = {
     resolvePath(pa){
         let isdev = process.env.NODE_ENV;
         return isdev ? path.resolve(pa):path.resolve(path.join('resources/app.asar',pa));
+    },
+    isDev(){
+        return process.env.NODE_ENV;
     }
 }
 module.exports = Common;
