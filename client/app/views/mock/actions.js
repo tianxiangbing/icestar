@@ -1,4 +1,4 @@
-import { MOCK_DEL, MOCK_PROJECT_DEL,MOCK_START, MOCK_PROJECT_ADD, MOCK_PROJECT_UPDATE, MOCK_INIT, MOCK_LIST_INIT, MOCK_ADD, MOCK_UPDATE, MOCK_WS_START, MOCK_WS_ADD,MOCK_WS_INIT, MOCK_WS_DEL } from './actionTypes';
+import { MOCK_DEL, MOCK_PROJECT_DEL,MOCK_START, MOCK_PROJECT_ADD, MOCK_PROJECT_UPDATE, MOCK_INIT, MOCK_LIST_INIT, MOCK_ADD, MOCK_UPDATE, MOCK_WS_START, MOCK_WS_ADD,MOCK_WS_INIT, MOCK_WS_DEL, MOCK_WS_UPDATE } from './actionTypes';
 import renderer from 'renderer';
 let action = {
     [MOCK_PROJECT_ADD]: ({ commit, state }, item) => {
@@ -112,6 +112,22 @@ let action = {
         data.splice(delIndex,1);
         renderer.save(data, 'socket').then(() => {
             commit(MOCK_WS_DEL, obj);
+            obj.data.callback && obj.data.callback();
+        });
+    },
+    [MOCK_WS_UPDATE]:({commit,state},obj)=>{
+        let data = JSON.parse(JSON.stringify(state.wsList));
+        let id = obj.data.id;
+        let index = 0;
+        data.forEach((element, i) => {
+            if (id == element.id) {
+                index = i;
+                return false;
+            }
+        });
+        data[index] = obj.data;
+        renderer.save(data, 'socket').then(() => {
+            commit(MOCK_WS_UPDATE, obj);
             obj.data.callback && obj.data.callback();
         });
     },

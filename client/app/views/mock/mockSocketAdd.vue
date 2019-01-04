@@ -103,9 +103,8 @@ export default {
             id: this.id,
             title: this.title,
             content: this.code,
-            url: this.url,
-            methods: this.methods,
-            pid: this.pid,
+            rule: this.rule,
+            frequency: this.frequency,
             callback: () => {
               this.valert({ content: "修改成功！" });
               this.vtab.close();

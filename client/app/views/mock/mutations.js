@@ -1,4 +1,4 @@
-import {MOCK_WS_START,MOCK_UPDATE, MOCK_START, MOCK_PROJECT_ADD, MOCK_PROJECT_UPDATE, MOCK_INIT, MOCK_LIST_INIT, MOCK_ADD, MOCK_DEL, MOCK_WS_ADD,MOCK_WS_INIT, MOCK_WS_DEL,MOCK_PROJECT_DEL } from './actionTypes';
+import {MOCK_WS_START,MOCK_UPDATE, MOCK_START, MOCK_PROJECT_ADD, MOCK_PROJECT_UPDATE, MOCK_INIT, MOCK_LIST_INIT, MOCK_ADD, MOCK_DEL, MOCK_WS_ADD,MOCK_WS_INIT, MOCK_WS_DEL,MOCK_PROJECT_DEL, MOCK_WS_UPDATE } from './actionTypes';
 import Vue from 'vue';
 
 let mutations = {
@@ -69,6 +69,18 @@ let mutations = {
         let delIndex = obj.data.index;
         let data =  state.wsList;
         data.splice(delIndex,1);
+    },
+    [MOCK_WS_UPDATE]:(state,obj)=>{
+        let id = obj.data.id;
+        let data =  state.wsList;
+        let index = 0;
+        data.forEach((element, i) => {
+            if (id == element.id) {
+                index = i;
+                return false;
+            }
+        });
+        data.splice(index,1,obj.data);
     },
     [MOCK_UPDATE]:(state,obj)=>{
         let data = state.projectList;
