@@ -5,10 +5,11 @@
             <a title="mock接口" @click="showSubMenu('mock',0)" :class="{active:activeIndex==0}"><i class="tianxiangbing txb-M"></i></a>
             <a title="Post请求" @click="showSubMenu('post',1)" :class="{active:activeIndex==1}"><i class="tianxiangbing txb-p"></i></a>
             <a title="工具" @click="showSubMenu('tool',2)" :class="{active:activeIndex==2}"><i class="tianxiangbing txb-iconfontwujingongju"></i></a>
+            <a title="收藏" @click="showSubMenu('favor',3)" :class="{active:activeIndex==3}"><i class="tianxiangbing txb-iconfontxingxing"></i></a>
         </nav>
         <nav class="sub-menu" v-show="isExpands">
             <div class="sub-menu-title">{{currentTitle}}</div>
-            <tab v-for="item in submenu" :key="item.to" :to="item.to">{{item.title}}</tab>
+            <tab v-for="item in submenu" :key="item.title" :to="item.to" :title="item.title" :prop="item.prop">{{item.title}}</tab>
         </nav>
     </div>
 </template>

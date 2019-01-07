@@ -1,6 +1,6 @@
 {
   "name": "icestar",
-  "version": "2.0.12",
+  "version": "2.0.13",
   "description": "IceStar:该工具可以模拟本地的http服务后端接口，以方便前端联调接口，支持多种请求类型，自定义url和参数。",
   "main": "main.js",
   "scripts": {
@@ -35,8 +35,8 @@
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.4",
     "babel-preset-env": "^1.6.1",
-    "electron-winstaller": "^2.6.3",
     "cross-env": "^5.1.4",
+    "electron-winstaller": "^2.6.3",
     "webpack": "^4.5.0"
   }
 }

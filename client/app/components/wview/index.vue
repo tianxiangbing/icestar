@@ -19,7 +19,7 @@
                 // }
                 this.vtab.to({
                     to: "wview",
-                    title: "曲线",
+                    title: title,
                     prop: { src:e.url }
                 });
                 e.preventDefault()
@@ -29,10 +29,10 @@
                 // if (protocol === 'http:' || protocol === 'https:') {
                     // webview.src = e.url;
                 // }
-                
+                let title = e.currentTarget.getTitle();
                 this.vtab.to({
                     to: "wview",
-                    title: "曲线",
+                    title: title,
                     prop: { src:e.url }
                 });
                 e.preventDefault()

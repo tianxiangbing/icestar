@@ -1,6 +1,7 @@
 <template>
 <div class="tab-header">
-  <div class="item" :class="{active:isActive(index)}" @click="showTab(index)" v-for="(item,index) in tabList" :key="index">{{item.title}}
+  <div class="item" :class="{active:isActive(index)}" @click="showTab(index)" v-for="(item,index) in tabList" :key="index">
+    <span>{{item.title}}</span>
     <i class="tianxiangbing txb-close" @click="closeTab(index)"></i>
   </div>
 </div>
