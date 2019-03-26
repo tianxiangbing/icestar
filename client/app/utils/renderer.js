@@ -5,7 +5,10 @@ let os = require('os');
 const { shell } = require('electron');
 const ipc = require('electron').ipcRenderer;
 const crypto = require('crypto');//加密
-const basePath = path.join(os.homedir(), ".icestar");
+let basePath = path.join(os.homedir(), ".icestar");
+if (process.env.NODE_ENV !== 'development') {
+    basePath = path.join(__dirname, "../../../");
+}
 let wins = BrowserWindow.getAllWindows()
 console.log(wins)
 let win = wins.pop();

@@ -6,6 +6,7 @@
   "scripts": {
     "start": "cross-env  NODE_ENV=development  node server",
     "build": "cross-env NODE_ENV=production && node publish",
+    "min": "webpack -p",
     "test": "webpack-dev-server"
   },
   "dependencies": {

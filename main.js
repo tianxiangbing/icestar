@@ -67,23 +67,38 @@ function openWindow() {
     });
     // win.webContents.openDevTools();
     //目录不存在时创建
-    const basePath = path.join(os.homedir(), ".icestar");
+    let basePath = path.join(os.homedir(), ".icestar");
+    let appPath = path.join(__dirname);
+    if (process.env.NODE_ENV !== 'development') {
+        basePath = path.join(__dirname, "../");
+        appPath = path.join(__dirname);
+    }
     if (!fs.existsSync(basePath)) {
         fs.mkdirSync(basePath);
     }
     let p = path.join(basePath, 'mockconfig.json');
     fs.exists(p, (ex) => {
         if (!ex) {
-            fs.readFile(path.join(__dirname, '/mock/mockconfig.json'), 'utf8', function(err, data) {
-                fs.writeFile(p, data, { encoding: 'utf8' });
+            // dialog.showMessageBox({message:path.join(appPath, '/mock/mockconfig.json')})
+            fs.readFile(path.join(appPath, '/mock/mockconfig.json'), 'utf8', function(err, data) {
+                fs.writeFile(p, data, { encoding: 'utf8' },function(err,data){
+                    if (err) {
+                        throw err;
+                    }
+                });
             })
         }
     });
     let s = path.join(basePath, 'socketconfig.json');
     fs.exists(s, (ex) => {
         if (!ex) {
+            // dialog.showMessageBox({message:path.join(__dirname, '/mock/socketconfig.json')})
             fs.readFile(path.join(__dirname, '/mock/socketconfig.json'), 'utf8', function(err, data) {
-                fs.writeFile(s, data, { encoding: 'utf8' });
+                fs.writeFile(s, data, { encoding: 'utf8' },function(err,data){
+                    if (err) {
+                        throw err;
+                    }
+                });
             })
         }
     });
