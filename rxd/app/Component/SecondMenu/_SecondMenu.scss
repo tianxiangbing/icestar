@@ -1,0 +1,19 @@
+@import 'base';
+.menu-list{
+	height:pxToRem(80);
+	padding:pxToRem(16) pxToRem(20);
+	background-color:$whiteColor;
+	a{
+		display: block;
+		width:pxToRem(50);
+		text-align: center;
+		float:left;
+		margin-right:pxToRem(20);
+		color:#3a3a3a;
+		.iconfont{
+			display: block;
+			font-size:pxToRem(33);
+			color:#0a0908;
+		}
+	}
+}

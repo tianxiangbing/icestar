@@ -6,6 +6,8 @@
             <a title="Post请求" @click="showSubMenu('post',1)" :class="{active:activeIndex==1}"><i class="tianxiangbing txb-p"></i></a>
             <a title="工具" @click="showSubMenu('tool',2)" :class="{active:activeIndex==2}"><i class="tianxiangbing txb-iconfontwujingongju"></i></a>
             <a title="收藏" @click="showSubMenu('favor',3)" :class="{active:activeIndex==3}"><i class="tianxiangbing txb-iconfontxingxing"></i></a>
+            <!-- <tab to="wview" title="智能建站" prop="{url:'https://www.baidu.com'}">111</tab> -->
+            <a title="智能建站" @click="showAIweb('aiweb',4)" :class="{active:activeIndex==4}"><i class="tianxiangbing txb-chuanzhongjianzhan"></i></a>
         </nav>
         <nav class="sub-menu" v-show="isExpands">
             <div class="sub-menu-title">{{currentTitle}}</div>
@@ -16,7 +18,8 @@
 <script>
 import "./style";
 import store from "store/store";
-import { TOGGLESUBMENU } from "./actionTypes";
+import { TOGGLESUBMENU,OPENTAB } from "./actionTypes";
+import renderer from 'utils/renderer';
 
 export default {
   name: "MenuLeft",
@@ -54,6 +57,18 @@ export default {
     }
   },
   methods: {
+    showAIweb(t,index){
+      this.activeIndex = index;
+      let src = renderer.isDev()?'http://localhost:8090/':''
+       store.dispatch({
+        type: OPENTAB,
+        to: 'wview',
+        title:t,
+        prop:{
+          src:src
+        }
+      });
+    },
     showSubMenu(title,index) {
       this.activeIndex = index;
       store.dispatch({

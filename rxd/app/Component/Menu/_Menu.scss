@@ -1,0 +1,17 @@
+@import 'base';
+.menu {
+    height: pxToRem(40);
+    line-height: pxToRem(40);
+    background-color: #3a3a3a;
+    @extend .fontSize15;
+    text-align: center;
+    color: #ffffff;
+    padding: 0 pxToRem(14);
+    .foward {
+        @extend .fontSize19;
+        float: left;
+    }
+    .more{
+        float:right;
+    }
+}
