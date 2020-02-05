@@ -20,15 +20,15 @@ import data from './data2';
 import tpl from './tpl2';
 import childTpl from './childTpl';
 import zh_CN from './i18n/zh_CN';
-import I18n,{I18nContext} from 'x-i18n';
-import {updateId} from '../src/utils/common';
-
+import I18n, { I18nContext } from 'x-i18n';
+import { updateId } from '../src/utils/common';
+import Coms from './coms';
 
 
 const Formatter = {
-   testFormatter (str){
-      return str+"testformatter"
-   }
+  testFormatter(str) {
+    return str + "testformatter"
+  }
 }
 
 class App extends React.Component {
@@ -36,25 +36,13 @@ class App extends React.Component {
     super(props);
     this.state = {
       tpl: [], data: [],
-      js: `
-    var TestArr = {}
-    function Test1(){
-      return React.createElement("div", null,"123456111")
+       mapping: `
+    {
+    "rxd": {
+        
+    }}  
+      `
     }
-    TestArr.Test1=Test1;
-    function Test2(){
-      return React.createElement("div", null,"aaaaaaa")
-    }
-    TestArr.Test2=Test2;
-    TestArr.name="TestArr"
-    return TestArr`, 
-    format: `
-    function format(data){
-      data.name="杭州银行"
-      return  data;
-    }
-    return format;
-                ` }
   }
   changeTpl(e) {
     this.setState({ tpl: e.target.value })
@@ -86,19 +74,20 @@ class App extends React.Component {
     let tpl = JSON.parse(this.tpl.value);
     let data = JSON.parse(this.data.value);
     let childTpl = JSON.parse(this.childTpl.value);
+    console.log("jsjsjsjsjjsjsjs",this.js)
     let js = this.js.value;
     let css = this.css.value;
     let format = this.format.value;
-    this.setState({ tpl, data, js, css, format ,childTpl});
+    this.setState({ tpl, data, js, css, format, childTpl });
   }
   componentDidMount() {
-    // this.runCode();
-    console.log(childTpl,'childTpl')
+    console.log(childTpl, 'childTpl')
     updateId(tpl);
-    this.setState({data,tpl,childTpl});
-    this.data.value =this.formatJson( JSON.stringify(data));
+    // this.setState({ data, tpl, childTpl });
+    this.data.value = this.formatJson(JSON.stringify(data));
     this.tpl.value = this.formatJson(JSON.stringify(tpl));
     this.childTpl.value = this.formatJson(JSON.stringify(childTpl));
+    this.runCode();
   }
   update = (json) => {
     // alert('update11')
@@ -106,21 +95,21 @@ class App extends React.Component {
     // this.setState({tpl:json})
     this.tpl.value = this.formatJson(JSON.stringify(json));
   }
-  renderContent({global},b){
-    return <Dynamic checkPermission={this.checkPermission} id="demo"  formName="customerDeal" enableRedux={true} reducers={reducers} components={all} className="tradeBox" tpl={this.state.tpl} childTpl={this.state.childTpl} data={this.state.data} js={this.state.js} css={this.state.css} format={this.state.format}></Dynamic>
+  renderContent({ global }, b) {
+    return <Dynamic checkPermission={this.checkPermission} id="demo" formName="customerDeal" enableRedux={true} reducers={reducers} components={all} className="tradeBox" tpl={this.state.tpl} childTpl={this.state.childTpl} data={this.state.data} js={this.state.js} css={this.state.css} format={this.state.format}></Dynamic>
   }
   //判断权限
-  checkPermission(powerBit){
-    return powerBit>100 ;
+  checkPermission(powerBit) {
+    return powerBit > 100;
   }
   render() {
     let data = this.state.data// {"price":1,"quatity":15, "baseDecimal":4,"branchCode":"00012","code":"003","costBid":65.6,"costMid":0,"costOffer":68.93,"customerBid":65.6,"customerMid":0,"customerOffer":68.93,"dataType":"BondsPrice","extensionParam":{"applyStartDate":20171116,"indexation":"F","applyEndDate":20171116,"valueDate":20190314,"settlementDate":20190318,"bidYield":3.54,"bondCode":"091718001","listedCirculateDate":20171122,"localName":"17农发绿债","ytm":3.56,"interest":0,"maturityDate":20221208,"offerYield":2.43},"indexCode":"091718001 BP","isBackAudit":"N","localName":"现券","maturityDate":20221208,"priceType":"R","productTradable":"Y","strategyId":1,"tenorList":[],"tradable":"Y","underlying":"091718001","updateDate":20190509,"updateTime":180541,"valueDate":0,"priceBidMid":"66","priceOfferMid":"69","underlying2":"091718001","index":0,"tradeDate":1555406895430};
-    console.log(11111,this.state.tpl)
+    console.log(11111, this.state.tpl)
     return (
       <div className="exmple">
         <Tabs className="source">
           <Tabs.TabPane tab="工具栏" key="0">
-            <Dnd json={this.state.tpl} id="demo" components={all} update={this.update}></Dnd>
+            <Dnd json={this.state.tpl} id="demo" mapping={this.state.mapping} components={all} update={this.update}></Dnd>
           </Tabs.TabPane>
           <Tabs.TabPane tab="模板" key="1">
             <textarea ref={ref => this.tpl = ref} defaultValue={this.formatJson(JSON.stringify(this.state.tpl))}></textarea>
@@ -132,7 +121,7 @@ class App extends React.Component {
             <textarea ref={ref => this.data = ref} defaultValue={this.formatJson(JSON.stringify(this.state.data))}></textarea>
           </Tabs.TabPane>
           <Tabs.TabPane tab="自定义组件" key="3">
-            <textarea ref={ref => this.js = ref} defaultValue={this.state.js}></textarea>
+            <Coms ref={ref => this.js = ref}/>
           </Tabs.TabPane>
           <Tabs.TabPane tab="css" key="4">
             <textarea ref={ref => this.css = ref}></textarea>
@@ -140,12 +129,15 @@ class App extends React.Component {
           <Tabs.TabPane tab="数据处理" key="5">
             <textarea ref={ref => this.format = ref} defaultValue={this.state.format}></textarea>
           </Tabs.TabPane>
+          <Tabs.TabPane tab="组件关系" key="6">
+            <textarea ref={ref => this.mapping = ref} defaultValue={this.state.mapping}></textarea>
+          </Tabs.TabPane>
         </Tabs>
         <button className="runCode" onClick={this.runCode}>运行</button>
         <Tabs className="result">
           <Tabs.TabPane tab="结果" key="1">
             <I18n defaultValue={zh_CN}>
-                {this.renderContent.bind(this)}
+              {this.renderContent.bind(this)}
             </I18n>
           </Tabs.TabPane>
         </Tabs>

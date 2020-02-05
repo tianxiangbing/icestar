@@ -23,7 +23,7 @@ class Index extends Component {
         this.Did = id;
         this.updateId(json)
         // console.log(json,10000)
-        this.state = { showAttr:false, list: tools,current:null ,id:null,type:'',json}
+        this.state = { showAttr:false, list:Object.assign(tools,JSON.parse(this.props.mapping)) ,current:null ,id:null,type:'',json}
     }
     updateId(json){
         updateId(json,0);

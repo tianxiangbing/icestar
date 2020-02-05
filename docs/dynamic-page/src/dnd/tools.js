@@ -16,6 +16,4 @@ export default {
         "Fold": { title: "折叠组件", isContainer: true },
         "Fold.Panel": { title: "折叠项", isContainer: true }
     },
-    "业务组件": {
-    },
 }
