@@ -1,0 +1,126 @@
+*{
+    box-sizing: border-box;
+    font-size: 12px;
+    outline: none;
+}
+body{
+    background-color:#efefef;
+}
+.dnd-container{
+    height: 600px;
+    .dnd-tools{
+        overflow: auto;
+        &::-webkit-scrollbar {/*滚动条整体样式*/
+            width: 6px;     /*高宽分别对应横竖滚动条的尺寸*/
+            height: 1px;
+        }
+        &::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
+            border-radius: 6px;
+            background-color: rgba(0,0,0,0.6);
+            background-image: -webkit-linear-gradient(45deg, rgba(255, 255, 255, .2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, .2) 50%, rgba(255, 255, 255, .2) 75%, transparent 75%, transparent);
+        }
+        &::-webkit-scrollbar-track {/*滚动条里面轨道*/
+            box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+            /*border-radius: 10px;*/
+            background: #EDEDED;
+        }
+    }
+}
+.exmple{
+    display: flex;
+    >div:first-child{
+        flex:1;
+    }
+    .x-tabs-item{
+        padding:10px;
+        textarea{
+            height:600px;
+            width:100%;
+        }
+    }
+}
+.tradeBox{
+    form{
+        input[readonly]{
+            cursor:not-allowed;
+        }
+        background-color: #fff;
+        width:500px;
+        .validate-error input{
+            border-color:red !important;
+        }
+        .fold-title{
+            padding:3px 5px;
+        }
+        .x-fold-item>div{
+            display: flex;
+            flex-wrap:wrap;
+            >div{
+                width:250px;
+            }
+            // display: flex;
+            .tradeItem{
+                width:250px;
+            }
+            .tradeItem{
+                position: relative;
+                height: 50px;
+                padding:5px 5px;
+                >div:first-child{
+                    position: absolute;
+                    padding:5px 10px;
+                }
+                .x-label{
+                    pointer-events: none;
+                }
+                input,.labelValue{
+                    height:100%;
+                    width:100%;
+                    padding:5px 10px;
+                    border: 1px solid #E0DFDF;
+                    padding: 17px 10px 0;
+                    &:hover{
+                        border-color:blue;
+                    }
+                }
+                .labelValue, input:disabled{
+                    background-color: #F0F0F0;
+                    cursor: not-allowed;
+                }
+            }
+            .x-radiolist .x-radio{
+                position:static !important;
+                text-align: center;
+                border:1px solid #ccc;
+                &:first-child{
+                    margin-right: 10px;
+                    padding:0;
+                }
+            }
+            .x-radiolist-radio-selected{
+                background-color:#F69B43;
+                border:1px solid #F69B43;
+                color:#fff;
+            }
+        }
+        .actions{
+            display: flex;
+            .marketButton{
+                flex:1;
+                line-height: 30px;
+                border:1px solid #ccc;
+                background-color: #fff;
+                cursor: pointer;
+                &:first-child{
+                    border-right: none;
+                }
+            }
+        }
+    }
+}
+.runCode{
+    height: 30px;
+    position: absolute;
+    right:20px;
+    cursor: pointer;
+}

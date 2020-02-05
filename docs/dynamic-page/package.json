@@ -1,0 +1,93 @@
+{
+  "name": "dynamic-page",
+  "version": "1.4.0",
+  "description": "react xui 组件组装插件",
+  "main": "./lib/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tianxiangbing/dynamic-page.git"
+  },
+  "homepage": "https://github.com/tianxiangbing/dynamic-page",
+  "bugs": "https://github.com/tianxiangbing/dynamic-page/issues",
+  "directories": {
+    "example": "examples"
+  },
+  "scripts": {
+    "test": "jest ./test",
+    "build:dev":"webpack --config webpack.html.config.js",
+    "example": "npm-run-all prepublish exserver",
+    "exserver": "node scripts/dev-examples",
+    "start": "node scripts/dev-src",
+    "build": "webpack --config webpack.dist.config.js",
+    "lib": "babel src -d lib && webpack --config webpack.css.config.js",
+    "prepublish": "npm-run-all lib build",
+    "docs": "npm-run-all docs:*",
+    "doc-dev": "npm-run-all docs:clean docs:prepare docs:build:watch",
+    "docs:clean": "rimraf _book",
+    "docs:prepare": "gitbook install",
+    "docs:build": "gitbook build -g react-plugin/dynamic-page",
+    "docs:build:watch": "gitbook serve",
+    "docs:publish": "cd _book && git init && git checkout -b gh-pages && git add --all && git commit -am \"update book\" && git push git@github.com:react-plugin/dynamic-page gh-pages --force"
+  },
+  "authors": [
+    "tianxiangbing"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "babel-cli": "^6.23.0",
+    "babel-core": "^6.7.4",
+    "babel-eslint": "^7.1.1",
+    "babel-jest": "^24.9.0",
+    "babel-loader": "^6.2.4",
+    "babel-plugin-transform-object-assign": "^6.22.0",
+    "babel-preset-es2015": "^6.6.0",
+    "babel-preset-latest": "^6.16.0",
+    "babel-preset-react": "^6.5.0",
+    "babel-preset-stage-2": "^6.18.0",
+    "css-loader": "^0.23.1",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.14.0",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "gitbook-cli": "^2.3.0",
+    "jest": "23.6.0",
+    "jsx-input": "^1.1.1",
+    "less": "^3.10.3",
+    "less-loader": "^4.1.0",
+    "npm-run-all": "^3.1.2",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "redux-devtools-extension": "^2.13.8",
+    "rimraf": "^2.7.1",
+    "style-loader": "^0.13.1",
+    "uglify-js": "^2.6.0",
+    "webpack": "^4.41.5",
+    "webpack-dev-server": "^1.14.1",
+    "x-i18n": "0.0.4"
+  },
+  "dependencies": {
+    "axios": "^0.18.1",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.14.0",
+    "moment": "^2.24.0",
+    "react-dnd": "^7.7.0",
+    "react-dnd-html5-backend": "^7.7.0",
+    "react-redux": "^6.0.1",
+    "redux": "^4.0.4",
+    "redux-thunk": "^2.3.0",
+    "x-fold": "^1.0.2",
+    "x-radio-list": "^1.0.1",
+    "xui-form": "^1.1.4",
+    "xui-tabs": "0.0.4"
+  },
+  "tags": [
+    "react",
+    "plugin",
+    "form"
+  ],
+  "keywords": [
+    "react",
+    "react-component",
+    "form",
+    "react-plugin"
+  ]
+}

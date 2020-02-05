@@ -1,0 +1,27 @@
+export default {
+    local:"zh_CN",
+    global:{
+        baseinfo:'基本信息',
+        trade:"交易",
+        order:"委托",
+        purchase:"申购",
+        buy:"买",
+        sell:"卖",
+        annualizedRateOfReturn:"年化收益率",
+        renewal:"续发",
+        maturity:"到期日",
+        selfSupport:"自营",
+        sellBuyPrice:"卖/买价",
+        customer:"客",
+        cost:"分",
+        sort:"排序",
+        permittedTransaction:"允许交易",
+        noTrade:"禁止交易",
+        sellPrice:"卖出价",
+        bidPrice:"买入价",
+        hand:"手",
+        underly:'标的',
+        askprice:'询价',
+        market:'市价'
+    }
+}
