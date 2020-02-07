@@ -26,6 +26,7 @@ export default class Coms extends Component {
     constructor(props) {
         super(props);
         this.componetUrl = React.createRef();
+        this.jsnamespace = React.createRef();
     }
     componentDidMount() {
         this.value = this.state.js;
@@ -36,12 +37,17 @@ export default class Coms extends Component {
     addUrlHandle = () => {
         console.log(this.componetUrl)
         fetch(this.componetUrl.value)
-        .then((response) =>{
-            return response.text().then((text)=> {
-            //   console.log(text) ;
-            this.value +=text;
-            });
-          })
+            .then((response) => {
+                return response.text().then((text) => {
+                    let jsnamespace = this.jsnamespace.value;
+                    let code =`
+                        Object.assign(window,${jsnamespace})
+                    `;
+                    
+                    this.value = text+ code + this.value ;
+                    return this.value;
+                });
+            })
             .catch(error => console.error(error))
     }
     onChange(e) {
@@ -50,7 +56,7 @@ export default class Coms extends Component {
     render() {
         return (
             <div>
-                <input className="input_componentUrl" type="text" defaultValue="http://192.168.1.8:8080/demo/getjs" ref={ref => this.componetUrl = ref} /><button onClick={this.addUrlHandle}>添加</button>
+                namespace:<input defaultValue="rxd" ref={ref => this.jsnamespace = ref} /><input className="input_componentUrl" type="text" defaultValue="http://192.168.1.8:8080/demo/getjs" ref={ref => this.componetUrl = ref} /><button onClick={this.addUrlHandle}>添加</button>
                 <textarea onChange={this.onChange.bind(this)} defaultValue={this.state.js}></textarea>
             </div>
         )

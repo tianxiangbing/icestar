@@ -78,7 +78,8 @@ class App extends React.Component {
     let js = this.js.value;
     let css = this.css.value;
     let format = this.format.value;
-    this.setState({ tpl, data, js, css, format, childTpl });
+    let mapping = this.mapping.value;
+    this.setState({ tpl, data, js, css, format, childTpl,mapping });
   }
   componentDidMount() {
     console.log(childTpl, 'childTpl')

@@ -51,6 +51,11 @@ class Index extends Component {
             this.updateId(newProps.json)
             this.setState({json:newProps.json});
         }
+        if(newProps.mapping != this.props.mapping){
+           this.setState({
+               list: Object.assign(this.state.list,JSON.parse(newProps.mapping))
+            });
+        }
     }
     // getObj(id,data){
     //     let returnValue = null;

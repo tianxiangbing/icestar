@@ -8,7 +8,7 @@ export default {
         "NumberItem": { title: '数字输入项' },
     },
     "表单组件": {
-        "Form": { title: "Form容器", isContainer: true },
+        "Form": { "title": "Form容器", "isContainer": true },
         "Form.Item": { title: "Form项", isContainer: true },
         "Container": { title: "容器", isContainer: true },
     },
