@@ -18,7 +18,7 @@ export default class Coms extends Component {
         return TestArr`,
         format: `
         function format(data){
-          data.name="杭州银行"
+          data.name="杭州西湖"
           return  data;
         }
         return format;`
